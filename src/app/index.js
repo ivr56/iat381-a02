@@ -4,7 +4,7 @@ angular.module('iat381-a02', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize',
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'app/mainscreen/threejstest.html',
+        templateUrl: 'app/mainscreen/globe_experiment.html',
         controller: ''
       })
       .otherwise({
