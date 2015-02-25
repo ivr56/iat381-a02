@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" href="http://www.moczys.com/webGL/css/base.css">
 </head>
-<body ng-app="ngWebglDemo" style class="ng-scope">
+<body>
 
 
 <div id="ThreeJS" style="position: absolute; left:0px; top:0px"><canvas width="1070" height="0"></canvas></div>
@@ -14,13 +14,16 @@
 <script>
 'use strict';
 
-angular.module('ngWebglDemo')
-  .directive('ngWebgl', function () {
+angular.module('iat381-a02', [])
+  .directive('iat381-a02', function () {
     return {
-      restrict: 'A',
+      restrict: 'E',
       scope: {
-        'width': '=',
-        'height': '=',
+      'width': '=',
+     'height': '=',
+     'fillcontainer': '=',
+     'scale': '=',
+     'materialType': '='
       },
       link: function postLink(scope, element, attrs) {
 

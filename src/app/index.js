@@ -5,7 +5,7 @@ angular.module('iat381-a02', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize',
     $routeProvider
       .when('/', {
         templateUrl: 'app/mainscreen/globe_experiment.html',
-        controller: ''
+        controller: 'MainCtrl'
       })
       .otherwise({
         redirectTo: '/'
