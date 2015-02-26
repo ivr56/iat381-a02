@@ -9,6 +9,4 @@ angular.module('iat381-a02')
    $scope.scale = 1;
    $scope.materialType = 'lambert';
 
-  
-
   });

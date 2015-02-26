@@ -1,7 +1,7 @@
 'use strict';
+var a02 = angular.module('iat381-a02', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRoute'])
 
-angular.module('iat381-a02', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRoute'])
-  .config(function ($routeProvider) {
+  a02.config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'app/mainscreen/globe_experiment.html',
@@ -10,5 +10,4 @@ angular.module('iat381-a02', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize',
       .otherwise({
         redirectTo: '/'
       });
-  })
-;
+  });

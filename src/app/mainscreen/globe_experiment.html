@@ -9,24 +9,25 @@
 <body>
 
 
-<div id="ThreeJS" style="position: absolute; left:0px; top:0px"><canvas width="1070" height="0"></canvas></div>
+<div id="ThreeJS" style="position: absolute; left:0px; top:0px"><canvas id="test" width="1070" height="0"></canvas></div>
 
 <script>
-// 'use strict';
-//
-// angular.module('iat381-a02', [])
-//   .directive('iat381-a02', function () {
-//     return {
-//       restrict: 'E',
-//       scope: {
-//       'width': '=',
-//      'height': '=',
-//      'fillcontainer': '=',
-//      'scale': '=',
-//      'materialType': '='
-//       },
-//       link: function postLink(scope, element, attrs) {
-//
+'use strict';
+
+
+angular.module('iat381-a02', [])
+  .directive('iat381-a02', function () {
+    return {
+      restrict: 'E',
+      scope: {
+      'width': '=',
+     'height': '=',
+     'fillcontainer': '=',
+     'scale': '=',
+     'materialType': '='
+      },
+      link: function postLink(scope, element, attrs) {
+
 
         /*
         	Experiment 02-05
@@ -45,7 +46,7 @@
 
         // standard global variables
         var container, scene, camera, renderer, controls;
-        var keyboard = new KeyboardState();
+        //var keyboard = new KeyboardState();
 
         // custom global variables
         var targetList = [];
@@ -80,11 +81,9 @@
         	camera.position.set(0,250,950);
         	camera.lookAt(scene.position);
         	// RENDERER
-        	if ( Detector.webgl )
-        		renderer = new THREE.WebGLRenderer( {antialias:true} );
-        	else
-        		renderer = new THREE.CanvasRenderer();
-        	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+          renderer = new THREE.CanvasRenderer();
+          renderer.setSize(window.innerWidth, window.innerHeight);
         	container = document.getElementById( 'ThreeJS' );
         	container.appendChild( renderer.domElement );
         	// EVENTS
@@ -138,7 +137,6 @@
 
 
         	//////////////////////////////////////////////////////////////////////
-
 
         	// initialize object to perform world/screen calculations
         	projector = new THREE.Projector();
@@ -234,6 +232,7 @@
         }
         //Octa End
 
+
         //Mouse Move Start
         function onDocumentMouseMove( event )
         {
@@ -286,6 +285,7 @@
         	//if an intersection is detected
         	if ( intersects.length > 0 )
         	{
+
             console.log("Intersects :" + intersects.length);
         		//test items in selected faces array
         		var test=-1;
@@ -421,16 +421,16 @@
 
 
 
-  //     }
-  //   };
-  // });
+      }
+    };
+  });
 
 
 </script>
 <div style="position: absolute; z-index: 1; left: 50px; top: 20px; width:400px; height:30px;">
-	<p>Click/drag to rotate. Mouse wheel to zoom.</p>
-	<p>Press the "up" arrow to add a random octahedron!</p>
-	<p>Mouse-over faces to highlight, click to select.</p>
+	<p>HI</p>
+	<p>IRENE</p>
+	<p>WANG</p>
 </div>
 
 </body></html>
