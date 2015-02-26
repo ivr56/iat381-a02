@@ -3,8 +3,13 @@
 	padding: 0;
 }
 
+html{
+	 background-image: url("../assets/images/bg.png");
+	 font-family: 'Open Sans', sans-serif;
+}
 body {
 	overflow: hidden;
+
 }
 
 h1 {
@@ -29,4 +34,25 @@ a {
 	height: 100%;
 	width: 100%;
 	z-index: 0;
+}
+
+.controlpanel{
+	position: absolute; 
+	z-index: 1; 
+	left: 50px; 
+	bottom: 80px; 
+	width:50%; 
+	height:30px;
+}
+.userpanel{
+	z-index: 2;
+	width: 30%;
+	display:inline-block;
+	height: 100%;
+	background-color: #fff;
+	padding: 20px;
+	opacity: 0.6;
+	font-family: 'Open Sans', sans-serif;
+	margin-right: 10px;
+
 }
