@@ -143,6 +143,7 @@ angular.module("tjsModelViewer", [])
 
 						//Renderer
 						renderer = new THREE.CanvasRenderer();
+						//renderer = new THREE.WebGLRenderer( {antialias:true} );
 						renderer.setSize(window.innerWidth, window.innerHeight);
 						//elem[0].appendChild(renderer.domElement);
 						container = document.getElementById( 'ThreeJS' );
@@ -162,6 +163,26 @@ angular.module("tjsModelViewer", [])
 
 				        	// CONTROLS
 				        	controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+									// LIGHT
+				        	var light = new THREE.AmbientLight( 0x333333 ); // soft white light
+				        	scene.add( light );
+				        	var light = new THREE.PointLight(0xffffff,1,4500);
+				        	light.position.set(-300,1000,-300);
+				        	scene.add(light);
+				        	// FLOOR
+				        	var faceMat = new THREE.MeshBasicMaterial({color: 0x888888,side: THREE.DoubleSide});
+				        	var wireMat = new THREE.MeshBasicMaterial({color:0xaaaaaa,wireframe:true,transparent:true});
+				        	var multiMat = [faceMat ,wireMat];
+
+				        	var floor= THREE.SceneUtils.createMultiMaterialObject(new THREE.PlaneGeometry(floorSide, floorSide, 10, 10),multiMat);
+
+				        	floor.rotation.x = Math.PI / 2;
+				        	scene.add(floor);
+
+				        	// SKYBOX
+				        	
+
 
 
 						// initialize object to perform world/screen calculations
