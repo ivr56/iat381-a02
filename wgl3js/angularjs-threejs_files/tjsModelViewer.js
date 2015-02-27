@@ -5,7 +5,7 @@ angular.module("tjsModelViewer", [])
 			return {
 				restrict: "E",
 				scope: {
-					assimpUrl: "=assimpUrl"
+					//assimpUrl: "=assimpUrl"
 				},
 				link: function (scope, elem, attr) {
 					var container;
@@ -247,7 +247,7 @@ angular.module("tjsModelViewer", [])
 						//Inject 4
 
 						// Find intersections
-						function checkSelection(){
+						function checkSelection($rootScope){
 
 
 							// create a Ray with origin at the mouse position
@@ -273,11 +273,13 @@ angular.module("tjsModelViewer", [])
 									//Validate Load Currency
 									if (arrayItem.object.id === 11)
 									{
-										console.log("CAD Active");
+
+
 									}
 									else if (arrayItem.object.id === 12)
 									{
-										console.log("USD Active");
+
+
 									}
 
 									console.log("True 1");
