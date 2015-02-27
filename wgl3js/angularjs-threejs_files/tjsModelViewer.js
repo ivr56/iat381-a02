@@ -181,7 +181,7 @@ angular.module("tjsModelViewer", [])
 				        	scene.add(floor);
 
 				        	// SKYBOX
-				        	
+
 
 
 
@@ -269,13 +269,23 @@ angular.module("tjsModelViewer", [])
 								selectedFaces.forEach( function(arrayItem)
 								{
 
-									console.log("True");
+									console.log("ObjectID 1: " + arrayItem.object.id);
+									//Validate Load Currency
+									if (arrayItem.object.id === 11)
+									{
+										console.log("CAD Active");
+									}
+									else if (arrayItem.object.id === 12)
+									{
+										console.log("USD Active");
+									}
+
+									console.log("True 1");
 									// if the faceIndex and object ID are the same between the intersect and selected faces ,
 									// the face index is recorded
 									if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
-										test=selectedFaces.indexOf(arrayItem);
-										console.log("ObjectID: " + arrayItem.object.id);
-
+										test=arrayItem.object.id;
+										console.log("ObjectID 2: " + arrayItem.object.id);
 
 									}
 								});
@@ -289,6 +299,7 @@ angular.module("tjsModelViewer", [])
 								}
 								else
 								{
+									console.log("True 2");
 									intersects[ 0 ].face.color=new THREE.Color( 0x222288 );
 									selectedFaces.push(intersects[0]);
 								}
