@@ -217,11 +217,65 @@ angular.module("tjsModelViewer", [])
 		        	// update the mouse variable
 		        	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 		        	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-		        	//checkSelection();
+		        	checkSelection();
 		        }
 		        //Mouse Down End
 
+
+
 						//Inject 4
+
+						// Find intersections
+						function checkSelection(){
+
+
+							// create a Ray with origin at the mouse position
+							//   and direction into the scene (camera direction)
+							console.log("Ping");
+							var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+							projector.unprojectVector( vector, camera );
+							var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+
+							// create an array containing all objects in the scene with which the ray intersects
+							var intersects = ray.intersectObjects( targetList );
+
+							//if an intersection is detected
+							if ( intersects.length > 0 )
+							{
+								console.log("Intersects :" + intersects.length);
+								//test items in selected faces array
+								var test=-1;
+								selectedFaces.forEach( function(arrayItem)
+								{
+
+									console.log("True");
+									// if the faceIndex and object ID are the same between the intersect and selected faces ,
+									// the face index is recorded
+									if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
+										test=selectedFaces.indexOf(arrayItem);
+										console.log("ObjectID: " + arrayItem.object.id);
+
+
+									}
+								});
+
+								// if is a previously selected face, change the color back to green, otherswise change to blue
+								if(test>=0)
+								{
+									console.log("False");
+									intersects[ 0 ].face.color=new THREE.Color( 0x44dd66 );
+									selectedFaces.splice(test, 1);
+								}
+								else
+								{
+									intersects[ 0 ].face.color=new THREE.Color( 0x222288 );
+									selectedFaces.push(intersects[0]);
+								}
+
+								intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
+							}
+						}
+						// Find intersections End
 
 						//End inject 4
 

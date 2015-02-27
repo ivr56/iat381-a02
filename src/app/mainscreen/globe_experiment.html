@@ -28,7 +28,7 @@
                 <span class="glyphicon glyphicon-time"></span>
             </span>
         </div>
-    
+
     </div>
 
     <div class="userpanel">Hello World</div>
@@ -173,7 +173,16 @@
         	// when the mouse moves, call the given function
         	document.addEventListener( 'mousedown', onDocumentMouseDown, false );
         	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+          window.addEventListener('resize', onWindowResize, false);
         } //Init End
+
+
+        //On Resize
+        					function onWindowResize(event) {
+        						renderer.setSize(window.innerWidth, window.innerHeight);
+        						camera.aspect = window.innerWidth / window.innerHeight;
+        						camera.updateProjectionMatrix();
+        					}
 
 
         //Add Earth
@@ -303,6 +312,7 @@
 
         	// create a Ray with origin at the mouse position
         	//   and direction into the scene (camera direction)
+          console.log("Ping");
         	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
         	projector.unprojectVector( vector, camera );
         	var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
