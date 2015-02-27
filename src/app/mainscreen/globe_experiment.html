@@ -39,21 +39,6 @@
 
 </div>
 <script>
-// 'use strict';
-//
-// angular.module('iat381-a02', [])
-//   .directive('iat381-a02', function () {
-//     return {
-//       restrict: 'E',
-//       scope: {
-//       'width': '=',
-//      'height': '=',
-//      'fillcontainer': '=',
-//      'scale': '=',
-//      'materialType': '='
-//       },
-//       link: function postLink(scope, element, attrs) {
-//
 
         /*
         	Experiment 02-05
@@ -86,7 +71,7 @@
         var mouseSphere=[];
         var country_targetList = [];
 
-        var currencycheckUSD =
+
         init();
         animate();
 
@@ -94,7 +79,9 @@
         // FUNCTIONS
 
 
-        //Init Start
+        ////////////
+        // INIT   //
+        ////////////
         function init()
         {
         	// SCENE
@@ -175,7 +162,16 @@
         	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
         } //Init End
 
+        ////////////
+        // INIT   //
+        ////////////
 
+
+
+
+        ////////////
+        // GEOM   //
+        ////////////
         //Add Earth
         function addEarth()
         {
@@ -261,6 +257,18 @@
         }
         //Octa End
 
+
+        ////////////
+        // GEOM   //
+        ////////////
+
+
+
+
+        /////////////////
+        // INTER CHECK //
+        /////////////////
+
         //Mouse Move Start
         function onDocumentMouseMove( event )
         {
@@ -290,6 +298,17 @@
         }
         //Mouse Down End
 
+
+        /////////////////
+        // INTER CHECK //
+        /////////////////
+
+
+
+        /////////////////
+        // SELECTION   //
+        /////////////////
+
         //Color Select Start
         function ColorSelected(){
         	selectedFaces.forEach( function(arrayItem)
@@ -299,6 +318,12 @@
         		});
         }
         //Color Select End
+
+
+
+        /////////////////////
+        // SELECTION CHECK //
+        /////////////////////
 
         // Find intersections
         function checkSelection(){
@@ -372,6 +397,10 @@
         }
         // Find intersections End
 
+        /////////////////
+        // SELECTION   //
+        /////////////////
+
 
         // Find highlight
         // function checkHighlight(){
@@ -440,6 +469,11 @@
         // Check Mouse End
 
 
+
+        ///////////////
+        // UPDATES   //
+        ///////////////
+
         function toString(v) { return "[ " + v.x + ", " + v.y + ", " + v.z + " ]"; }
 
         // Check Animate, Update, Render
@@ -471,18 +505,17 @@
         }
         // Check Animate, Update, Render End
 
+        ///////////////
+        // UPDATES   //
+        ///////////////
 
-
-  //     }
-  //   };
-  // });
 
 
 </script>
 
 
 
-
+<!--
 <script type="text/javascript">
 
 $('.clockpicker').clockpicker()
@@ -494,7 +527,7 @@ $('.clockpicker').clockpicker()
 if (/mobile/i.test(navigator.userAgent)) {
     $('input').prop('readOnly', true);
 }
-</script>
+</script> -->
 
 
 </body>

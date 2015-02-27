@@ -23,32 +23,13 @@
 	<![endif]-->
 
 	<!-- Add your site or application content here -->
-	<div class="container" ng-view=""><div class="hero-unit ng-scope">
+	<div class="container" ng-view="">
 	<h1>AngularJS + ThreeJS</h1>
 	<canvas width="1226" height="622"></canvas>
-	<p>Loading WebGL content with AngularJS</p>
-	<!-- <tjs-model-viewer assimp-url="assimpModelUrl" class="ng-isolate-scope ng-scope"></tjs-model-viewer> -->
-	<button ng-click="changeModel()">change model</button>
-	<input ng-model="assimpModelUrl" class="ng-pristine ng-valid">
 </div>
 </div>
 
-	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-	<script async="" src="./angularjs-threejs_files/analytics.js"></script><script>
-		(function (i, s, o, g, r, a, m) {
-			i['GoogleAnalyticsObject'] = r;
-			i[r] = i[r] || function () {
-				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * new Date();
-			a = s.createElement(o),
-				m = s.getElementsByTagName(o)[0];
-			a.async = 1;
-			a.src = g;
-			m.parentNode.insertBefore(a, m)
-		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-		ga('create', 'UA-41473887-1');
-		ga('send', 'pageview');
-	</script>
+
 
 	<script src="./angularjs-threejs_files/three.js"></script>
 	<script src="./angularjs-threejs_files/AssimpJSONLoader.js"></script>
@@ -64,6 +45,7 @@
 	<!-- build:js({.tmp,app}) scripts/scripts.js -->
 	<script src="./angularjs-threejs_files/app.js"></script>
 	<script src="./angularjs-threejs_files/main.js"></script>
+	<script src="./angularjs-threejs_files/Detector.js"></script>
 	<script src="./angularjs-threejs_files/tjsModelViewer.js"></script>
 	<!-- endbuild -->
 

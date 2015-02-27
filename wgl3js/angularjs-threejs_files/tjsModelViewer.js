@@ -5,19 +5,19 @@ angular.module("tjsModelViewer", [])
 			return {
 				restrict: "E",
 				scope: {
-					assimpUrl: "=assimpUrl"
+					//assimpUrl: "=assimpUrl"
 				},
 				link: function (scope, rootScope, elem, attr) {
 					var container;
-					var camera;
 					var scene;
+					var camera;
 					var renderer;
-					var previous;
 					var controls;
+					var previous;
 					//var keyboard = new KeyboardState();
 
 					//Inject
-					var targetList = [];
+					 var targetList = [];
 		        var projector, mouse = { x: 0, y: 0 },INTERSECTED;
 		        var selectedFaces = [];
 		        var floorSide=1000;
@@ -32,130 +32,112 @@ angular.module("tjsModelViewer", [])
 
 					// init scene
 					init();
-
-
-					// Load Model --------
-					// Load jeep model using the AssimpJSONLoader
-					// var loader1 = new THREE.AssimpJSONLoader();
-					//
-					//
-					// scope.$watch("assimpUrl", function(newValue, oldValue) {
-					// 	if (newValue != oldValue) loadModel(newValue);
-					// });
-					//
-					// function loadModel(modelUrl) {
-					//
-					// 	//Model Loader
-					// 	loader1.load(modelUrl, function (assimpjson) {
-					// 		assimpjson.scale.x = assimpjson.scale.y = assimpjson.scale.z = 0.2;
-					// 		assimpjson.updateMatrix();
-					// 		if (previous) scene.remove(previous);
-					// 		//Add to Scene
-					// 		scene.add(assimpjson);
-					//
-					// 		previous = assimpjson;
-					//
-					// 	});
-					// }
-					// // Load Model --------
-					//
-					// loadModel(scope.assimpUrl);
-
-
-
-
 					animate();
+
+
+
+
+
+
+
+
+					////////////
+					// INIT   //
+					////////////
+
 
 					//Initilize Start
 					function init() {
-						//camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 2000);
 
-						// CAMERA
-
-
-						//camera.position.set(0,250,950);
-
+						// SCENE
 						scene = new THREE.Scene();
 
-
+						// CAMERA
 						var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
 						var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 0;
 						camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 						scene.add(camera);
-						camera.position.set(0,500,500);
+						camera.position.set(0,250,950);
 						camera.lookAt(scene.position);
 
-						scene.fog = new THREE.FogExp2(0x000000, 0.035);
-
-						// Lights
-						var light = new THREE.AmbientLight( 0x333333 ); // soft white light
-		        	scene.add( light );
-		        	var light = new THREE.PointLight(0xffffff,1,4500);
-		        	light.position.set(-300,1000,-300);
-		        	scene.add(light);
 
 
-
-							// // FLOOR
-						  //       	var faceMat = new THREE.MeshBasicMaterial({color: 0x888888,side: THREE.DoubleSide});
-						  //       	var wireMat = new THREE.MeshBasicMaterial({color:0xaaaaaa,wireframe:true,transparent:true});
-						  //       	var multiMat = [faceMat ,wireMat];
-							//
-						  //       	var floor= THREE.SceneUtils.createMultiMaterialObject(new THREE.PlaneGeometry(floorSide, floorSide, 10, 10),multiMat);
-							//
-						  //       	floor.rotation.x = Math.PI / 2;
-						  //       	scene.add(floor);
-
-
-											// // SKYBOX
-								      //   	var skyBoxGeometry = new THREE.CubeGeometry( 10000, 10000, 10000 );
-								      //   	var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0xdddddd, side: THREE.BackSide } );
-								      //   	var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
-								      //   	scene.add(skyBox);
-
-
-
-
-
-						//Renderer
+						//RENDERER
+						// if ( Detector.webgl )
+						// 	renderer = new THREE.WebGLRenderer( {antialias:true} );
+						// else
 						renderer = new THREE.CanvasRenderer();
 						renderer.setSize(window.innerWidth, window.innerHeight);
 						//elem[0].appendChild(renderer.domElement);
 						container = document.getElementById( 'ThreeJS' );
 						container.appendChild(renderer.domElement );
 
-						// Events
+
+						// CONTROLS
+						controls = new THREE.OrbitControls( camera, renderer.domElement );
 
 
-						// RENDERER
+						// LIGHT
+						var light = new THREE.AmbientLight( 0x333333 ); // soft white light
+		        scene.add( light );
+		        var light2 = new THREE.PointLight(0xffffff,1,4500);
+		        light2.position.set(-300,1000,-300);
+		        scene.add(light2);
 
-				        	// renderer = new THREE.WebGLRenderer( {antialias:true} );
-				        	// renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-				        	// container = document.getElementById( 'ThreeJS' );
-				        	// container.appendChild(renderer.domElement );
 
-				        	// EVENTS
+						// FLOOR
+						var faceMat = new THREE.MeshBasicMaterial({color: 0x888888,side: THREE.DoubleSide});
+						var wireMat = new THREE.MeshBasicMaterial({color:0xaaaaaa,wireframe:true,transparent:true});
+						var multiMat = [faceMat ,wireMat];
 
-				        	// CONTROLS
-				        	controls = new THREE.OrbitControls( camera, renderer.domElement );
+						var floor= THREE.SceneUtils.createMultiMaterialObject(new THREE.PlaneGeometry(floorSide, floorSide, 10, 10),multiMat);
+
+						floor.rotation.x = Math.PI / 2;
+						scene.add(floor);
+
+
+						// SKYBOX
+						var skyBoxGeometry = new THREE.CubeGeometry( 10000, 10000, 10000 );
+						var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0xdddddd, side: THREE.BackSide } );
+						var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
+						scene.add(skyBox);
+
+
+
+
+				    // MOUSE SPHERE
+						var newSphereGeom= new THREE.SphereGeometry(5,5,5);
+						var sphere= new THREE.Mesh(newSphereGeom, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
+						scene.add(sphere);
+						mouseSphere.push(sphere);
 
 
 						// initialize object to perform world/screen calculations
 					 projector = new THREE.Projector();
 
+					 // GEOMERTY CREATION
 					 addEarth();
 					 addTouchpointsUSD();
 					 addTouchpointsCAD();
 
-					 // when the mouse moves, call the given function
+					 // EVENT CALLS
 					 document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 					 document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 					 //window.addEventListener('resize', onWindowResize, false);
 
 
 					}
-					//Initilize End
 
+					////////////
+					// INIT   //
+					////////////
+
+
+
+
+					////////////
+					// GEOM   //
+					////////////
 
 
 					//Add Earth
@@ -204,6 +186,10 @@ angular.module("tjsModelViewer", [])
 					}
 					//Currency 2 End
 
+					////////////
+					// GEOM   //
+					////////////
+
 
 
 					//Octa Start
@@ -245,10 +231,20 @@ angular.module("tjsModelViewer", [])
 					}
 					//Octa End
 
+					////////////
+					// GEOM   //
+					////////////
+
+
+
+					//////////////////
+					// INTERACTIONS //
+					//////////////////
+
 					//Mouse Move Start
 					function onDocumentMouseMove( event )
 					{
-						//console.log("Mouse Interaction Move:" + mouse.x + " : " + mouse.y);
+						console.log("Mouse Interaction Move:" + mouse.x + " : " + mouse.y);
 						// the following line would stop any other event handler from firing
 						// (such as the mouse's TrackballControls)
 						//event.preventDefault();
@@ -260,218 +256,223 @@ angular.module("tjsModelViewer", [])
 
 					//Mouse Down
 					function onDocumentMouseDown( event )
-					{
-						console.log("Mouse Interaction Push:" + mouse.x + " : " + mouse.y);
-						// the following line would stop any other event handler from firing
-						// (such as the mouse's TrackballControls)
-						// event.preventDefault();
-						//console.log("Click.");
-						// update the mouse variable
-						mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-						mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-						checkSelection();
-					}
+	        {
+	          console.log("Mouse Interaction Push:" + mouse.x + " : " + mouse.y);
+	        	// the following line would stop any other event handler from firing
+	        	// (such as the mouse's TrackballControls)
+	        	// event.preventDefault();
+	        	//console.log("Click.");
+	        	// update the mouse variable
+	        	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	        	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+	          checkSelection();
+	        }
 					//Mouse Down End
 
+
+					//////////////////
+					// INTERACTIONS //
+					//////////////////
+
+
+
+					/////////////////////
+					// COLOR SELECTION //
+					/////////////////////
+
 					//Color Select Start
-					function ColorSelected(){
-						selectedFaces.forEach( function(arrayItem)
-							{
-								arrayItem.face.color = selectedColor;
-								arrayItem.object.geometry.colorsNeedUpdate = true;
-							});
-					}
+					// function ColorSelected(){
+					// 	selectedFaces.forEach( function(arrayItem)
+					// 		{
+					// 			arrayItem.face.color = selectedColor;
+					// 			arrayItem.object.geometry.colorsNeedUpdate = true;
+					// 		});
+					// }
 					//Color Select End
 
-					// Find intersections
-					function checkSelection(){
+					/////////////////////
+	        // SELECTION CHECK //
+	        /////////////////////
 
-						console.log("Check Selected:" + mouse.x + " : " + mouse.y);
-						// create a Ray with origin at the mouse position
-						//   and direction into the scene (camera direction)
-						var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-						projector.unprojectVector( vector, camera );
-						var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-						//console.log("X-: " + mouse.x);
-						//console.log("Y-: " + mouse.y);
-						// create an array containing all objects in the scene with which the ray intersects
-						var intersects = ray.intersectObjects( targetList );
-						var selected = 0;
+	        // Find intersections
+	        function checkSelection(){
 
-						//if an intersection is detected
-						if ( intersects.length > 0 )
-						{
-							console.log("Intersects :" + intersects.length);
-							//test items in selected faces array
-							var test=-1;
-							var selected = selected + 1;
+	          // create a Ray with origin at the mouse position
+	          //   and direction into the scene (camera direction)
+	          var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+	          projector.unprojectVector( vector, camera );
+	          var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+	          //console.log("X-: " + mouse.x);
+	          //console.log("Y-: " + mouse.y);
 
-							selectedFaces.forEach( function(arrayItem)
-							{
+	          // create an array containing all objects in the scene with which the ray intersects
+	          var intersects = ray.intersectObjects( targetList );
+	          var selected = 0;
 
-							  console.log("True 1");
-								// if the faceIndex and object ID are the same between the intersect and selected faces ,
-								// the face index is recorded
-								if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
-									test=selectedFaces.indexOf(arrayItem);
-							    console.log("ObjectID: " + arrayItem.object.id);
+	          //if an intersection is detected
+	          if ( intersects.length > 0 )
+	          {
+	            console.log("Intersects :" + intersects.length);
+	            //test items in selected faces array
+	            var test=-1;
+	            var selected = selected + 1;
 
-									//Send Over to RootScope
-									if (arrayItem.object.id === 10 )
-									{
-									  console.log("CANADA");
+	            selectedFaces.forEach( function(arrayItem)
+	            {
 
-									}
-									else if (arrayItem.object.id === 11)
-									{
-									  console.log("MURICA");
-									}
+	              console.log("True 1");
+	              // if the faceIndex and object ID are the same between the intersect and selected faces ,
+	              // the face index is recorded
+	              if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
+	                test=intersects[0].object.id;
+	                console.log("ObjectID: " + arrayItem.object.id);
+
+	            } //End Check
+	            });
 
 
-								}
+	            // if is a previously selected face, change the color back to green, otherswise change to blue
+	            if(test>=0)
+	            {
+	              console.log("False");
+	              intersects[ 0 ].face.color=new THREE.Color( 0x44dd66 );
+	              selectedFaces.splice(test, 1);
+	            }
 
-							});
+	            else
+	            {
 
-							// if is a previously selected face, change the color back to green, otherswise change to blue
-							if(test>=0)
-							{
-								console.log("False");
-								//intersects[ 0 ].face.color=new THREE.Color( 0x44dd66 );
-								//selectedFaces.splice(test, 1);
+	              console.log("True 2");
+	              intersects[ 0 ].face.color=new THREE.Color( 0x222288 );
+	              selectedFaces.push(intersects[0]);
+	            }
 
-							}
-
-							else
-							{
-
-								console.log("True 2");
-								//intersects[ 0 ].face.color=new THREE.Color( 0x222288 );
-								//selectedFaces.push(intersects[0]);
-							}
-
-							//intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
-						}
-					}
-					// Find intersections End
-
-					// Find highlight
-					function checkHighlight(){
-						// find intersections
-
-						// create a Ray with origin at the mouse position
-						//   and direction into the scene (camera direction)
-						var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-						projector.unprojectVector( vector, camera );
-						var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-
-						// create an array containing all objects in the scene with which the ray intersects
-						var intersects = ray.intersectObjects( targetList );
-
-						// INTERSECTED = the object in the scene currently closest to the camera
-						//		and intersected by the Ray projected from the mouse position
-
-						// if there is one (or more) intersections
-						if ( intersects.length > 0 )
-						{	// case if mouse is not currently over an object
-							if(INTERSECTED==null){
-								INTERSECTED = intersects[ 0 ];
-								INTERSECTED.face.color = highlightedColor;
-							}
-							else{	// if thse mouse is over an object
-								INTERSECTED.face.color= baseColor;
-								INTERSECTED.object.geometry.colorsNeedUpdate=true;
-								INTERSECTED = intersects[ 0 ];
-								INTERSECTED.face.color = highlightedColor;
-							}
-							// upsdate mouseSphere coordinates and update colors
-							mouseSphereCoords = [INTERSECTED.point.x,INTERSECTED.point.y,INTERSECTED.point.z];
-							INTERSECTED.object.geometry.colorsNeedUpdate=true;
-
-						}
-						else // there are no intersections
-						{
-							// restore previous intersection object (if it exists) to its original color
-							if ( INTERSECTED ){
-								INTERSECTED.face.color = baseColor;
-								INTERSECTED.object.geometry.colorsNeedUpdate=true;
-							}
-							// remove previous intersection object reference
-							//     by setting current intersection object to "nothing"
-
-							INTERSECTED = null;
-							mouseSphereCoords = null;
+	            //intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
+	          }
+	        }
+	        // Find intersections End
 
 
-						}
-					}
-					// Find highlight end
+	        /////////////////
+	        // SELECTION   //
+	        /////////////////
 
-					// Check Mouse
-					function CheckMouseSphere(){
-						// if the coordinates exist, make the sphere visible
-						if(mouseSphereCoords != null){
-							//console.log(mouseSphereCoords[0].toString()+","+mouseSphereCoords[1].toString()+","+mouseSphereCoords[2].toString());
-							mouseSphere[0].position.set(mouseSphereCoords[0],mouseSphereCoords[1],mouseSphereCoords[2]);
-							mouseSphere[0].visible = true;
-						}
-						else{ // otherwise hide the sphere
-							mouseSphere[0].visible = false;
-						}
-					}
-					// Check Mouse End
 
+					//Find Highlight
+					// function checkHighlight(){
+					// 	// find intersections
+					//
+					// 	// create a Ray with origin at the mouse position
+					// 	//   and direction into the scene (camera direction)
+					// 	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+					// 	projector.unprojectVector( vector, camera );
+					// 	var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+					//
+					// 	// create an array containing all objects in the scene with which the ray intersects
+					// 	var intersects = ray.intersectObjects( targetList );
+					//
+					// 	// INTERSECTED = the object in the scene currently closest to the camera
+					// 	//		and intersected by the Ray projected from the mouse position
+					//
+					// 	// if there is one (or more) intersections
+					// 	if ( intersects.length > 0 )
+					// 	{	// case if mouse is not currently over an object
+					// 		if(INTERSECTED==null){
+					// 			INTERSECTED = intersects[ 0 ];
+					// 			INTERSECTED.face.color = highlightedColor;
+					// 		}
+					// 		else{	// if thse mouse is over an object
+					// 			INTERSECTED.face.color= baseColor;
+					// 			INTERSECTED.object.geometry.colorsNeedUpdate=true;
+					// 			INTERSECTED = intersects[ 0 ];
+					// 			INTERSECTED.face.color = highlightedColor;
+					// 		}
+					// 		// upsdate mouseSphere coordinates and update colors
+					// 		mouseSphereCoords = [INTERSECTED.point.x,INTERSECTED.point.y,INTERSECTED.point.z];
+					// 		INTERSECTED.object.geometry.colorsNeedUpdate=true;
+					//
+					// 	}
+					// 	else // there are no intersections
+					// 	{
+					// 		// restore previous intersection object (if it exists) to its original color
+					// 		if ( INTERSECTED ){
+					// 			INTERSECTED.face.color = baseColor;
+					// 			INTERSECTED.object.geometry.colorsNeedUpdate=true;
+					// 		}
+					// 		// remove previous intersection object reference
+					// 		//     by setting current intersection object to "nothing"
+					//
+					// 		INTERSECTED = null;
+					// 		mouseSphereCoords = null;
+					//
+					//
+					// 	}
+					// }
+					//Find highlight end
+
+					//Check Mouse
+					// function CheckMouseSphere(){
+					// 	// if the coordinates exist, make the sphere visible
+					// 	if(mouseSphereCoords != null){
+					// 		//console.log(mouseSphereCoords[0].toString()+","+mouseSphereCoords[1].toString()+","+mouseSphereCoords[2].toString());
+					// 		mouseSphere[0].position.set(mouseSphereCoords[0],mouseSphereCoords[1],mouseSphereCoords[2]);
+					// 		mouseSphere[0].visible = true;
+					// 	}
+					// 	else{ // otherwise hide the sphere
+					// 		mouseSphere[0].visible = false;
+					// 	}
+					// }
+					//Check Mouse End
+
+
+
+					///////////////
+					// UPDATES   //
+					///////////////
 
 					function toString(v) { return "[ " + v.x + ", " + v.y + ", " + v.z + " ]"; }
-
-
-
-
-
-						//End inject 4
-
-						function update()
-					        {
-										function update()
-										{
-											//checkHighlight();
-											//CheckMouseSphere();
-											keyboard.update();
-
-											if ( keyboard.down("up") )
-											{
-											//addOcta();
-											}
-											ColorSelected();
-											//intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
-											controls.update();
-										}
-					        }
-
-					//Inject 3 End
 
 
 
 					//Animate Start
 					function animate() {
 						requestAnimationFrame(animate);
-						update();
 						render();
+						update();
 					}
 					//Animate End
+
+
+						//End inject 4
+
+						function update()
+					  {
+
+						controls.update();
+
+					  }
+
+					//Inject 3 End
 
 
 
 					//Render Start
-					function render() {
-						// var timer = Date.now() * 0.0005;
-					  // camera.position.x = 10;
-						// camera.position.y = 4;
-						// camera.position.z = Math.sin(timer) * 10;
+					function render()
+					{
 						renderer.render(scene, camera);
 					}
 					//Animate End
+
+					///////////////
+					// UPDATES   //
+					///////////////
+
+
+
+					// LINK END
 				}
+					// RETURN
 			}
+					// FUNCTION
 		}
 	]);
