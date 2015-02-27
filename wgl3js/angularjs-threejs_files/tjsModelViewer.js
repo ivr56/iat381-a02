@@ -13,30 +13,24 @@ angular.module("tjsModelViewer", [])
 					var camera;
 					var renderer;
 					var controls;
-					var previous;
+					//var previous;
 					//var keyboard = new KeyboardState();
 
 					//Inject
-					 var targetList = [];
-		        var projector, mouse = { x: 0, y: 0 },INTERSECTED;
-		        var selectedFaces = [];
-		        var floorSide=1000;
-		        var baseColor=new THREE.Color( 0x44dd66 );
-		        var highlightedColor=new THREE.Color( 0xddaa00 );
-		        var selectedColor=new THREE.Color( 0x4466dd );
-		        var mouseSphereCoords = null;
-		        var mouseSphere=[];
-		        var country_targetList = [];
-
+					var targetList = [];
+		      var projector, mouse = { x: 0, y: 0 },INTERSECTED;
+		      var selectedFaces = [];
+		      var floorSide=1000;
+		      var baseColor=new THREE.Color( 0x44dd66 );
+		      var highlightedColor=new THREE.Color( 0xddaa00 );
+		      var selectedColor=new THREE.Color( 0x4466dd );
+		      var mouseSphereCoords = null;
+		      var mouseSphere=[];
+		      var country_targetList = [];
 					//Inject End
 
-					// init scene
 					init();
 					animate();
-
-
-
-
 
 
 
@@ -72,6 +66,10 @@ angular.module("tjsModelViewer", [])
 						container = document.getElementById( 'ThreeJS' );
 						container.appendChild(renderer.domElement );
 
+
+						// EVENTS
+	        	THREEx.WindowResize(renderer, camera);
+	        	THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
 
 						// CONTROLS
 						controls = new THREE.OrbitControls( camera, renderer.domElement );
@@ -257,6 +255,7 @@ angular.module("tjsModelViewer", [])
 					//Mouse Down
 					function onDocumentMouseDown( event )
 	        {
+						var click = 0;
 	          console.log("Mouse Interaction Push:" + mouse.x + " : " + mouse.y);
 	        	// the following line would stop any other event handler from firing
 	        	// (such as the mouse's TrackballControls)
@@ -296,17 +295,32 @@ angular.module("tjsModelViewer", [])
 
 	        // Find intersections
 	        function checkSelection(){
+						console.log("Ping");
+						console.log("X-: " + mouse.x);
+						console.log("Y-: " + mouse.y);
+						// create a Ray with origin at the mouse position
+						//   and direction into the scene (camera direction)
+						var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+						console.log("Vector Check");
+						console.log(vector);
+						console.log(camera);
+						//Problem Child
+						projector.unprojectVector( vector, camera );
+						//Problem Child
 
-	          // create a Ray with origin at the mouse position
-	          //   and direction into the scene (camera direction)
-	          var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-	          projector.unprojectVector( vector, camera );
-	          var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-	          //console.log("X-: " + mouse.x);
-	          //console.log("Y-: " + mouse.y);
 
-	          // create an array containing all objects in the scene with which the ray intersects
-	          var intersects = ray.intersectObjects( targetList );
+						var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+						console.log(ray);
+						console.log("Ray Check");
+						//console.log("X-: " + mouse.x);
+						//console.log("Y-: " + mouse.y);
+
+						// create an array containing all objects in the scene with which the ray intersects
+						var intersects = ray.intersectObjects( targetList );
+						console.log("Instersects Check");
+						console.log(intersects);
+
+
 	          var selected = 0;
 
 	          //if an intersection is detected

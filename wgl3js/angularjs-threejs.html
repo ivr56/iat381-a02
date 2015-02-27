@@ -24,10 +24,12 @@
 
 	<!-- Add your site or application content here -->
 	<div class="container" ng-view="">
-	<h1>AngularJS + ThreeJS</h1>
+		<div id="ThreeJS" style="position: absolute; left:0px; top:0px">
 	<canvas width="1226" height="622"></canvas>
 </div>
+<!-- Threee.JS Canvas End -->
 </div>
+<!-- Container End -->
 
 
 
@@ -45,6 +47,8 @@
 	<!-- build:js({.tmp,app}) scripts/scripts.js -->
 	<script src="./angularjs-threejs_files/app.js"></script>
 	<script src="./angularjs-threejs_files/main.js"></script>
+	<script src="./angularjs-threejs_files/THREEx.WindowResize.js"></script>
+	<script src="./angularjs-threejs_files/THREEx.FullScreen.js"></script>
 	<script src="./angularjs-threejs_files/Detector.js"></script>
 	<script src="./angularjs-threejs_files/tjsModelViewer.js"></script>
 	<!-- endbuild -->

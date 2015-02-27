@@ -327,17 +327,29 @@
 
         // Find intersections
         function checkSelection(){
-
+          console.log("Ping");
+          console.log("X-: " + mouse.x);
+          console.log("Y-: " + mouse.y);
           // create a Ray with origin at the mouse position
           //   and direction into the scene (camera direction)
           var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+          console.log("Vector Check");
+          console.log(vector);
+          console.log(camera);
           projector.unprojectVector( vector, camera );
+      
+
+
           var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-          console.log("X-: " + mouse.x);
-          console.log("Y-: " + mouse.y);
+          console.log(ray);
+          console.log("Ray Check");
+          //console.log("X-: " + mouse.x);
+          //console.log("Y-: " + mouse.y);
+
           // create an array containing all objects in the scene with which the ray intersects
           var intersects = ray.intersectObjects( targetList );
-          var selected = 0;
+          console.log("Instersects Check");
+          console.log(intersects);
 
           //if an intersection is detected
           if ( intersects.length > 0 )
