@@ -7,7 +7,7 @@ angular.module("tjsModelViewer", [])
 				scope: {
 					//assimpUrl: "=assimpUrl"
 				},
-				link: function (scope, elem, attr) {
+				link: function ($scope, $elem, $attr) {
 					var container;
 					var camera;
 					var scene;
@@ -61,6 +61,7 @@ angular.module("tjsModelViewer", [])
 					//
 					// loadModel(scope.assimpUrl);
 
+
 					          var newEarth= new THREE.SphereGeometry(125,125,125);
 					          var newEarth_shaded = new THREE.Mesh(newEarth, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
 					          newEarth_shaded.position.x = 0;
@@ -106,7 +107,7 @@ angular.module("tjsModelViewer", [])
 						var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
 						camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 						scene.add(camera);
-						camera.position.set(0,1250,1950);
+						camera.position.set(0,250,250);
 						camera.lookAt(scene.position);
 
 						scene.fog = new THREE.FogExp2(0x000000, 0.035);
@@ -247,12 +248,17 @@ angular.module("tjsModelViewer", [])
 						//Inject 4
 
 						// Find intersections
-						function checkSelection($rootScope){
+						function checkSelection(){
 
 
 							// create a Ray with origin at the mouse position
 							//   and direction into the scene (camera direction)
 							console.log("Ping");
+							console.log("Emitting");
+
+							$scope.$emit("message", "Hello, this is ThreeJS!");
+
+
 							var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 							projector.unprojectVector( vector, camera );
 							var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
