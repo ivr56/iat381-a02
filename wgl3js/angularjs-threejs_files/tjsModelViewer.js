@@ -256,7 +256,8 @@ angular.module("tjsModelViewer", [])
 							console.log("Ping");
 							console.log("Emitting");
 
-							$scope.$emit("message", "Hello, this is ThreeJS!");
+							//$scope.$emit("message", "Hello, this is ThreeJS!");
+
 
 
 							var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
@@ -272,48 +273,103 @@ angular.module("tjsModelViewer", [])
 								console.log("Intersects :" + intersects.length);
 								//test items in selected faces array
 								var test=-1;
+
+								//Activity of Economy
+								var activityUSD=0;
+								var activityCAD=0;
+
 								selectedFaces.forEach( function(arrayItem)
 								{
 
 									console.log("ObjectID 1: " + arrayItem.object.id);
 									//Validate Load Currency
+									console.log("True 1");
+
 									if (arrayItem.object.id === 11)
 									{
+										console.log("After True Check");
+										$scope.$emit("message", "CAD Active");
+										//test=arrayItem.object.id;
+										//----------------------------
+										// if the faceIndex and object ID are the same between the intersect and selected faces ,
+										// the face index is recorded
+										if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
+											test=arrayItem.object.id;
+											console.log("ObjectID 2: " + arrayItem.object.id);
+											activityCAD = 1;
+
+
+										}
+										//Check Face Index
+										//----------------------------
+
 
 
 									}
+
 									else if (arrayItem.object.id === 12)
 									{
+										console.log("After True Check");
+										$scope.$emit("message", "USD Active");
+										//test=arrayItem.object.id;
+
+										//----------------------------
+										// if the faceIndex and object ID are the same between the intersect and selected faces ,
+										// the face index is recorded
+										if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
+											test=arrayItem.object.id;
+											console.log("ObjectID 2: " + arrayItem.object.id);
+											activityUSD = 1;
+
+
+										}
+										//Check Face Index
+										//----------------------------
+
 
 
 									}
 
-									console.log("True 1");
-									// if the faceIndex and object ID are the same between the intersect and selected faces ,
-									// the face index is recorded
-									if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
-										test=arrayItem.object.id;
-										console.log("ObjectID 2: " + arrayItem.object.id);
-
-									}
 								});
+
 
 								// if is a previously selected face, change the color back to green, otherswise change to blue
 								if(test>=0)
 								{
+
 									console.log("False");
 									intersects[ 0 ].face.color=new THREE.Color( 0x44dd66 );
 									selectedFaces.splice(test, 1);
+
+									if (activityCAD = 1)
+									{
+										console.log("After False Check");
+										$scope.$emit("message", "CAD In-Active");
+										activityCAD = 0;
+									}
+
+									else if (activityUSD = 1)
+									{
+										console.log("After False Check");
+										$scope.$emit("message", "USD In-Active");
+										activityUSD = 0;
+									}
+
 								}
+
+
 								else
 								{
+
 									console.log("True 2");
 									intersects[ 0 ].face.color=new THREE.Color( 0x222288 );
 									selectedFaces.push(intersects[0]);
 								}
+								//End of If/Else Check Testing
+
 
 								intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
-							}
+							} //End of Intersects
 						}
 						// Find intersections End
 
