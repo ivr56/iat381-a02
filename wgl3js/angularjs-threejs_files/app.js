@@ -36,12 +36,22 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 	//-----------------------------
 	//-----------------------------
 	//Master Controller
+	//Manage View State. Check Currency to be Used by User/Visitor
+	/
 	a02.controller('MainCtrl', function ($scope, $rootScope) {
 
 		//--------
+
+		//Test Attribute
 		var test = 0;
 
+		//Verify how many selections were made
+		//Add and Subtract values dependent on broadcast messages recieved from ThreeJS/Angular Directives
 		var active = 0;
+
+
+
+
 
 		//--------------------------------------------
 		//--------------------------------------------
@@ -72,11 +82,13 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 				if (msg === 1)
 				{
 					active = active + 1;
+					console.log("Added Selection");
 
 				}
 				else if (msg === 0)
 				{
 					active = active - 1;
+					console.log("Removed Selection");
 				}
 
 		});
@@ -92,11 +104,13 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 				if (msg === 1)
 				{
 					active = active + 1;
+					console.log("Added Selection");
 
 				}
 				else if (msg === 0)
 				{
 					active = active - 1;
+					console.log("Removed Selection");
 				}
 
 
@@ -113,11 +127,13 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 				if (msg === 1)
 				{
 					active = active + 1;
+					console.log("Added Selection");
 
 				}
 				else if (msg === 0)
 				{
 					active = active - 1;
+					console.log("Removed Selection");
 				}
 
 		});
@@ -129,16 +145,22 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 		{
 
 			//Activate Button to Confirm
-
+			console.log("Test Full Selection");
+			// [Code_Here.] //
 			//--------
-
+			
 
 		}
+		else if (active === 3)
+		{
+			console.log("Invalid Selection");
+		}
+
+		//--------------------------------------------
+		//--------------------------------------------
+		//--------------------------------------------
 
 
-		//--------------------------------------------
-		//--------------------------------------------
-		//--------------------------------------------
 
 
 		// $scope.foo = 'bar';
@@ -151,6 +173,7 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 
 		//--------
 		//Check Communciation Between Functions
+		//Test function and value passthrough
 		function testing()
 		{
 			console.log(test);
