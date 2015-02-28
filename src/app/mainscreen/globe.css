@@ -40,11 +40,11 @@ a {
 .controlpanel{
 	position: absolute; 
 	z-index: 1; 
-	left: 15%; 
-	bottom: 60%; 
-	width:75%; 
+	 
+	bottom: 55%; 
+	width:100%; 
 	height:30px;
-	background-color: green;
+	
 	
 }
 .userpanel{
@@ -57,18 +57,23 @@ a {
 	opacity: 1;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 1em;
-	margin-right: 10px;
-	text-align: top-center;
+	margin-right: 0px;
+	
 
 }
 
 .form-group{
-	width:50%;
+	width:100%;
 	
 }
 
-.currencyButtons{
-top:90%;
-height: 50px;
+.currencyBoxes{
+margin-top: 19em;
+height: 75px;
 text-align: center;
+width: 100%;
+}
+
+.currencyBoxes p{
+padding: 1.75em;
 }
