@@ -59,8 +59,8 @@
 	var dialRadius = 280,
 		outerRadius = 200,
 		// innerRadius = 80 on 12 hour clock
-		innerRadius = 180,
-		tickRadius = 23,
+		innerRadius = 150,
+		tickRadius = 20,
 		diameter = dialRadius * 2,
 		duration = transitionSupported ? 350 : 1;
 
