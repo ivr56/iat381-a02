@@ -52,8 +52,8 @@ a {
 	width: 45%;
 	display:inline-block;
 	height: 100%;
-	background-color: red;
-	
+	background-color: #d9d9d9;
+	border: 1px black solid;
 	opacity: 1;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 1em;
