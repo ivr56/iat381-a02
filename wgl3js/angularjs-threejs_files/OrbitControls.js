@@ -39,7 +39,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 	// This option actually enables dollying in and out; left as "zoom" for
 	// backwards compatibility
-	this.noZoom = false;
+	this.noZoom = true;
 	this.zoomSpeed = 1.0;
 	// Limits to how far you can dolly in and out
 	this.minDistance = 0;
@@ -121,7 +121,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		}
 
-		phiDelta -= angle;
+		//phiDelta -= angle;
 
 	};
 
@@ -144,6 +144,7 @@ THREE.OrbitControls = function ( object, domElement ) {
 		var panOffset = new THREE.Vector3();
 		var te = this.object.matrix.elements;
 		// get Y column of matrix
+		//4,5,6
 		panOffset.set( te[4], te[5], te[6] );
 		panOffset.multiplyScalar(distance);
 
