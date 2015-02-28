@@ -16,6 +16,7 @@ angular.module("tjsModelViewer", [])
 					var controls;
 					//var keyboard = new KeyboardState();
 
+
 					//Inject
 					var targetList = [];
 		        var projector, mouse = { x: 0, y: 0 },INTERSECTED;
@@ -76,7 +77,7 @@ angular.module("tjsModelViewer", [])
 					 var newtouchpointUSD_shaded = new THREE.Mesh(newtouchpointUSD, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
 					 newtouchpointUSD_shaded.position.x = 0;
 					 newtouchpointUSD_shaded.position.y = 50;
-					 newtouchpointUSD_shaded.position.z = -100;
+					 newtouchpointUSD_shaded.position.z = -75;
 
 					 scene.add(newtouchpointUSD_shaded);
 					 //Add to Interaction List
@@ -90,7 +91,7 @@ angular.module("tjsModelViewer", [])
 				 var newtouchpointEU_shaded = new THREE.Mesh(newtouchpointEU, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
 				 newtouchpointEU_shaded.position.x = 0;
 				 newtouchpointEU_shaded.position.y = 50;
-				 newtouchpointEU_shaded.position.z = 100;
+				 newtouchpointEU_shaded.position.z = 75;
 				 scene.add(newtouchpointEU_shaded);
 				 targetList.push(newtouchpointEU_shaded);
 				 country_targetList.push("Euro");
@@ -121,10 +122,10 @@ angular.module("tjsModelViewer", [])
 
 						scene = new THREE.Scene();
 						var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
-						var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 100000;
+						var VIEW_ANGLE = 30, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 10000;
 						camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 						scene.add(camera);
-						camera.position.set(-750,50,700);
+						camera.position.set(-750,50,0);
 						camera.lookAt(scene.position);
 						//scene.fog = new THREE.FogExp2(0x000000, 0.035);
 
