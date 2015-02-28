@@ -61,33 +61,46 @@ angular.module("tjsModelViewer", [])
 					//
 					// loadModel(scope.assimpUrl);
 
+					//Earth Geometry
+					 var newEarth= new THREE.SphereGeometry(75,75,75);
+					 var newEarth_shaded = new THREE.Mesh(newEarth, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
+					 newEarth_shaded.position.x = 0;
+					 newEarth_shaded.position.y = 0;
+					 newEarth_shaded.position.z = 0;
+					 scene.add(newEarth_shaded);
 
-					          var newEarth= new THREE.SphereGeometry(125,125,125);
-					          var newEarth_shaded = new THREE.Mesh(newEarth, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
-					          newEarth_shaded.position.x = 0;
-					          newEarth_shaded.position.y = 0;
-					          newEarth_shaded.position.z = 0;
-					        	scene.add(newEarth_shaded);
+					//American Dollar
+					 var newtouchpointUSD= new THREE.SphereGeometry(5,5,5);
+					 var newtouchpointUSD_shaded = new THREE.Mesh(newtouchpointUSD, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
+					 newtouchpointUSD_shaded.position.x = 0;
+					 newtouchpointUSD_shaded.position.y = 50;
+					 newtouchpointUSD_shaded.position.z = -100;
+					scene.add(newtouchpointUSD_shaded);
+					targetList.push(newtouchpointUSD_shaded);
+					country_targetList.push("American Dollar");
 
 
-										var newtouchpointUSD= new THREE.SphereGeometry(12,12,12);
-								          var newtouchpointUSD_shaded = new THREE.Mesh(newtouchpointUSD, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
-								          newtouchpointUSD_shaded.position.x = 150;
-								          newtouchpointUSD_shaded.position.y = 150;
-								          newtouchpointUSD_shaded.position.z = 150;
-								        	scene.add(newtouchpointUSD_shaded);
+				 //Euro
+				 var newtouchpointEU= new THREE.SphereGeometry(5,5,5);
+				 var newtouchpointEU_shaded = new THREE.Mesh(newtouchpointEU, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
+				 newtouchpointEU_shaded.position.x = 0;
+				 newtouchpointEU_shaded.position.y = 50;
+				 newtouchpointEU_shaded.position.z = 100;
+				 scene.add(newtouchpointEU_shaded);
+				 targetList.push(newtouchpointEU_shaded);
+				 country_targetList.push("Euro");
 
-								          targetList.push(newtouchpointUSD_shaded);
-								          country_targetList.push("American Dollar");
 
-													var newtouchpointCAD= new THREE.SphereGeometry(12,12,12);
-	var newtouchpointCAD_shaded = new THREE.Mesh(newtouchpointCAD, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
-	newtouchpointCAD_shaded.position.x = 250;
-	newtouchpointCAD_shaded.position.y = 250;
-	newtouchpointCAD_shaded.position.z = 250;
-	scene.add(newtouchpointCAD_shaded);
-	targetList.push(newtouchpointCAD_shaded);
-	country_targetList.push("Canadian Dollar");
+				//Chinese Yen
+				var newtouchpointCHA= new THREE.SphereGeometry(5,5,5);
+				var newtouchpointCHA_shaded = new THREE.Mesh(newtouchpointCHA, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
+				newtouchpointCHA_shaded.position.x = 100;
+				newtouchpointCHA_shaded.position.y = 50;
+				newtouchpointCHA_shaded.position.z = 0;
+				scene.add(newtouchpointCHA_shaded);
+				targetList.push(newtouchpointCHA_shaded);
+				country_targetList.push("Chinese Yen");
+
 
 					animate();
 
@@ -101,16 +114,13 @@ angular.module("tjsModelViewer", [])
 						//camera.position.set(0,250,950);
 
 						scene = new THREE.Scene();
-
-
 						var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
-						var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
+						var VIEW_ANGLE = 5, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 100000;
 						camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 						scene.add(camera);
-						camera.position.set(0,250,250);
+						camera.position.set(-750,50,700);
 						camera.lookAt(scene.position);
-
-						scene.fog = new THREE.FogExp2(0x000000, 0.035);
+						//scene.fog = new THREE.FogExp2(0x000000, 0.035);
 
 						// Lights
 						var light = new THREE.AmbientLight( 0x333333 ); // soft white light
@@ -132,28 +142,28 @@ angular.module("tjsModelViewer", [])
 						  //       	scene.add(floor);
 
 
-											// // SKYBOX
-								      //   	var skyBoxGeometry = new THREE.CubeGeometry( 10000, 10000, 10000 );
-								      //   	var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0xdddddd, side: THREE.BackSide } );
-								      //   	var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
-								      //   	scene.add(skyBox);
+							// // SKYBOX
+						  //   	var skyBoxGeometry = new THREE.CubeGeometry( 10000, 10000, 10000 );
+							//   	var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0xdddddd, side: THREE.BackSide } );
+						  //   	var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
+						  //   	scene.add(skyBox);
 
 
 
 
 
-						//Renderer
-						renderer = new THREE.CanvasRenderer();
-						//renderer = new THREE.WebGLRenderer( {antialias:true} );
-						renderer.setSize(window.innerWidth, window.innerHeight);
-						//elem[0].appendChild(renderer.domElement);
-						container = document.getElementById( 'ThreeJS' );
-						container.appendChild(renderer.domElement );
+						  //Renderer
+						  renderer = new THREE.CanvasRenderer();
+						  //renderer = new THREE.WebGLRenderer( {antialias:true} );
+						  renderer.setSize(window.innerWidth, window.innerHeight);
+						  //elem[0].appendChild(renderer.domElement);
+						  container = document.getElementById( 'ThreeJS' );
+						  container.appendChild(renderer.domElement );
 
-						// Events
+						  // Events
 
 
-						// RENDERER
+						  // RENDERER
 
 				        	// renderer = new THREE.WebGLRenderer( {antialias:true} );
 				        	// renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -172,14 +182,12 @@ angular.module("tjsModelViewer", [])
 				        	light.position.set(-300,1000,-300);
 				        	scene.add(light);
 				        	// FLOOR
-				        	var faceMat = new THREE.MeshBasicMaterial({color: 0x888888,side: THREE.DoubleSide});
-				        	var wireMat = new THREE.MeshBasicMaterial({color:0xaaaaaa,wireframe:true,transparent:true});
-				        	var multiMat = [faceMat ,wireMat];
-
-				        	var floor= THREE.SceneUtils.createMultiMaterialObject(new THREE.PlaneGeometry(floorSide, floorSide, 10, 10),multiMat);
-
-				        	floor.rotation.x = Math.PI / 2;
-				        	scene.add(floor);
+				        	// var faceMat = new THREE.MeshBasicMaterial({color: 0x888888,side: THREE.DoubleSide});
+				        	// var wireMat = new THREE.MeshBasicMaterial({color:0xaaaaaa,wireframe:true,transparent:true});
+				        	// var multiMat = [faceMat ,wireMat];
+				        	// var floor= THREE.SceneUtils.createMultiMaterialObject(new THREE.PlaneGeometry(floorSide, floorSide, 10, 10),multiMat);
+				        	// floor.rotation.x = Math.PI / 2;
+				        	// scene.add(floor);
 
 				        	// SKYBOX
 
@@ -276,7 +284,8 @@ angular.module("tjsModelViewer", [])
 
 								//Activity of Economy
 								var activityUSD=0;
-								var activityCAD=0;
+								var activityCHA=0;
+								var activityEU=0;
 
 								selectedFaces.forEach( function(arrayItem)
 								{
@@ -285,34 +294,11 @@ angular.module("tjsModelViewer", [])
 									//Validate Load Currency
 									console.log("True 1");
 
-									if (arrayItem.object.id === 11)
-									{
-										console.log("After True Check");
-										$scope.$emit("message", "CAD Active");
-										//test=arrayItem.object.id;
-										//----------------------------
-										// if the faceIndex and object ID are the same between the intersect and selected faces ,
-										// the face index is recorded
-										if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
-											test=arrayItem.object.id;
-											console.log("ObjectID 2: " + arrayItem.object.id);
-											activityCAD = 1;
-
-
-										}
-										//Check Face Index
-										//----------------------------
-
-
-
-									}
-
-									else if (arrayItem.object.id === 12)
+									if (arrayItem.object.id === 9)
 									{
 										console.log("After True Check");
 										$scope.$emit("message", "USD Active");
 										//test=arrayItem.object.id;
-
 										//----------------------------
 										// if the faceIndex and object ID are the same between the intersect and selected faces ,
 										// the face index is recorded
@@ -330,6 +316,50 @@ angular.module("tjsModelViewer", [])
 
 									}
 
+									else if (arrayItem.object.id === 10)
+									{
+										console.log("After True Check");
+										$scope.$emit("message", "CHA Active");
+										//test=arrayItem.object.id;
+
+										//----------------------------
+										// if the faceIndex and object ID are the same between the intersect and selected faces ,
+										// the face index is recorded
+										if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
+											test=arrayItem.object.id;
+											console.log("ObjectID 2: " + arrayItem.object.id);
+											activityCHA = 1;
+
+
+										}
+										//Check Face Index
+										//----------------------------
+
+
+
+									}
+
+									else if (arrayItem.object.id === 11)
+									{
+										console.log("After True Check");
+										$scope.$emit("message", "EU Active");
+										//test=arrayItem.object.id;
+
+										//----------------------------
+										// if the faceIndex and object ID are the same between the intersect and selected faces ,
+										// the face index is recorded
+										if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
+											test=arrayItem.object.id;
+											console.log("ObjectID 2: " + arrayItem.object.id);
+											activityEU = 1;
+
+
+										}
+										//Check Face Index
+										//----------------------------
+									}
+
+
 								});
 
 
@@ -341,12 +371,13 @@ angular.module("tjsModelViewer", [])
 									intersects[ 0 ].face.color=new THREE.Color( 0x44dd66 );
 									selectedFaces.splice(test, 1);
 
-									if (activityCAD = 1)
+									if (activityCHA = 1)
 									{
 										console.log("After False Check");
-										$scope.$emit("message", "CAD In-Active");
-										activityCAD = 0;
+										$scope.$emit("message", "CHA In-Active");
+										activityCHA = 0;
 									}
+
 
 									else if (activityUSD = 1)
 									{
@@ -355,6 +386,13 @@ angular.module("tjsModelViewer", [])
 										activityUSD = 0;
 									}
 
+
+									else if (activityEU = 1)
+									{
+										console.log("After False Check");
+										$scope.$emit("message", "EU In-Active");
+										activityEU = 0;
+									}
 								}
 
 
@@ -375,20 +413,11 @@ angular.module("tjsModelViewer", [])
 
 						//End inject 4
 
-						function update()
-					        {
-					        	// checkHighlight();
-					        	// CheckMouseSphere();
-					        	// keyboard.update();
-										//
-					        	// if ( keyboard.down("up") )
-					        	// {
-					        	// //addOcta();
-					        	// }
-					        	// ColorSelected();
-					        	//intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
-					        	controls.update();
-					        }
+
+					function update()
+					{
+					  controls.update();
+					}
 
 					//Inject 3 End
 

@@ -20,18 +20,17 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 	//--------
 
 
+
 	//--------
 	//Global Scope
-	a02.run(function ($rootScope)
-		{
-		}
-		);
 	//End Global Scope
 	//--------
 
-var APP = {};
 
-APP.publicMethods = {};
+
+	//var APP = {};
+	//APP.publicMethods = {};
+
 
 	//--------
 	//Master Controller
@@ -56,12 +55,12 @@ APP.publicMethods = {};
 		//End Messages and Activity from ThreeJS + AngularJS Directive
 		//--------
 
-		$scope.foo = 'bar';
-
-		APP.publicMethods.doSomething = $scope.doSomething = function() {
-			$scope.foo = 'bar none';
-			$scope.$apply();
-		}
+		// $scope.foo = 'bar';
+		//
+		// APP.publicMethods.doSomething = $scope.doSomething = function() {
+		// 	$scope.foo = 'bar none';
+		// 	$scope.$apply();
+		// }
 
 
 		//--------
