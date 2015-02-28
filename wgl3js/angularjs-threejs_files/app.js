@@ -37,8 +37,9 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 	//-----------------------------
 	//Master Controller
 	//Manage View State. Check Currency to be Used by User/Visitor
-	/
-	a02.controller('MainCtrl', function ($scope, $rootScope) {
+
+	a02.controller('MainCtrl', function ($scope, $rootScope)
+		{
 
 		//--------
 
@@ -77,18 +78,34 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 		//Read Read Messages for USD
 		$scope.$on("messageUSD", function (e, msg)
 		{
-				console.log(msg + " : USD");
+				console.log("Bank Relay : " + msg);
 
 				if (msg === 1)
 				{
 					active = active + 1;
-					console.log("Added Selection");
+					console.log("Active Currencies: " + active);
+					console.log("Added USD Selection to Active");
+
+					if (active === 2)
+					{
+
+						//Activate Button to Confirm
+						console.log("Button Activated for Exchange");
+
+						// [ code_here. ] //
+						// [ Toggle HTML DOM Element Visiblity]
+						//--------
+
+
+					}
 
 				}
+
 				else if (msg === 0)
 				{
 					active = active - 1;
-					console.log("Removed Selection");
+					console.log("Active Currencies: " + active);
+					console.log("Removed USD Selection from Active");
 				}
 
 		});
@@ -104,13 +121,29 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 				if (msg === 1)
 				{
 					active = active + 1;
-					console.log("Added Selection");
+					console.log("Active: " + active);
+					console.log("Added EU Selection");
+
+					if (active === 2)
+					{
+
+						//Activate Button to Confirm
+						console.log("Button Activated for Exchange");
+
+						// [ code_here. ] //
+						// [ Toggle HTML DOM Element Visiblity]
+						//--------
+
+
+					}
+
 
 				}
 				else if (msg === 0)
 				{
 					active = active - 1;
-					console.log("Removed Selection");
+					console.log("Active: " + active);
+					console.log("Removed EU Selection");
 				}
 
 
@@ -119,46 +152,19 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 		//--------
 
 
-		//--------
-		//Read Read Messages for CHA
-		$scope.$on("messageCHA", function (e, msg)
-		{
-				console.log(msg + ": CHA");
-				if (msg === 1)
-				{
-					active = active + 1;
-					console.log("Added Selection");
 
-				}
-				else if (msg === 0)
-				{
-					active = active - 1;
-					console.log("Removed Selection");
-				}
-
-		});
-		//End Messages and Activity for CHA
-		//--------
 
 		//Check Activity if 2 Selected Run Button
-		if (active === 2)
-		{
 
-			//Activate Button to Confirm
-			console.log("Test Full Selection");
-			// [Code_Here.] //
-			//--------
-			
 
-		}
-		else if (active === 3)
-		{
-			console.log("Invalid Selection");
-		}
+
+		// [ code_here. ] //
+		// [ Toggle HTML DOM Element Visiblity]
 
 		//--------------------------------------------
 		//--------------------------------------------
 		//--------------------------------------------
+
 
 
 
@@ -198,10 +204,63 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 	//-----------------------------
 	//-----------------------------
 	//-----------------------------
+	a02.controller('ViewState', function ($scope, $rootScope)
+	{
+
+		//--------
+		//Read Read Messages for EU
+		$scope.$on("messageView", function (e, msg)
+		{
+				console.log(msg + " : EU");
+				if (msg === 1)
+				{
+					active = active + 1;
+					console.log("Added Selection");
+
+				}
+				else if (msg === 0)
+				{
+					active = active - 1;
+					console.log("Removed Selection");
+				}
+
+
+		});
+		//End Messages and Activity for EU
+		//--------
+
+
+		//On Click Switch Views
+		$scope.confirm = function ()
+		{
+			//Test Code
+
+
+		}
 
 
 
+	});
 
+
+
+	//Change View State
+	//-----------------------------
+	//-----------------------------
+	//-----------------------------
+
+
+
+	//Second View State
+	//-----------------------------
+	//-----------------------------
+	//-----------------------------
+
+	a02.controller('logicState', function ($scope, $rootScope)
+	{
+
+
+	});
 
 
 	//Change View State

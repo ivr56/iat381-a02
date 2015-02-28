@@ -67,7 +67,9 @@ angular.module("tjsModelViewer", [])
 					 newEarth_shaded.position.x = 0;
 					 newEarth_shaded.position.y = 0;
 					 newEarth_shaded.position.z = 0;
-					 scene.add(newEarth_shaded);
+					 newEarth_shaded.name = "Earth";
+					scene.add(newEarth_shaded);
+
 
 					//American Dollar
 					 var newtouchpointUSD= new THREE.SphereGeometry(5,5,5);
@@ -75,9 +77,12 @@ angular.module("tjsModelViewer", [])
 					 newtouchpointUSD_shaded.position.x = 0;
 					 newtouchpointUSD_shaded.position.y = 50;
 					 newtouchpointUSD_shaded.position.z = -100;
-					scene.add(newtouchpointUSD_shaded);
-					targetList.push(newtouchpointUSD_shaded);
-					country_targetList.push("American Dollar");
+
+					 scene.add(newtouchpointUSD_shaded);
+					 //Add to Interaction List
+					 targetList.push(newtouchpointUSD_shaded);
+
+					 //country_targetList.push("American Dollar");
 
 
 				 //Euro
@@ -90,16 +95,17 @@ angular.module("tjsModelViewer", [])
 				 targetList.push(newtouchpointEU_shaded);
 				 country_targetList.push("Euro");
 
-
-				//Chinese Yen
-				var newtouchpointCHA= new THREE.SphereGeometry(5,5,5);
-				var newtouchpointCHA_shaded = new THREE.Mesh(newtouchpointCHA, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
-				newtouchpointCHA_shaded.position.x = 100;
-				newtouchpointCHA_shaded.position.y = 50;
-				newtouchpointCHA_shaded.position.z = 0;
-				scene.add(newtouchpointCHA_shaded);
-				targetList.push(newtouchpointCHA_shaded);
-				country_targetList.push("Chinese Yen");
+				//
+				//
+				// //Chinese Yen
+				// var newtouchpointCHA= new THREE.SphereGeometry(5,5,5);
+				// var newtouchpointCHA_shaded = new THREE.Mesh(newtouchpointCHA, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
+				// newtouchpointCHA_shaded.position.x = 100;
+				// newtouchpointCHA_shaded.position.y = 50;
+				// newtouchpointCHA_shaded.position.z = 0;
+				// scene.add(newtouchpointCHA_shaded);
+				// targetList.push(newtouchpointCHA_shaded);
+				// country_targetList.push("Chinese Yen");
 
 
 					animate();
@@ -267,6 +273,9 @@ angular.module("tjsModelViewer", [])
 							//$scope.$emit("message", "Hello, this is ThreeJS!");
 
 
+							//Validate Loaded Currnecies
+							//console.log("Loaded Models: " + targetList);
+							//console.log("Loaded Identifiers: " + country_targetList);
 
 							var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 							projector.unprojectVector( vector, camera );
@@ -275,136 +284,167 @@ angular.module("tjsModelViewer", [])
 							// create an array containing all objects in the scene with which the ray intersects
 							var intersects = ray.intersectObjects( targetList );
 
+
+
+
 							//if an intersection is detected
 							if ( intersects.length > 0 )
 							{
+								//Validate Intersect
 								console.log("Intersects :" + intersects.length);
+								console.log("Intersect Location : " + intersects);
+
+
+
 								//test items in selected faces array
+
 								var test=-1;
 
 								//Activity of Economy
 								var activityUSD=0;
-								var activityCHA=0;
 								var activityEU=0;
 
+
+
+								//Validate State
 								selectedFaces.forEach( function(arrayItem)
 								{
 
-									console.log("ObjectID 1: " + arrayItem.object.id);
-									//Validate Load Currency
-									console.log("True 1");
 
-									if (arrayItem.object.id === 9)
+									//Validate Selection
+									console.log("What Country was Selected? " + arrayItem.object.id);
+
+
+
+									//Validate USD
+									if (arrayItem.object.id === 8)
 									{
-										console.log("After True Check");
-										$scope.$emit("message", "USD Active");
-										$scope.$emit("messageUSD", 1);
+										console.log("After True Check 00 on USD");
+										activityUSD = 1;
+										// $scope.$emit("message", "USD Active");
+										// $scope.$emit("messageUSD", 1);
+
 										//test=arrayItem.object.id;
 										//----------------------------
 										// if the faceIndex and object ID are the same between the intersect and selected faces ,
 										// the face index is recorded
 										if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
-											test=arrayItem.object.id;
-											console.log("ObjectID 2: " + arrayItem.object.id);
-											activityUSD = 1;
-
+											test=selectedFaces.indexOf(arrayItem);
+											console.log("ObjectID 01 Check: " + arrayItem.object.id);
+											console.log("Check FaceIndex - Check 01 on USD")
+											activityUSD = 2;
 
 										}
 										//Check Face Index
 										//----------------------------
-
-
-
 									}
+									//End Validation of USD
 
-									else if (arrayItem.object.id === 10)
+
+									//Validate EU
+									else if (arrayItem.object.id === 9)
 									{
-										console.log("After True Check");
-										$scope.$emit("message", "CHA Active");
-										//test=arrayItem.object.id;
+										console.log("After True Check 00 on EU");
+										activityEU = 1;
+										// $scope.$emit("message", "USD Active");
+										// $scope.$emit("messageUSD", 1);
 
+										//test=arrayItem.object.id;
 										//----------------------------
 										// if the faceIndex and object ID are the same between the intersect and selected faces ,
 										// the face index is recorded
 										if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
-											test=arrayItem.object.id;
-											console.log("ObjectID 2: " + arrayItem.object.id);
-											activityCHA = 1;
-
-
-										}
-										//Check Face Index
-										//----------------------------
-
-
-
-									}
-
-									else if (arrayItem.object.id === 11)
-									{
-										console.log("After True Check");
-										$scope.$emit("message", "EU Active");
-										//test=arrayItem.object.id;
-
-										//----------------------------
-										// if the faceIndex and object ID are the same between the intersect and selected faces ,
-										// the face index is recorded
-										if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
-											test=arrayItem.object.id;
-											console.log("ObjectID 2: " + arrayItem.object.id);
-											activityEU = 1;
-
+											test=selectedFaces.indexOf(arrayItem);
+											console.log("ObjectID 01 Check: " + arrayItem.object.id);
+											console.log("Check FaceIndex - Check 01 on EU")
+											activityEU = 2;
 
 										}
 										//Check Face Index
 										//----------------------------
 									}
+
+									//End Validation of EU
+
+
 
 
 								});
-
+								//Selected Faces
 
 								// if is a previously selected face, change the color back to green, otherswise change to blue
 								if(test>=0)
 								{
 
-									console.log("False");
+									console.log("False Flag: " + "USD: " + activityUSD + " EU: " + activityEU);
 									intersects[ 0 ].face.color=new THREE.Color( 0x44dd66 );
 									selectedFaces.splice(test, 1);
 
-									if (activityCHA = 1)
-									{
-										console.log("After False Check");
-										$scope.$emit("message", "CHA In-Active");
-										activityCHA = 0;
-									}
 
-
-									else if (activityUSD = 1)
+									//Validate De-Selection of USD
+									if (activityUSD === 2)
 									{
-										console.log("After False Check");
+										console.log("Test Flag A Set To : " + test );
+										console.log("False Flag for USD");
 										$scope.$emit("message", "USD In-Active");
+										$scope.$emit("messageUSD", 0);
+										test = -1;
+										console.log("Test Flag B Set To : " + test );
 										activityUSD = 0;
 									}
-
-
-									else if (activityEU = 1)
+									//-----
+									else if (activityEU === 2)
 									{
-										console.log("After False Check");
+										console.log("Test Flag A Set To : " + test );
+										console.log("False Flag for EU");
 										$scope.$emit("message", "EU In-Active");
+										$scope.$emit("messageEU", 0);
+										test = -1;
+										console.log("Test Flag B Set To : " + test );
 										activityEU = 0;
 									}
+
+
+
 								}
 
 
 								else
 								{
 
-									console.log("True 2");
+									console.log("True Flag: " + "USD: " + activityUSD + " EU: " + activityEU);
 									intersects[ 0 ].face.color=new THREE.Color( 0x222288 );
 									selectedFaces.push(intersects[0]);
+
+									//Validate USD Selection to Master Controller
+									if (activityUSD === 1)
+									{
+										console.log("True Flag for USD");
+										$scope.$emit("message", "USD Active");
+										$scope.$emit("messageUSD", 1);
+
+										activityUSD = 1;
+									}
+									//-----
+
+									//Validate EU Selection to Master Controller
+									else if (activityEU === 1)
+									{
+
+										console.log("True Flag for EU");
+										$scope.$emit("message", "EU Active");
+										$scope.$emit("messageEU", 1);
+										test = -1;
+
+									}
+									//------
+
+
 								}
 								//End of If/Else Check Testing
+
+
+
 
 
 								intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
