@@ -115,7 +115,7 @@ angular.module("tjsModelViewer", [])
 
 						scene = new THREE.Scene();
 						var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
-						var VIEW_ANGLE = 5, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 100000;
+						var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 100000;
 						camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
 						scene.add(camera);
 						camera.position.set(-750,50,700);
@@ -298,6 +298,7 @@ angular.module("tjsModelViewer", [])
 									{
 										console.log("After True Check");
 										$scope.$emit("message", "USD Active");
+										$scope.$emit("messageUSD", 1);
 										//test=arrayItem.object.id;
 										//----------------------------
 										// if the faceIndex and object ID are the same between the intersect and selected faces ,
