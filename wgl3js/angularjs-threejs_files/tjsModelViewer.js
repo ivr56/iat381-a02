@@ -30,7 +30,6 @@ angular.module("tjsModelViewer", [])
 		        var country_targetList = [];
 
 					//Inject End
-
 					// init scene
 					init();
 
@@ -62,14 +61,30 @@ angular.module("tjsModelViewer", [])
 					//
 					// loadModel(scope.assimpUrl);
 
-					//Earth Geometry
+					 //Earth Geometry
+
+					 //Create Geometery
 					 var newEarth= new THREE.SphereGeometry(75,75,75);
-					 var newEarth_shaded = new THREE.Mesh(newEarth, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
+					 var etexture = THREE.ImageUtils.loadTexture('models/earthtexturemin.png');
+					 //Add Diffuse Texture and
+					 //var earthtexture = THREE.ImageUtils.loadTexture('models/defult_earth.jpg');
+					 var eMaterial = new THREE.MeshBasicMaterial({
+				   map:etexture
+			     });
+
+					 //var earthmaterial = new THREE.MeshBasicMaterial({map: earthtexture});
+
+					 //Create Mesh with Material
+					 var newEarth_shaded = new THREE.Mesh(newEarth, eMaterial);
+					 //Position Mesh
 					 newEarth_shaded.position.x = 0;
 					 newEarth_shaded.position.y = 0;
 					 newEarth_shaded.position.z = 0;
+
+					 //Add Identifiying Tag
 					 newEarth_shaded.name = "Earth";
-					scene.add(newEarth_shaded);
+					 //Add to Scene
+					 scene.add(newEarth_shaded);
 
 
 					//American Dollar
@@ -109,7 +124,6 @@ angular.module("tjsModelViewer", [])
 				// country_targetList.push("Chinese Yen");
 
 
-					animate();
 
 					//Initilize Start
 					function init() {
@@ -137,6 +151,13 @@ angular.module("tjsModelViewer", [])
 		        	scene.add(light);
 
 
+							var directionalLight = new THREE.DirectionalLight(0xffffff);
+							directionalLight.position.set(1, 1, 1).normalize();
+							scene.add(directionalLight);
+
+							// var light = new THREE.PointLight(0xffffff,1,4500);
+							// light.position.set(0,0,0);
+							// scene.add(light);
 
 							// // FLOOR
 						  //       	var faceMat = new THREE.MeshBasicMaterial({color: 0x888888,side: THREE.DoubleSide});
@@ -183,11 +204,10 @@ angular.module("tjsModelViewer", [])
 				        	controls = new THREE.OrbitControls( camera, renderer.domElement );
 
 									// LIGHT
-				        	var light = new THREE.AmbientLight( 0x333333 ); // soft white light
-				        	scene.add( light );
-				        	var light = new THREE.PointLight(0xffffff,1,4500);
-				        	light.position.set(-300,1000,-300);
-				        	scene.add(light);
+				        	//var light = new THREE.AmbientLight( 0x333333 ); // soft white light
+				        	//scene.add( light );
+
+
 				        	// FLOOR
 				        	// var faceMat = new THREE.MeshBasicMaterial({color: 0x888888,side: THREE.DoubleSide});
 				        	// var wireMat = new THREE.MeshBasicMaterial({color:0xaaaaaa,wireframe:true,transparent:true});
@@ -210,6 +230,7 @@ angular.module("tjsModelViewer", [])
 
 
 						window.addEventListener('resize', onWindowResize, false);
+
 					}
 					//Initilize End
 
@@ -445,9 +466,6 @@ angular.module("tjsModelViewer", [])
 								//End of If/Else Check Testing
 
 
-
-
-
 								intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
 							} //End of Intersects
 						}
@@ -484,6 +502,9 @@ angular.module("tjsModelViewer", [])
 						renderer.render(scene, camera);
 					}
 					//Animate End
+
+					render();
+					animate();
 				}
 			}
 		}
