@@ -7,6 +7,12 @@ angular.module('iat381-a02', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize',
         templateUrl: 'app/mainscreen/globe_experiment.html',
         controller: 'MainCtrl'
       })
+
+       .when('/results', {
+        templateUrl: 'app/results/results.html',
+        controller: 'MainCtrl'
+      })
+      
       .otherwise({
         redirectTo: '/'
       });
