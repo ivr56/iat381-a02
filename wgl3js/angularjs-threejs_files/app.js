@@ -98,6 +98,19 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 
 
 					}
+					else if (active > 2)
+					{
+
+						//Activate Button to Confirm
+						console.log("Too Many");
+
+						// [ code_here. ] //
+						// [ Toggle HTML DOM Element Visiblity]
+						//--------
+
+
+					}
+
 
 				}
 
@@ -137,6 +150,18 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 
 					}
 
+					else if (active > 2)
+					{
+
+						//Activate Button to Confirm
+						console.log("Too Many");
+
+						// [ code_here. ] //
+						// [ Toggle HTML DOM Element Visiblity]
+						//--------
+
+
+					}
 
 				}
 				else if (msg === 0)
@@ -150,6 +175,60 @@ var a02 = angular.module('angularjsThreejsApp', ["tjsModelViewer"]);
 		});
 		//End Messages and Activity for EU
 		//--------
+
+
+
+
+		//--------
+		//Read Read Messages for EU
+		$scope.$on("messageCHA", function (e, msg)
+		{
+				console.log(msg + " : CHA");
+				if (msg === 1)
+				{
+					active = active + 1;
+					console.log("Active: " + active);
+					console.log("Added CHA Selection");
+
+					if (active === 2)
+					{
+
+						//Activate Button to Confirm
+						console.log("Button Activated for Exchange");
+
+						// [ code_here. ] //
+						// [ Toggle HTML DOM Element Visiblity]
+						//--------
+
+
+					}
+					else if (active > 2)
+					{
+
+						//Activate Button to Confirm
+						console.log("Too Many");
+
+						// [ code_here. ] //
+						// [ Toggle HTML DOM Element Visiblity]
+						//--------
+
+
+					}
+
+
+				}
+				else if (msg === 0)
+				{
+					active = active - 1;
+					console.log("Active: " + active);
+					console.log("Removed CHA Selection");
+				}
+
+
+		});
+		//End Messages and Activity for EU
+		//--------
+
 
 
 

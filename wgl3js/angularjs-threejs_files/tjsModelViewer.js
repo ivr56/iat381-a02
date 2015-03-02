@@ -359,6 +359,49 @@ angular.module("tjsModelViewer", [])
 
 
 
+
+																function addCHA()
+																{
+																	var octaGeom = new THREE.Geometry();
+
+																	octaGeom.vertices.push(
+																		new THREE.Vector3( -10,  10, 0 ),
+																		new THREE.Vector3( -10, -10, 0 ),
+																		new THREE.Vector3(  10, -10, 0 )
+																	);
+
+																	octaGeom.faces.push( new THREE.Face3( 0, 1, 2 ) );
+
+																	var faceColorMaterial = new THREE.MeshLambertMaterial(
+																	{ color: 0x17A0BF, vertexColors: THREE.FaceColors,shading:THREE.FlatShading,polygonOffset: true,polygonOffsetUnits: 1,polygonOffsetFactor: 1} );
+
+																	//var octaGeom= new THREE.SphereGeometry(1,12,2);
+																	for ( var i = 0; i < octaGeom.faces.length; i++ )
+																	{
+																		face = octaGeom.faces[ i ];
+																		face.color= baseColor;
+																	}
+																	var octa= new THREE.Mesh( octaGeom, faceColorMaterial );
+																	//octa.position.set(position[0], position[2], position[1]);
+																	octa.position.x = 75;
+																	octa.position.y = 25;
+																	octa.position.z = 0;
+
+
+																	// creates a wireMesh object
+																	octa.name = "CHA";
+																	wireOcta = new THREE.Mesh(octaGeom, new THREE.MeshBasicMaterial({ color: 0x17A0BF, wireframe: true }));
+
+
+																	scene.add(octa);
+																	// wireMesh object is added to the original as a sub-object
+																	octa.add(wireOcta);
+
+																	targetList.push(octa);
+																}
+
+
+
 					//On Resize
 					function onWindowResize(event) {
 						renderer.setSize(window.innerWidth, window.innerHeight);
@@ -466,6 +509,25 @@ angular.module("tjsModelViewer", [])
 
 				}
 			}
+			else if (arrayItem.object.name === "CHA")
+			{
+				if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
+					test=selectedFaces.indexOf(arrayItem);
+					console.log("False");
+					$scope.$emit("messageCHA", 0);
+					var cgtxt = scene.getObjectByName("Earth");
+					cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminwhole.png', {}, function(){
+					console.log("De-Loaded Texture for CHA")
+					},
+					function(){
+							alert('Error Loading Texture')
+					});
+
+					cgtxt.material.needsUpdate  = true;
+					animate();
+
+				}
+			}
 
 
 
@@ -505,13 +567,31 @@ angular.module("tjsModelViewer", [])
 
 				else if (arrayItem.object.name === "EU")
 				{
-					if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
-						test=selectedFaces.indexOf(arrayItem);
+					console.log("True");
+					$scope.$emit("messageUEU", 1);
+					var cgtxt = scene.getObjectByName("Earth");
+					cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminEU.png', {}, function(){
+					console.log("Loaded Texture for EU")
+					},
+					function(){
+							alert('Error Loading Texture')
+					});
+
+					cgtxt.material.needsUpdate  = true;
+					animate();
+
+					}
+
+
+
+				else if (arrayItem.object.name === "CHA")
+				{
+
 						console.log("True");
-						$scope.$emit("messageEU", 1);
+						$scope.$emit("messageCHA", 1);
 						var cgtxt = scene.getObjectByName("Earth");
-						cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminEU.png', {}, function(){
-						console.log("Loaded Texture for EU")
+						cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminCHA.png', {}, function(){
+						console.log("Loaded Texture for CHA")
 						},
 						function(){
 								alert('Error Loading Texture')
@@ -520,7 +600,7 @@ angular.module("tjsModelViewer", [])
 						cgtxt.material.needsUpdate  = true;
 						animate();
 
-					}
+
 				}
 
 			});
