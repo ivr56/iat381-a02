@@ -37,11 +37,11 @@ a {
 }
 
 .controlpanel{
-	position: absolute; 
-	z-index: 1; 
-	left: 50px; 
-	bottom: 40%; 
-	width:50%; 
+	position: absolute;
+	z-index: 1;
+	left: 50px;
+	bottom: 40%;
+	width:50%;
 	height:30px;
 }
 .userpanel{
@@ -54,5 +54,13 @@ a {
 	opacity: 0.6;
 	font-family: 'Open Sans', sans-serif;
 	margin-right: 10px;
+
+}
+
+.knobswitch{
+	z-index:15;
+	position:absolute;
+	top:-195px;
+	left:30px;
 
 }
