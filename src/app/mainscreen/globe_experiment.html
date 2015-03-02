@@ -9,7 +9,66 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../dist/bootstrap-clockpicker.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+       <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+       <script src="../dist/jquery.knob.min.js"></script>
+       <script>
+           $(function($) {
 
+               $(".knob").knob({
+                   change : function (value) {
+                       //console.log("change : " + value);
+                   },
+                   release : function (value) {
+                       //console.log(this.$.attr('value'));
+                       console.log("release : " + value);
+                   },
+                   cancel : function () {
+                       console.log("cancel : ", this);
+                   },
+                   /*format : function (value) {
+                       return value + '%';
+                   },*/
+                   draw : function () {
+
+                       // "tron" case
+                       if(this.$.data('skin') == 'tron') {
+
+                           this.cursorExt = 0.3;
+
+                           var a = this.arc(this.cv)  // Arc
+                               , pa                   // Previous arc
+                               , r = 1;
+
+                           this.g.lineWidth = this.lineWidth;
+
+                           if (this.o.displayPrevious) {
+                               pa = this.arc(this.v);
+                               this.g.beginPath();
+                               this.g.strokeStyle = this.pColor;
+                               this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, pa.s, pa.e, pa.d);
+                               this.g.stroke();
+                           }
+
+                           this.g.beginPath();
+                           this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ;
+                           this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, a.s, a.e, a.d);
+                           this.g.stroke();
+
+                           this.g.lineWidth = 2;
+                           this.g.beginPath();
+                           this.g.strokeStyle = this.o.fgColor;
+                           this.g.arc( this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+                           this.g.stroke();
+
+                           return false;
+                       }
+                   }
+               });
+
+
+           });
+       </script>
 
 </head>
 <body>
@@ -20,7 +79,7 @@
     <!--<p>Click/drag to rotate. Mouse wheel to zoom.</p>
     <p>Press the "up" arrow to add a random octahedron!</p>
     <p>Mouse-over faces to highlight, click to select.</p>-->
-<div class="form-group">
+    <!--<div class="form-group">
         <h4>Default: </h4>
         <div class="input-group clockpicker">
             <input type="text" class="form-control" value="09:30">
@@ -29,7 +88,13 @@
             </span>
         </div>
 
-    </div>
+    </div>-->
+
+    <div>
+
+
+           <input class="knob" data-width="150" data-cursor=true data-fgColor="#222222" data-thickness=.3 value="29">
+       </div>
 
     <div class="userpanel">Hello World</div>
      <div class="userpanel">Hello World</div>
@@ -457,7 +522,7 @@
 
 
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
 
 $('.clockpicker').clockpicker()
     .find('input').change(function(){
@@ -468,7 +533,7 @@ $('.clockpicker').clockpicker()
 if (/mobile/i.test(navigator.userAgent)) {
     $('input').prop('readOnly', true);
 }
-</script>
+</script>-->
 
 
 </body>

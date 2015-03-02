@@ -56,10 +56,10 @@
 	}
 
 	// Clock size
-	var dialRadius = 280,
-		outerRadius = 200,
+	var dialRadius = 180,
+		outerRadius = 120,
 		// innerRadius = 80 on 12 hour clock
-		innerRadius = 150,
+		innerRadius = 80,
 		tickRadius = 20,
 		diameter = dialRadius * 2,
 		duration = transitionSupported ? 350 : 1;
@@ -74,18 +74,17 @@
 				'<span class="clockpicker-span-minutes"></span>',
 				'<span class="clockpicker-span-am-pm"></span>',
 			'</div>',
-			'',
-				'',
+			'<div class="popover-content">',
+				'<div class="clockpicker-plate">',
 					'<div class="clockpicker-canvas"></div>',
 					'<div class="clockpicker-dial clockpicker-hours"></div>',
 					'<div class="clockpicker-dial clockpicker-minutes clockpicker-dial-out"></div>',
-				'',
+				'</div>',
 				'<span class="clockpicker-am-pm-block">',
 				'</span>',
-			'',
+			'</div>',
 		'</div>'
 	].join('');
-
 	// ClockPicker
 	function ClockPicker(element, options) {
 		var popover = $(tpl),
