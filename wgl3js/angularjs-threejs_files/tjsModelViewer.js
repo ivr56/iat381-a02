@@ -230,8 +230,7 @@ angular.module("tjsModelViewer", [])
 
 
 						addEarthgeo();
-						//addEUgeo();
-						addUSDgeo();
+
 						render();
 						animate();
 
@@ -264,7 +263,9 @@ angular.module("tjsModelViewer", [])
 					newEarth_shaded.name = "Earth";
 					//Add to Scene
 					scene.add(newEarth_shaded);
-					addOcta();
+					addUSD();
+					addEU();
+					addCHA();
 				}
 					//Earth Create
 
@@ -274,60 +275,9 @@ angular.module("tjsModelViewer", [])
 
 
 
-				function addUSDgeo()
+
+				function addUSD()
 				{
-				//American Dollar
-				var newtouchpointUSD= new THREE.SphereGeometry(5,5,5);
-				var newtouchpointUSD_shaded = new THREE.Mesh(newtouchpointUSD, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
-				newtouchpointUSD_shaded.position.x = 0;
-				newtouchpointUSD_shaded.position.y = 50;
-				newtouchpointUSD_shaded.position.z = -75;
-				newtouchpointUSD_shaded.name = "EarthUSDo";
-				scene.add(newtouchpointUSD_shaded);
-				//Add to Interaction List
-				targetList.push(newtouchpointUSD_shaded);
-
-				//country_targetList.push("American Dollar");
-
-
-				}
-				//Earth Create
-
-
-				// function addEUgeo()
-				// {
-				// //Euro
-				// var newtouchpointEU= new THREE.SphereGeometry(5,5,5);
-				// var newtouchpointEU_shaded = new THREE.Mesh(newtouchpointEU, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
-				// newtouchpointEU_shaded.position.x = 0;
-				// newtouchpointEU_shaded.position.y = 50;
-				// newtouchpointEU_shaded.position.z = 75;
-				// scene.add(newtouchpointEU_shaded);
-				// targetList.push(newtouchpointEU_shaded);
-				// country_targetList.push("Euro");
-				//
-				// }
-				// //Earth Create
-
-
-
-
-				function addOcta()
-				{
-					var position = new Array();
-					var notAboveGround = true;
-					while(notAboveGround){
-						position[0]=Math.random()*floorSide-floorSide/2;
-						position[1]=Math.random()*floorSide-floorSide/2;
-						position[2]=Math.random()*floorSide/5;
-						var cubeSide = Math.random()*floorSide/12+floorSide/50;
-						//alert("cubeSide="+cubeSide);
-						if(position[2]-cubeSide>0){
-							notAboveGround = false;
-						}
-					}
-
-
 					var octaGeom = new THREE.Geometry();
 
 					octaGeom.vertices.push(
@@ -338,11 +288,8 @@ angular.module("tjsModelViewer", [])
 
 					octaGeom.faces.push( new THREE.Face3( 0, 1, 2 ) );
 
-
-
-
 					var faceColorMaterial = new THREE.MeshLambertMaterial(
-					{ color: 0xffffff, vertexColors: THREE.FaceColors,shading:THREE.FlatShading,polygonOffset: true,polygonOffsetUnits: 1,polygonOffsetFactor: 1} );
+					{ color: 0x17A0BF, vertexColors: THREE.FaceColors,shading:THREE.FlatShading,polygonOffset: true,polygonOffsetUnits: 1,polygonOffsetFactor: 1} );
 
 					//var octaGeom= new THREE.SphereGeometry(1,12,2);
 					for ( var i = 0; i < octaGeom.faces.length; i++ )
@@ -351,10 +298,15 @@ angular.module("tjsModelViewer", [])
 						face.color= baseColor;
 					}
 					var octa= new THREE.Mesh( octaGeom, faceColorMaterial );
-					octa.position.set(position[0], position[2], position[1]);
+					//octa.position.set(position[0], position[2], position[1]);
+					octa.position.x = 75;
+					octa.position.y = 75;
+					octa.position.z = 0;
+
+
 					// creates a wireMesh object
-					octa.name = "EarthUSD";
-					wireOcta = new THREE.Mesh(octaGeom, new THREE.MeshBasicMaterial({ color: 0x116611, wireframe: true }));
+					octa.name = "USD";
+					wireOcta = new THREE.Mesh(octaGeom, new THREE.MeshBasicMaterial({ color: 0x17A0BF, wireframe: true }));
 
 
 					scene.add(octa);
@@ -363,6 +315,49 @@ angular.module("tjsModelViewer", [])
 
 					targetList.push(octa);
 				}
+
+
+								function addEU()
+								{
+									var octaGeom = new THREE.Geometry();
+
+									octaGeom.vertices.push(
+										new THREE.Vector3( -10,  10, 0 ),
+										new THREE.Vector3( -10, -10, 0 ),
+										new THREE.Vector3(  10, -10, 0 )
+									);
+
+									octaGeom.faces.push( new THREE.Face3( 0, 1, 2 ) );
+
+									var faceColorMaterial = new THREE.MeshLambertMaterial(
+									{ color: 0x17A0BF, vertexColors: THREE.FaceColors,shading:THREE.FlatShading,polygonOffset: true,polygonOffsetUnits: 1,polygonOffsetFactor: 1} );
+
+									//var octaGeom= new THREE.SphereGeometry(1,12,2);
+									for ( var i = 0; i < octaGeom.faces.length; i++ )
+									{
+										face = octaGeom.faces[ i ];
+										face.color= baseColor;
+									}
+									var octa= new THREE.Mesh( octaGeom, faceColorMaterial );
+									//octa.position.set(position[0], position[2], position[1]);
+									octa.position.x = 75;
+									octa.position.y = 50;
+									octa.position.z = 0;
+
+
+									// creates a wireMesh object
+									octa.name = "EU";
+									wireOcta = new THREE.Mesh(octaGeom, new THREE.MeshBasicMaterial({ color: 0x17A0BF, wireframe: true }));
+
+
+									scene.add(octa);
+									// wireMesh object is added to the original as a sub-object
+									octa.add(wireOcta);
+
+									targetList.push(octa);
+								}
+
+
 
 					//On Resize
 					function onWindowResize(event) {
@@ -432,35 +427,104 @@ angular.module("tjsModelViewer", [])
 		selectedFaces.forEach( function(arrayItem)
 		{
 
-			if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
-				test=selectedFaces.indexOf(arrayItem);
-				console.log("False");
+			if (arrayItem.object.name === "USD")
+			{
+				if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
+					test=selectedFaces.indexOf(arrayItem);
+					console.log("False");
+					$scope.$emit("messageUSD", 0);
+					var cgtxt = scene.getObjectByName("Earth");
+					cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminwhole.png', {}, function(){
+					console.log("De-Loaded Texture for USA")
+					},
+					function(){
+							alert('Error Loading Texture')
+					});
+
+					cgtxt.material.needsUpdate  = true;
+					animate();
+
+				}
 			}
+
+			else if (arrayItem.object.name === "EU")
+			{
+				if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
+					test=selectedFaces.indexOf(arrayItem);
+					console.log("False");
+					$scope.$emit("messageEU", 0);
+					var cgtxt = scene.getObjectByName("Earth");
+					cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminwhole.png', {}, function(){
+					console.log("De-Loaded Texture forEU")
+					},
+					function(){
+							alert('Error Loading Texture')
+					});
+
+					cgtxt.material.needsUpdate  = true;
+					animate();
+
+				}
+			}
+
+
 
 
 		});
 
 
 
-
+		//Change Touchpoint Color
 		// if is a previously selected face, change the color back to green, otherswise change to blue
 		if(test>=0){
-			intersects[ 0 ].face.color=new THREE.Color( 0x44dd66 );
+			intersects[ 0 ].face.color=new THREE.Color( 0x17A0BF );
 			selectedFaces.splice(test, 1);
 
 		}
 		else{
-			intersects[ 0 ].face.color=new THREE.Color( 0x222288 );
+			intersects[ 0 ].face.color=new THREE.Color( 0x17A0BF );
 			selectedFaces.push(intersects[0]);
 			selectedFaces.forEach( function(arrayItem)
 			{
-				if (arrayItem.object.name === "EarthUSD")
+				if (arrayItem.object.name === "USD")
 				{
 				console.log("True");
+				$scope.$emit("messageUSD", 1);
+				var cgtxt = scene.getObjectByName("Earth");
+				cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminUSA.png', {}, function(){
+				console.log("Loaded Texture for USA")
+				},
+				function(){
+						alert('Error Loading Texture')
+				});
+
+				cgtxt.material.needsUpdate  = true;
+				animate();
+				}
+
+
+				else if (arrayItem.object.name === "EU")
+				{
+					if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
+						test=selectedFaces.indexOf(arrayItem);
+						console.log("True");
+						$scope.$emit("messageEU", 1);
+						var cgtxt = scene.getObjectByName("Earth");
+						cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminEU.png', {}, function(){
+						console.log("Loaded Texture for EU")
+						},
+						function(){
+								alert('Error Loading Texture')
+						});
+
+						cgtxt.material.needsUpdate  = true;
+						animate();
+
+					}
 				}
 
 			});
-			
+
 		}
 
 		intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
