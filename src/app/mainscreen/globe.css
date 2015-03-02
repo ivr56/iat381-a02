@@ -39,7 +39,8 @@ a {
 
 .controlpanel{
 	position: absolute; 
-	z-index: 1; 
+	z-index: 1;
+	top: 3em; 
 	 
 	bottom: 68%; 
 	width:100%; 
@@ -100,11 +101,12 @@ a {
 
 .form-group{
 	width:100%;
+	margin-top: 10em;
 	
 }
 
 .currencyBoxes{
-margin-top: 19em;
+margin-top: 14em;
 height: 75px;
 text-align: center;
 width: 100%;
@@ -116,8 +118,9 @@ padding: 2em;
 
 .instructionText{
 
-margin-top: 2em;
+margin-top: 0;
 padding: 1em;
 text-align: center;
+margin-bottom: 0;
 
 }
