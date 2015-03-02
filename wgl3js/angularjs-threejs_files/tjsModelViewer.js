@@ -456,7 +456,9 @@ angular.module("tjsModelViewer", [])
 	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 	projector.unprojectVector( vector, camera );
 	var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-
+  var activeEU = 0;
+	var activeUS = 0;
+	var activeCHA = 0;
 	// create an array containing all objects in the scene with which the ray intersects
 	var intersects = ray.intersectObjects( targetList );
 
@@ -475,17 +477,33 @@ angular.module("tjsModelViewer", [])
 				if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
 					test=selectedFaces.indexOf(arrayItem);
 					console.log("False");
+					activeCHA = 0;
 					$scope.$emit("messageUSD", 0);
 					var cgtxt = scene.getObjectByName("Earth");
-					cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminwhole.png', {}, function(){
-					console.log("De-Loaded Texture for USA")
-					},
-					function(){
-							alert('Error Loading Texture')
-					});
+					if (activeCHA === 0 && activeUS === 0 && activeEU)
+					{
+						cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminwhole.png', {}, function(){
+						console.log("De-Loaded Texture for CHA")
+						},
+						function(){
+								alert('Error Loading Texture')
+						});
 
-					cgtxt.material.needsUpdate  = true;
-					animate();
+						cgtxt.material.needsUpdate  = true;
+						animate();
+					}
+					else
+					{
+						cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminUSA.png', {}, function(){
+						console.log("De-Loaded Texture for CHA")
+						},
+						function(){
+								alert('Error Loading Texture')
+						});
+
+						cgtxt.material.needsUpdate  = true;
+						animate();
+					}
 
 				}
 			}
@@ -496,17 +514,32 @@ angular.module("tjsModelViewer", [])
 					test=selectedFaces.indexOf(arrayItem);
 					console.log("False");
 					$scope.$emit("messageEU", 0);
+					activeCHA = 0;
 					var cgtxt = scene.getObjectByName("Earth");
-					cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminwhole.png', {}, function(){
-					console.log("De-Loaded Texture forEU")
-					},
-					function(){
-							alert('Error Loading Texture')
-					});
+					if (activeCHA === 0 && activeUS === 0 && activeEU)
+					{
+						cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminwhole.png', {}, function(){
+						console.log("De-Loaded Texture for CHA")
+						},
+						function(){
+								alert('Error Loading Texture')
+						});
 
-					cgtxt.material.needsUpdate  = true;
-					animate();
+						cgtxt.material.needsUpdate  = true;
+						animate();
+					}
+					else
+					{
+						cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminEU.png', {}, function(){
+						console.log("De-Loaded Texture for CHA")
+						},
+						function(){
+								alert('Error Loading Texture')
+						});
 
+						cgtxt.material.needsUpdate  = true;
+						animate();
+					}
 				}
 			}
 			else if (arrayItem.object.name === "CHA")
@@ -516,15 +549,31 @@ angular.module("tjsModelViewer", [])
 					console.log("False");
 					$scope.$emit("messageCHA", 0);
 					var cgtxt = scene.getObjectByName("Earth");
-					cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminwhole.png', {}, function(){
-					console.log("De-Loaded Texture for CHA")
-					},
-					function(){
-							alert('Error Loading Texture')
-					});
+					if (activeCHA === 0 && activeUS === 0 && activeEU)
+					{
+						cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminwhole.png', {}, function(){
+						console.log("De-Loaded Texture for CHA")
+						},
+						function(){
+								alert('Error Loading Texture')
+						});
 
-					cgtxt.material.needsUpdate  = true;
-					animate();
+						cgtxt.material.needsUpdate  = true;
+						animate();
+					}
+					else
+					{
+						cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminCHA.png', {}, function(){
+						console.log("De-Loaded Texture for CHA")
+						},
+						function(){
+								alert('Error Loading Texture')
+						});
+
+						cgtxt.material.needsUpdate  = true;
+						animate();
+					}
+
 
 				}
 			}
@@ -551,27 +600,13 @@ angular.module("tjsModelViewer", [])
 				if (arrayItem.object.name === "USD")
 				{
 				console.log("True");
+				activeUS = 1;
 				$scope.$emit("messageUSD", 1);
-				var cgtxt = scene.getObjectByName("Earth");
-				cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminUSA.png', {}, function(){
-				console.log("Loaded Texture for USA")
-				},
-				function(){
-						alert('Error Loading Texture')
-				});
-
-				cgtxt.material.needsUpdate  = true;
-				animate();
-				}
-
-
-				else if (arrayItem.object.name === "EU")
+        if (activeUS === 1 && activeEU == 1)
 				{
-					console.log("True");
-					$scope.$emit("messageUEU", 1);
 					var cgtxt = scene.getObjectByName("Earth");
-					cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminEU.png', {}, function(){
-					console.log("Loaded Texture for EU")
+					cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminUSEU.png', {}, function(){
+					console.log("Loaded Texture for USA <3 EU")
 					},
 					function(){
 							alert('Error Loading Texture')
@@ -579,6 +614,82 @@ angular.module("tjsModelViewer", [])
 
 					cgtxt.material.needsUpdate  = true;
 					animate();
+				}
+				else if (activeUS == 1 && activeCHA === 1)
+				{
+					var cgtxt = scene.getObjectByName("Earth");
+					cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminUSA.png', {}, function(){
+					console.log("Loaded Texture for USA <3 CHA")
+					},
+					function(){
+							alert('Error Loading Texture')
+					});
+
+					cgtxt.material.needsUpdate  = true;
+					animate();
+				}
+				else
+				{
+					var cgtxt = scene.getObjectByName("Earth");
+					cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminUSA.png', {}, function(){
+					console.log("Loaded Texture for USA")
+					},
+					function(){
+							alert('Error Loading Texture')
+					});
+
+					cgtxt.material.needsUpdate  = true;
+					animate();
+				}
+
+				}
+
+
+				else if (arrayItem.object.name === "EU")
+				{
+					console.log("True");
+					activeEU = 1;
+					$scope.$emit("messageUEU", 1);
+					var cgtxt = scene.getObjectByName("Earth");
+					if (activeUS === 1 && activeEU == 1)
+					{
+						var cgtxt = scene.getObjectByName("Earth");
+						cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminUSAEU.png', {}, function(){
+						console.log("Loaded Texture for USA <3 EU")
+						},
+						function(){
+								alert('Error Loading Texture')
+						});
+
+						cgtxt.material.needsUpdate  = true;
+						animate();
+					}
+					else if (activeEU == 1 && activeCHA === 1)
+					{
+						var cgtxt = scene.getObjectByName("Earth");
+						cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminCHAEU.png', {}, function(){
+						console.log("Loaded Texture for CHA <3 EU")
+						},
+						function(){
+								alert('Error Loading Texture')
+						});
+
+						cgtxt.material.needsUpdate  = true;
+						animate();
+					}
+					else
+					{
+						var cgtxt = scene.getObjectByName("Earth");
+						cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminEU.png', {}, function(){
+						console.log("Loaded Texture for EU")
+						},
+						function(){
+								alert('Error Loading Texture')
+						});
+
+						cgtxt.material.needsUpdate  = true;
+						animate();
+					}
 
 					}
 
@@ -588,18 +699,48 @@ angular.module("tjsModelViewer", [])
 				{
 
 						console.log("True");
+						activeCHA = 1;
 						$scope.$emit("messageCHA", 1);
 						var cgtxt = scene.getObjectByName("Earth");
-						cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminCHA.png', {}, function(){
-						console.log("Loaded Texture for CHA")
-						},
-						function(){
-								alert('Error Loading Texture')
-						});
+						if (activeUS === 1 && activeCHA == 1)
+						{
+							var cgtxt = scene.getObjectByName("Earth");
+							cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminUSAEU.png', {}, function(){
+							console.log("Loaded Texture for USA <3 EU")
+							},
+							function(){
+									alert('Error Loading Texture')
+							});
 
-						cgtxt.material.needsUpdate  = true;
-						animate();
+							cgtxt.material.needsUpdate  = true;
+							animate();
+						}
+						else if (activeEU == 1 && activeCHA === 1)
+						{
+							var cgtxt = scene.getObjectByName("Earth");
+							cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminCHAEU.png', {}, function(){
+							console.log("Loaded Texture for CHA < EU")
+							},
+							function(){
+									alert('Error Loading Texture')
+							});
 
+							cgtxt.material.needsUpdate  = true;
+							animate();
+						}
+						else
+						{
+							var cgtxt = scene.getObjectByName("Earth");
+							cgtxt.material.map = THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminCHA.png', {}, function(){
+							console.log("Loaded Texture for CHA")
+							},
+							function(){
+									alert('Error Loading Texture')
+							});
+
+							cgtxt.material.needsUpdate  = true;
+							animate();
+						}
 
 				}
 
