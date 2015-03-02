@@ -5,70 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" href="http://www.moczys.com/webGL/css/base.css">
-    <link rel="stylesheet" href="../dist/jquery-clockpicker.css">
+    <link rel="stylesheet" href="http://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../dist/bootstrap-clockpicker.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-       <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
-       <script src="../dist/jquery.knob.min.js"></script>
-       <script>
-           $(function($) {
+<link rel="stylesheet" type="text/css" href="../dist/bootstrap-clockpicker.min.css">
 
-               $(".knob").knob({
-                   change : function (value) {
-                       //console.log("change : " + value);
-                   },
-                   release : function (value) {
-                       //console.log(this.$.attr('value'));
-                       console.log("release : " + value);
-                   },
-                   cancel : function () {
-                       console.log("cancel : ", this);
-                   },
-                   /*format : function (value) {
-                       return value + '%';
-                   },*/
-                   draw : function () {
-
-                       // "tron" case
-                       if(this.$.data('skin') == 'tron') {
-
-                           this.cursorExt = 0.3;
-
-                           var a = this.arc(this.cv)  // Arc
-                               , pa                   // Previous arc
-                               , r = 1;
-
-                           this.g.lineWidth = this.lineWidth;
-
-                           if (this.o.displayPrevious) {
-                               pa = this.arc(this.v);
-                               this.g.beginPath();
-                               this.g.strokeStyle = this.pColor;
-                               this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, pa.s, pa.e, pa.d);
-                               this.g.stroke();
-                           }
-
-                           this.g.beginPath();
-                           this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ;
-                           this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, a.s, a.e, a.d);
-                           this.g.stroke();
-
-                           this.g.lineWidth = 2;
-                           this.g.beginPath();
-                           this.g.strokeStyle = this.o.fgColor;
-                           this.g.arc( this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
-                           this.g.stroke();
-
-                           return false;
-                       }
-                   }
-               });
-
-
-           });
-       </script>
 
 </head>
 <body>
@@ -81,25 +22,22 @@
 <div class="instructionText">
 <p> Select Two Countries to Convert Currency</p>
  </div>
-
+    
     <!--<p>Click/drag to rotate. Mouse wheel to zoom.</p>
     <p>Press the "up" arrow to add a random octahedron!</p>
     <p>Mouse-over faces to highlight, click to select.</p>-->
-
-
+<div class="form-group">
+         
+        <div class="input-group clockpicker">
+            <input type="text" class="form-control" value="09:30">
+            <span class="input-group-addon">
+            </span>
+        </div>
+    
+    </div>
 <div class="currencyBoxes">
     <div class="confirmpanel"><p>Confirm Conversion?</p></div>
     <div class="userpanel"><p>Hello World</p></div>
-
-
-    </div>
-
-    <div class="knobswitch">
-
-
-           <input class="knob" data-width="200" data-cursor=true data-fgColor="#222222" data-thickness=.3 value="0">
-       </div>
-
 
      <div class="userpanel"><p>Hello World</p></div>
      </div>
@@ -126,16 +64,16 @@
 //
 
         /*
-        	Experiment 02-05
-        	Seth Moczydlowski
-        	January 8th, 2014
-        	http://www.moczys.com
+          Experiment 02-05
+          Seth Moczydlowski
+          January 8th, 2014
+          http://www.moczys.com
 
-        	Code architecture adapted from:
-        	http://stemkoski.github.io/Three.js/Template.html
+          Code architecture adapted from:
+          http://stemkoski.github.io/Three.js/Template.html
 
-        	Three.js "tutorials by example"
-        	Author: Lee Stemkoski
+          Three.js "tutorials by example"
+          Author: Lee Stemkoski
          */
 
         // MAIN
@@ -167,59 +105,59 @@
         //Init Start
         function init()
         {
-        	// SCENE
-        	scene = new THREE.Scene();
-        	// CAMERA
-        	var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
-        	var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
-        	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
-        	scene.add(camera);
-        	camera.position.set(0,250,950);
-        	camera.lookAt(scene.position);
-        	// RENDERER
-        	if ( Detector.webgl )
-        		renderer = new THREE.WebGLRenderer( {antialias:true} );
-        	else
-        		renderer = new THREE.CanvasRenderer();
-        	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-        	container = document.getElementById( 'ThreeJS' );
-        	container.appendChild( renderer.domElement );
-        	// EVENTS
-        	THREEx.WindowResize(renderer, camera);
-        	THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
-        	// CONTROLS
-        	controls = new THREE.OrbitControls( camera, renderer.domElement );
-        	// LIGHT
-        	var light = new THREE.AmbientLight( 0x333333 ); // soft white light
-        	scene.add( light );
-        	var light = new THREE.PointLight(0xffffff,1,4500);
-        	light.position.set(-300,1000,-300);
-        	scene.add(light);
-        	// FLOOR
-        	var faceMat = new THREE.MeshBasicMaterial({color: 0x888888,side: THREE.DoubleSide});
-        	var wireMat = new THREE.MeshBasicMaterial({color:0xaaaaaa,wireframe:true,transparent:true});
-        	var multiMat = [faceMat ,wireMat];
+          // SCENE
+          scene = new THREE.Scene();
+          // CAMERA
+          var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+          var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
+          camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
+          scene.add(camera);
+          camera.position.set(0,250,950);
+          camera.lookAt(scene.position);
+          // RENDERER
+          if ( Detector.webgl )
+            renderer = new THREE.WebGLRenderer( {antialias:true} );
+          else
+            renderer = new THREE.CanvasRenderer();
+          renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+          container = document.getElementById( 'ThreeJS' );
+          container.appendChild( renderer.domElement );
+          // EVENTS
+          THREEx.WindowResize(renderer, camera);
+          THREEx.FullScreen.bindKey({ charCode : 'm'.charCodeAt(0) });
+          // CONTROLS
+          controls = new THREE.OrbitControls( camera, renderer.domElement );
+          // LIGHT
+          var light = new THREE.AmbientLight( 0x333333 ); // soft white light
+          scene.add( light );
+          var light = new THREE.PointLight(0xffffff,1,4500);
+          light.position.set(-300,1000,-300);
+          scene.add(light);
+          // FLOOR
+          var faceMat = new THREE.MeshBasicMaterial({color: 0x888888,side: THREE.DoubleSide});
+          var wireMat = new THREE.MeshBasicMaterial({color:0xaaaaaa,wireframe:true,transparent:true});
+          var multiMat = [faceMat ,wireMat];
 
-        	var floor= THREE.SceneUtils.createMultiMaterialObject(new THREE.PlaneGeometry(floorSide, floorSide, 10, 10),multiMat);
+          var floor= THREE.SceneUtils.createMultiMaterialObject(new THREE.PlaneGeometry(floorSide, floorSide, 10, 10),multiMat);
 
-        	floor.rotation.x = Math.PI / 2;
-        	scene.add(floor);
+          floor.rotation.x = Math.PI / 2;
+          scene.add(floor);
 
-        	// SKYBOX
-        	var skyBoxGeometry = new THREE.CubeGeometry( 10000, 10000, 10000 );
-        	var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0xdddddd, side: THREE.BackSide } );
-        	var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
-        	scene.add(skyBox);
+          // SKYBOX
+          var skyBoxGeometry = new THREE.CubeGeometry( 10000, 10000, 10000 );
+          var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0xdddddd, side: THREE.BackSide } );
+          var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
+          scene.add(skyBox);
 
 
-        	////////////
-        	// CUSTOM //
-        	////////////
+          ////////////
+          // CUSTOM //
+          ////////////
 
 
 
           //Generate
-        	//addOcta();
+          //addOcta();
           addEarth();
           addTouchpointsCAD();
           addTouchpointsUSD();
@@ -228,21 +166,21 @@
           var $element = $('#elementId');
           var USDactiveflag = false;
           var CADactiveflag = false;
-        	var newSphereGeom= new THREE.SphereGeometry(5,5,5);
-        	var sphere= new THREE.Mesh(newSphereGeom, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
-        	scene.add(sphere);
-        	mouseSphere.push(sphere);
+          var newSphereGeom= new THREE.SphereGeometry(5,5,5);
+          var sphere= new THREE.Mesh(newSphereGeom, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
+          scene.add(sphere);
+          mouseSphere.push(sphere);
 
 
-        	//////////////////////////////////////////////////////////////////////
+          //////////////////////////////////////////////////////////////////////
 
 
-        	// initialize object to perform world/screen calculations
-        	projector = new THREE.Projector();
+          // initialize object to perform world/screen calculations
+          projector = new THREE.Projector();
 
-        	// when the mouse moves, call the given function
-        	document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-        	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+          // when the mouse moves, call the given function
+          document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+          document.addEventListener( 'mousemove', onDocumentMouseMove, false );
         } //Init End
 
 
@@ -255,7 +193,7 @@
           newEarth_shaded.position.x = 0;
           newEarth_shaded.position.y = 100;
           newEarth_shaded.position.z = 0;
-        	scene.add(newEarth_shaded);
+          scene.add(newEarth_shaded);
 
         }
         //Add Earth End
@@ -269,7 +207,7 @@
           newtouchpointUSD_shaded.position.x = 150;
           newtouchpointUSD_shaded.position.y = 150;
           newtouchpointUSD_shaded.position.z = 150;
-        	scene.add(newtouchpointUSD_shaded);
+          scene.add(newtouchpointUSD_shaded);
 
           targetList.push(newtouchpointUSD_shaded);
           country_targetList.push("American Dollar");
@@ -285,7 +223,7 @@
           newtouchpointCAD_shaded.position.x = 250;
           newtouchpointCAD_shaded.position.y = 250;
           newtouchpointCAD_shaded.position.z = 250;
-        	scene.add(newtouchpointCAD_shaded);
+          scene.add(newtouchpointCAD_shaded);
           targetList.push(newtouchpointCAD_shaded);
           country_targetList.push("Canadian Dollar");
 
@@ -296,74 +234,74 @@
         function addOcta()
         {
 
-        	var position = new Array();
-        	var notAboveGround = true;
-        	while(notAboveGround){
-        		position[0]=Math.random()*floorSide-floorSide/2;
-        		position[1]=Math.random()*floorSide-floorSide/2;
-        		position[2]=Math.random()*floorSide/5;
-        		var cubeSide = Math.random()*floorSide/12+floorSide/50;
-        		//alert("cubeSide="+cubeSide);
-        		if(position[2]-cubeSide>0){
-        			notAboveGround = false;
-        		}
-        	}
+          var position = new Array();
+          var notAboveGround = true;
+          while(notAboveGround){
+            position[0]=Math.random()*floorSide-floorSide/2;
+            position[1]=Math.random()*floorSide-floorSide/2;
+            position[2]=Math.random()*floorSide/5;
+            var cubeSide = Math.random()*floorSide/12+floorSide/50;
+            //alert("cubeSide="+cubeSide);
+            if(position[2]-cubeSide>0){
+              notAboveGround = false;
+            }
+          }
 
-        	var faceColorMaterial = new THREE.MeshLambertMaterial(
-        	{ color: 0xffffff, vertexColors: THREE.FaceColors,shading:THREE.FlatShading,polygonOffset: true,polygonOffsetUnits: 1,polygonOffsetFactor: 1} );
+          var faceColorMaterial = new THREE.MeshLambertMaterial(
+          { color: 0xffffff, vertexColors: THREE.FaceColors,shading:THREE.FlatShading,polygonOffset: true,polygonOffsetUnits: 1,polygonOffsetFactor: 1} );
 
-        	var octaGeom= new THREE.OctahedronGeometry(cubeSide,0);
-        	for ( var i = 0; i < octaGeom.faces.length; i++ )
-        	{
-        		face = octaGeom.faces[ i ];
-        		face.color= baseColor;
-        	}
-        	var octa= new THREE.Mesh( octaGeom, faceColorMaterial );
-        	octa.position.set(position[0], position[2], position[1]);
-        	// creates a wireMesh object
-        	wireOcta = new THREE.Mesh(octaGeom, new THREE.MeshBasicMaterial({ color: 0x116611, wireframe: true }));
+          var octaGeom= new THREE.OctahedronGeometry(cubeSide,0);
+          for ( var i = 0; i < octaGeom.faces.length; i++ )
+          {
+            face = octaGeom.faces[ i ];
+            face.color= baseColor;
+          }
+          var octa= new THREE.Mesh( octaGeom, faceColorMaterial );
+          octa.position.set(position[0], position[2], position[1]);
+          // creates a wireMesh object
+          wireOcta = new THREE.Mesh(octaGeom, new THREE.MeshBasicMaterial({ color: 0x116611, wireframe: true }));
 
-        	scene.add(octa);
-        	// wireMesh object is added to the original as a sub-object
-        	octa.add(wireOcta );
+          scene.add(octa);
+          // wireMesh object is added to the original as a sub-object
+          octa.add(wireOcta );
 
-        	targetList.push(octa);
+          targetList.push(octa);
         }
         //Octa End
 
         //Mouse Move Start
         function onDocumentMouseMove( event )
         {
-        	// the following line would stop any other event handler from firing
-        	// (such as the mouse's TrackballControls)
-        	//event.preventDefault();
-        	// update the mouse variable
-        	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-        	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+          // the following line would stop any other event handler from firing
+          // (such as the mouse's TrackballControls)
+          //event.preventDefault();
+          // update the mouse variable
+          mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+          mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
         }
         //Mouse Move End
 
         //Mouse Down
         function onDocumentMouseDown( event )
         {
-        	// the following line would stop any other event handler from firing
-        	// (such as the mouse's TrackballControls)
-        	// event.preventDefault();
-        	//console.log("Click.");
-        	// update the mouse variable
-        	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-        	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-        	checkSelection();
+          // the following line would stop any other event handler from firing
+          // (such as the mouse's TrackballControls)
+          // event.preventDefault();
+          //console.log("Click.");
+          // update the mouse variable
+          mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+          mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+          checkSelection();
         }
         //Mouse Down End
 
         //Color Select Start
         function ColorSelected(){
-        	selectedFaces.forEach( function(arrayItem)
-        		{
-        			arrayItem.face.color = selectedColor;
-        			arrayItem.object.geometry.colorsNeedUpdate = true;
-        		});
+          selectedFaces.forEach( function(arrayItem)
+            {
+              arrayItem.face.color = selectedColor;
+              arrayItem.object.geometry.colorsNeedUpdate = true;
+            });
         }
         //Color Select End
 
@@ -371,116 +309,116 @@
         function checkSelection(){
 
 
-        	// create a Ray with origin at the mouse position
-        	//   and direction into the scene (camera direction)
-        	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-        	projector.unprojectVector( vector, camera );
-        	var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+          // create a Ray with origin at the mouse position
+          //   and direction into the scene (camera direction)
+          var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+          projector.unprojectVector( vector, camera );
+          var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 
-        	// create an array containing all objects in the scene with which the ray intersects
-        	var intersects = ray.intersectObjects( targetList );
+          // create an array containing all objects in the scene with which the ray intersects
+          var intersects = ray.intersectObjects( targetList );
 
-        	//if an intersection is detected
-        	if ( intersects.length > 0 )
-        	{
+          //if an intersection is detected
+          if ( intersects.length > 0 )
+          {
             console.log("Intersects :" + intersects.length);
-        		//test items in selected faces array
-        		var test=-1;
-        		selectedFaces.forEach( function(arrayItem)
-        		{
+            //test items in selected faces array
+            var test=-1;
+            selectedFaces.forEach( function(arrayItem)
+            {
 
               console.log("True");
-        			// if the faceIndex and object ID are the same between the intersect and selected faces ,
-        			// the face index is recorded
-        			if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
-        				test=selectedFaces.indexOf(arrayItem);
+              // if the faceIndex and object ID are the same between the intersect and selected faces ,
+              // the face index is recorded
+              if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
+                test=selectedFaces.indexOf(arrayItem);
                 console.log("ObjectID: " + arrayItem.object.id);
 
 
-        			}
-        		});
+              }
+            });
 
-        		// if is a previously selected face, change the color back to green, otherswise change to blue
-        		if(test>=0)
+            // if is a previously selected face, change the color back to green, otherswise change to blue
+            if(test>=0)
             {
               console.log("False");
-        			intersects[ 0 ].face.color=new THREE.Color( 0x44dd66 );
-        			selectedFaces.splice(test, 1);
-        		}
-        		else
+              intersects[ 0 ].face.color=new THREE.Color( 0x44dd66 );
+              selectedFaces.splice(test, 1);
+            }
+            else
             {
-        			intersects[ 0 ].face.color=new THREE.Color( 0x222288 );
-        			selectedFaces.push(intersects[0]);
-        		}
+              intersects[ 0 ].face.color=new THREE.Color( 0x222288 );
+              selectedFaces.push(intersects[0]);
+            }
 
-        		intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
-        	}
+            intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
+          }
         }
         // Find intersections End
 
         // Find highlight
         function checkHighlight(){
-        	// find intersections
+          // find intersections
 
-        	// create a Ray with origin at the mouse position
-        	//   and direction into the scene (camera direction)
-        	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-        	projector.unprojectVector( vector, camera );
-        	var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+          // create a Ray with origin at the mouse position
+          //   and direction into the scene (camera direction)
+          var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+          projector.unprojectVector( vector, camera );
+          var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 
-        	// create an array containing all objects in the scene with which the ray intersects
-        	var intersects = ray.intersectObjects( targetList );
+          // create an array containing all objects in the scene with which the ray intersects
+          var intersects = ray.intersectObjects( targetList );
 
-        	// INTERSECTED = the object in the scene currently closest to the camera
-        	//		and intersected by the Ray projected from the mouse position
+          // INTERSECTED = the object in the scene currently closest to the camera
+          //    and intersected by the Ray projected from the mouse position
 
-        	// if there is one (or more) intersections
-        	if ( intersects.length > 0 )
-        	{	// case if mouse is not currently over an object
-        		if(INTERSECTED==null){
-        			INTERSECTED = intersects[ 0 ];
-        			INTERSECTED.face.color = highlightedColor;
-        		}
-        		else{	// if thse mouse is over an object
-        			INTERSECTED.face.color= baseColor;
-        			INTERSECTED.object.geometry.colorsNeedUpdate=true;
-        			INTERSECTED = intersects[ 0 ];
-        			INTERSECTED.face.color = highlightedColor;
-        		}
-        		// upsdate mouseSphere coordinates and update colors
-        		mouseSphereCoords = [INTERSECTED.point.x,INTERSECTED.point.y,INTERSECTED.point.z];
-        		INTERSECTED.object.geometry.colorsNeedUpdate=true;
+          // if there is one (or more) intersections
+          if ( intersects.length > 0 )
+          { // case if mouse is not currently over an object
+            if(INTERSECTED==null){
+              INTERSECTED = intersects[ 0 ];
+              INTERSECTED.face.color = highlightedColor;
+            }
+            else{ // if thse mouse is over an object
+              INTERSECTED.face.color= baseColor;
+              INTERSECTED.object.geometry.colorsNeedUpdate=true;
+              INTERSECTED = intersects[ 0 ];
+              INTERSECTED.face.color = highlightedColor;
+            }
+            // upsdate mouseSphere coordinates and update colors
+            mouseSphereCoords = [INTERSECTED.point.x,INTERSECTED.point.y,INTERSECTED.point.z];
+            INTERSECTED.object.geometry.colorsNeedUpdate=true;
 
-        	}
-        	else // there are no intersections
-        	{
-        		// restore previous intersection object (if it exists) to its original color
-        		if ( INTERSECTED ){
-        			INTERSECTED.face.color = baseColor;
-        			INTERSECTED.object.geometry.colorsNeedUpdate=true;
-        		}
-        		// remove previous intersection object reference
-        		//     by setting current intersection object to "nothing"
+          }
+          else // there are no intersections
+          {
+            // restore previous intersection object (if it exists) to its original color
+            if ( INTERSECTED ){
+              INTERSECTED.face.color = baseColor;
+              INTERSECTED.object.geometry.colorsNeedUpdate=true;
+            }
+            // remove previous intersection object reference
+            //     by setting current intersection object to "nothing"
 
-        		INTERSECTED = null;
-        		mouseSphereCoords = null;
+            INTERSECTED = null;
+            mouseSphereCoords = null;
 
 
-        	}
+          }
         }
         // Find highlight end
 
         // Check Mouse
         function CheckMouseSphere(){
-        	// if the coordinates exist, make the sphere visible
-        	if(mouseSphereCoords != null){
-        		//console.log(mouseSphereCoords[0].toString()+","+mouseSphereCoords[1].toString()+","+mouseSphereCoords[2].toString());
-        		mouseSphere[0].position.set(mouseSphereCoords[0],mouseSphereCoords[1],mouseSphereCoords[2]);
-        		mouseSphere[0].visible = true;
-        	}
-        	else{ // otherwise hide the sphere
-        		mouseSphere[0].visible = false;
-        	}
+          // if the coordinates exist, make the sphere visible
+          if(mouseSphereCoords != null){
+            //console.log(mouseSphereCoords[0].toString()+","+mouseSphereCoords[1].toString()+","+mouseSphereCoords[2].toString());
+            mouseSphere[0].position.set(mouseSphereCoords[0],mouseSphereCoords[1],mouseSphereCoords[2]);
+            mouseSphere[0].visible = true;
+          }
+          else{ // otherwise hide the sphere
+            mouseSphere[0].visible = false;
+          }
         }
         // Check Mouse End
 
@@ -491,28 +429,28 @@
         function animate()
         {
           requestAnimationFrame( animate );
-        	render();
-        	update();
+          render();
+          update();
         }
 
         function update()
         {
-        	checkHighlight();
-        	CheckMouseSphere();
-        	keyboard.update();
+          checkHighlight();
+          CheckMouseSphere();
+          keyboard.update();
 
-        	if ( keyboard.down("up") )
-        	{
-        	//addOcta();
-        	}
-        	ColorSelected();
-        	//intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
-        	controls.update();
+          if ( keyboard.down("up") )
+          {
+          //addOcta();
+          }
+          ColorSelected();
+          //intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
+          controls.update();
         }
 
         function render()
         {
-        	renderer.render( scene, camera );
+          renderer.render( scene, camera );
         }
         // Check Animate, Update, Render End
 
@@ -527,7 +465,7 @@
 
 
 
-<!--<script type="text/javascript">
+<script type="text/javascript">
 
 $('.clockpicker').clockpicker()
     .find('input').change(function(){
@@ -538,7 +476,7 @@ $('.clockpicker').clockpicker()
 if (/mobile/i.test(navigator.userAgent)) {
     $('input').prop('readOnly', true);
 }
-</script>-->
+</script>
 
 
 </body>
