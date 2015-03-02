@@ -74,15 +74,15 @@
 				'<span class="clockpicker-span-minutes"></span>',
 				'<span class="clockpicker-span-am-pm"></span>',
 			'</div>',
-			'<div class="popover-content">',
-				'<div class="clockpicker-plate">',
+			'',
+				'',
 					'<div class="clockpicker-canvas"></div>',
 					'<div class="clockpicker-dial clockpicker-hours"></div>',
 					'<div class="clockpicker-dial clockpicker-minutes clockpicker-dial-out"></div>',
-				'</div>',
+				'',
 				'<span class="clockpicker-am-pm-block">',
 				'</span>',
-			'</div>',
+			'',
 		'</div>'
 	].join('');
 
