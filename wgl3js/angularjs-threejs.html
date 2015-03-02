@@ -12,7 +12,17 @@
 	<!-- build:css(.tmp) styles/main.css -->
 	<link rel="stylesheet" href="./angularjs-threejs_files/main.css">
 	<!-- endbuild -->
-<style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{display:none !important;}ng\:form{display:block;}</style></head>
+<style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{display:none !important;}ng\:form{display:block;}</style>
+<style>
+.number {
+  font-size: 100px;
+	margin-top: 25px;
+  font-family: 'Alegreya SC', serif;
+}
+
+</style>
+
+</head>
 <body ng-app="angularjsThreejsApp" class="ng-scope">
 	<!--[if lt IE 7]>
 	  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -66,7 +76,11 @@
 	<!-- build:js({.tmp,app}) scripts/scripts.js -->
 	<script src="./angularjs-threejs_files/app.js"></script>
 	<script src="./angularjs-threejs_files/main.js"></script>
+	<script src="./angularjs-threejs_files/Detector.js"></script>
 	<script src="./angularjs-threejs_files/tjsModelViewer.js"></script>
+	<!-- new for this example -->
+ <script src="./angularjs-threejs_files/CSS3DRenderer.js"></script>
+<script src="./angularjs-threejs_files/OrbitControls.js"></script>
 	<!-- endbuild -->
 
 

@@ -190,7 +190,15 @@
         {
 
           var newEarth= new THREE.SphereGeometry(125,125,125);
-          var newEarth_shaded = new THREE.Mesh(newEarth, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
+          var earthTexture = new THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtexturemins.jpg', {}, function(){
+          console.log("Loaded Texture")
+
+          },
+          function(){
+              alert('Error Loading Texture')
+          });
+
+          var newEarth_shaded = new THREE.Mesh(newEarth, new THREE.MeshBasicMaterial({ map: earthTexture }));
           newEarth_shaded.position.x = 0;
           newEarth_shaded.position.y = 100;
           newEarth_shaded.position.z = 0;

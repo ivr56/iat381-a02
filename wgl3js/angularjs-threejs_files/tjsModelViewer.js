@@ -14,7 +14,22 @@ angular.module("tjsModelViewer", [])
 					var renderer;
 					var previous;
 					var controls;
+					var rendererCSS;
+					var scene2;
+					var renderer2;
 					//var keyboard = new KeyboardState();
+					var activityUSD=0;
+					var activityEU=0;
+					var table = [
+								"H", "Hydrogen", "1.00794", 1, 1,
+
+								"Uuo", "Ununoctium", "(294)", 18, 7
+							];
+
+
+
+							var objects = [];
+							var targets = { table: [] };
 
 
 					//Inject
@@ -64,52 +79,12 @@ angular.module("tjsModelViewer", [])
 					 //Earth Geometry
 
 					 //Create Geometery
-					 var newEarth= new THREE.SphereGeometry(75,75,75);
-					 var etexture = THREE.ImageUtils.loadTexture('models/earthtexturemin.png');
-					 //Add Diffuse Texture and
-					 //var earthtexture = THREE.ImageUtils.loadTexture('models/defult_earth.jpg');
-					 var eMaterial = new THREE.MeshBasicMaterial({
-				   map:etexture
-			     });
-
-					 //var earthmaterial = new THREE.MeshBasicMaterial({map: earthtexture});
-
-					 //Create Mesh with Material
-					 var newEarth_shaded = new THREE.Mesh(newEarth, eMaterial);
-					 //Position Mesh
-					 newEarth_shaded.position.x = 0;
-					 newEarth_shaded.position.y = 0;
-					 newEarth_shaded.position.z = 0;
-
-					 //Add Identifiying Tag
-					 newEarth_shaded.name = "Earth";
-					 //Add to Scene
-					 scene.add(newEarth_shaded);
 
 
-					//American Dollar
-					 var newtouchpointUSD= new THREE.SphereGeometry(5,5,5);
-					 var newtouchpointUSD_shaded = new THREE.Mesh(newtouchpointUSD, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
-					 newtouchpointUSD_shaded.position.x = 0;
-					 newtouchpointUSD_shaded.position.y = 50;
-					 newtouchpointUSD_shaded.position.z = -75;
-
-					 scene.add(newtouchpointUSD_shaded);
-					 //Add to Interaction List
-					 targetList.push(newtouchpointUSD_shaded);
-
-					 //country_targetList.push("American Dollar");
 
 
-				 //Euro
-				 var newtouchpointEU= new THREE.SphereGeometry(5,5,5);
-				 var newtouchpointEU_shaded = new THREE.Mesh(newtouchpointEU, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
-				 newtouchpointEU_shaded.position.x = 0;
-				 newtouchpointEU_shaded.position.y = 50;
-				 newtouchpointEU_shaded.position.z = 75;
-				 scene.add(newtouchpointEU_shaded);
-				 targetList.push(newtouchpointEU_shaded);
-				 country_targetList.push("Euro");
+
+
 
 				//
 				//
@@ -135,6 +110,7 @@ angular.module("tjsModelViewer", [])
 						//camera.position.set(0,250,950);
 
 						scene = new THREE.Scene();
+
 						var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
 						var VIEW_ANGLE = 30, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 10000;
 						camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
@@ -143,21 +119,16 @@ angular.module("tjsModelViewer", [])
 						camera.lookAt(scene.position);
 						//scene.fog = new THREE.FogExp2(0x000000, 0.035);
 
-						// Lights
-						var light = new THREE.AmbientLight( 0x333333 ); // soft white light
-		        	scene.add( light );
-		        	var light = new THREE.PointLight(0xffffff,1,4500);
-		        	light.position.set(-300,1000,-300);
-		        	scene.add(light);
 
+						// directional lighting
+	         var directionalLight = new THREE.DirectionalLight(0xffffff);
+	      directionalLight.position.set(1, 1, 1).normalize();
+	      scene.add(directionalLight);
 
-							var directionalLight = new THREE.DirectionalLight(0xffffff);
-							directionalLight.position.set(1, 1, 1).normalize();
-							scene.add(directionalLight);
+	      // ambient lighting
+	      var ambientLight = new THREE.AmbientLight(0xbbbbbb);
+	      scene.add(ambientLight);
 
-							// var light = new THREE.PointLight(0xffffff,1,4500);
-							// light.position.set(0,0,0);
-							// scene.add(light);
 
 							// // FLOOR
 						  //       	var faceMat = new THREE.MeshBasicMaterial({color: 0x888888,side: THREE.DoubleSide});
@@ -179,9 +150,14 @@ angular.module("tjsModelViewer", [])
 
 
 
-
 						  //Renderer
-						  renderer = new THREE.CanvasRenderer();
+
+							if ( Detector.webgl )
+								renderer = new THREE.WebGLRenderer( {antialias:true} );
+							else
+							renderer = new THREE.CanvasRenderer();
+							//Set Backgound Color
+							renderer.setClearColor(0xd9d9d9, 1);
 						  //renderer = new THREE.WebGLRenderer( {antialias:true} );
 						  renderer.setSize(window.innerWidth, window.innerHeight);
 						  //elem[0].appendChild(renderer.domElement);
@@ -191,7 +167,6 @@ angular.module("tjsModelViewer", [])
 						  // Events
 
 
-						  // RENDERER
 
 				        	// renderer = new THREE.WebGLRenderer( {antialias:true} );
 				        	// renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -201,7 +176,12 @@ angular.module("tjsModelViewer", [])
 				        	// EVENTS
 
 				        	// CONTROLS
+
 				        	controls = new THREE.OrbitControls( camera, renderer.domElement );
+									//controls = new THREE.TrackballControls( camera );
+
+									// RENDERER
+
 
 									// LIGHT
 				        	//var light = new THREE.AmbientLight( 0x333333 ); // soft white light
@@ -220,6 +200,19 @@ angular.module("tjsModelViewer", [])
 
 
 
+									  ////////////
+										// CUSTOM //
+										////////////
+
+										////////////
+									// CUSTOM //
+									////////////
+
+
+									var newSphereGeom= new THREE.SphereGeometry(5,5,5);
+									var sphere= new THREE.Mesh(newSphereGeom, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
+									scene.add(sphere);
+									mouseSphere.push(sphere);
 
 						// initialize object to perform world/screen calculations
 					 projector = new THREE.Projector();
@@ -231,12 +224,145 @@ angular.module("tjsModelViewer", [])
 
 						window.addEventListener('resize', onWindowResize, false);
 
+
+
+
+
+
+						addEarthgeo();
+						//addEUgeo();
+						addUSDgeo();
+						render();
+						animate();
+
 					}
+
 					//Initilize End
 
+					//EARTHS ------ (WorkAround)
+					//Add Earth
+					function addEarthgeo()
+				  {
+
+					var newEarth= new THREE.SphereGeometry(75,75,75);
+				  // texture - texture must not be in same folder or there is an error.
+					var earthTexture = new THREE.ImageUtils.loadTexture( '../wgl3js/models/earthtextminwhole.png', {}, function(){
+					console.log("Loaded Texture")
+					},
+					function(){
+							alert('Error Loading Texture')
+					});
+					//newEarth_shaded.material.map.needsUpdate = true;
+					//Create Mesh
+					var earthmaterial = new THREE.MeshBasicMaterial({ map: earthTexture });
+					var newEarth_shaded = new THREE.Mesh(newEarth, earthmaterial );
+					//Position Mesh
+					newEarth_shaded.position.x = 0;
+					newEarth_shaded.position.y = 0;
+					newEarth_shaded.position.z = 0;
+					//Add Identifiying Tag
+					newEarth_shaded.name = "Earth";
+					//Add to Scene
+					scene.add(newEarth_shaded);
+					addOcta();
+				}
+					//Earth Create
+
+
+					//EARTHS ------ (WorkAround)
 
 
 
+
+				function addUSDgeo()
+				{
+				//American Dollar
+				var newtouchpointUSD= new THREE.SphereGeometry(5,5,5);
+				var newtouchpointUSD_shaded = new THREE.Mesh(newtouchpointUSD, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
+				newtouchpointUSD_shaded.position.x = 0;
+				newtouchpointUSD_shaded.position.y = 50;
+				newtouchpointUSD_shaded.position.z = -75;
+				newtouchpointUSD_shaded.name = "EarthUSDo";
+				scene.add(newtouchpointUSD_shaded);
+				//Add to Interaction List
+				targetList.push(newtouchpointUSD_shaded);
+
+				//country_targetList.push("American Dollar");
+
+
+				}
+				//Earth Create
+
+
+				// function addEUgeo()
+				// {
+				// //Euro
+				// var newtouchpointEU= new THREE.SphereGeometry(5,5,5);
+				// var newtouchpointEU_shaded = new THREE.Mesh(newtouchpointEU, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
+				// newtouchpointEU_shaded.position.x = 0;
+				// newtouchpointEU_shaded.position.y = 50;
+				// newtouchpointEU_shaded.position.z = 75;
+				// scene.add(newtouchpointEU_shaded);
+				// targetList.push(newtouchpointEU_shaded);
+				// country_targetList.push("Euro");
+				//
+				// }
+				// //Earth Create
+
+
+
+
+				function addOcta()
+				{
+					var position = new Array();
+					var notAboveGround = true;
+					while(notAboveGround){
+						position[0]=Math.random()*floorSide-floorSide/2;
+						position[1]=Math.random()*floorSide-floorSide/2;
+						position[2]=Math.random()*floorSide/5;
+						var cubeSide = Math.random()*floorSide/12+floorSide/50;
+						//alert("cubeSide="+cubeSide);
+						if(position[2]-cubeSide>0){
+							notAboveGround = false;
+						}
+					}
+
+
+					var octaGeom = new THREE.Geometry();
+
+					octaGeom.vertices.push(
+						new THREE.Vector3( -10,  10, 0 ),
+						new THREE.Vector3( -10, -10, 0 ),
+						new THREE.Vector3(  10, -10, 0 )
+					);
+
+					octaGeom.faces.push( new THREE.Face3( 0, 1, 2 ) );
+
+
+
+
+					var faceColorMaterial = new THREE.MeshLambertMaterial(
+					{ color: 0xffffff, vertexColors: THREE.FaceColors,shading:THREE.FlatShading,polygonOffset: true,polygonOffsetUnits: 1,polygonOffsetFactor: 1} );
+
+					//var octaGeom= new THREE.SphereGeometry(1,12,2);
+					for ( var i = 0; i < octaGeom.faces.length; i++ )
+					{
+						face = octaGeom.faces[ i ];
+						face.color= baseColor;
+					}
+					var octa= new THREE.Mesh( octaGeom, faceColorMaterial );
+					octa.position.set(position[0], position[2], position[1]);
+					// creates a wireMesh object
+					octa.name = "EarthUSD";
+					wireOcta = new THREE.Mesh(octaGeom, new THREE.MeshBasicMaterial({ color: 0x116611, wireframe: true }));
+
+
+					scene.add(octa);
+					// wireMesh object is added to the original as a sub-object
+					octa.add(wireOcta);
+
+					targetList.push(octa);
+				}
 
 					//On Resize
 					function onWindowResize(event) {
@@ -285,20 +411,80 @@ angular.module("tjsModelViewer", [])
 
 						// Find intersections
 						function checkSelection(){
+	// find intersections
 
+	// create a Ray with origin at the mouse position
+	//   and direction into the scene (camera direction)
+	var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+	projector.unprojectVector( vector, camera );
+	var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+
+	// create an array containing all objects in the scene with which the ray intersects
+	var intersects = ray.intersectObjects( targetList );
+
+	//if an intersection is detected
+	if ( intersects.length > 0 )
+	{
+		console.log("Hit @ " + toString( intersects[0].point ) );
+
+		//test items in selected faces array
+		var test=-1;
+		selectedFaces.forEach( function(arrayItem)
+		{
+
+			if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
+				test=selectedFaces.indexOf(arrayItem);
+				console.log("False");
+			}
+
+
+		});
+
+
+
+
+		// if is a previously selected face, change the color back to green, otherswise change to blue
+		if(test>=0){
+			intersects[ 0 ].face.color=new THREE.Color( 0x44dd66 );
+			selectedFaces.splice(test, 1);
+
+		}
+		else{
+			intersects[ 0 ].face.color=new THREE.Color( 0x222288 );
+			selectedFaces.push(intersects[0]);
+			selectedFaces.forEach( function(arrayItem)
+			{
+				if (arrayItem.object.name === "EarthUSD")
+				{
+				console.log("True");
+				}
+
+			});
+			
+		}
+
+		intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						function checkHighlight(){
+							// find intersections
 
 							// create a Ray with origin at the mouse position
 							//   and direction into the scene (camera direction)
-							console.log("Ping");
-							console.log("Emitting");
-
-							//$scope.$emit("message", "Hello, this is ThreeJS!");
-
-
-							//Validate Loaded Currnecies
-							//console.log("Loaded Models: " + targetList);
-							//console.log("Loaded Identifiers: " + country_targetList);
-
 							var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 							projector.unprojectVector( vector, camera );
 							var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
@@ -306,177 +492,64 @@ angular.module("tjsModelViewer", [])
 							// create an array containing all objects in the scene with which the ray intersects
 							var intersects = ray.intersectObjects( targetList );
 
+							// INTERSECTED = the object in the scene currently closest to the camera
+							//		and intersected by the Ray projected from the mouse position
 
-
-
-							//if an intersection is detected
+							// if there is one (or more) intersections
 							if ( intersects.length > 0 )
+							{	// case if mouse is not currently over an object
+								if(INTERSECTED==null){
+									INTERSECTED = intersects[ 0 ];
+									INTERSECTED.face.color = highlightedColor;
+								}
+								else{	// if thse mouse is over an object
+									INTERSECTED.face.color= baseColor;
+									INTERSECTED.object.geometry.colorsNeedUpdate=true;
+									INTERSECTED = intersects[ 0 ];
+									INTERSECTED.face.color = highlightedColor;
+								}
+								// upsdate mouseSphere coordinates and update colors
+								mouseSphereCoords = [INTERSECTED.point.x,INTERSECTED.point.y,INTERSECTED.point.z];
+								INTERSECTED.object.geometry.colorsNeedUpdate=true;
+
+							}
+							else // there are no intersections
 							{
-								//Validate Intersect
-								console.log("Intersects :" + intersects.length);
-								console.log("Intersect Location : " + intersects);
-
-
-
-								//test items in selected faces array
-
-								var test=-1;
-
-								//Activity of Economy
-								var activityUSD=0;
-								var activityEU=0;
-
-
-
-								//Validate State
-								selectedFaces.forEach( function(arrayItem)
-								{
-
-
-									//Validate Selection
-									console.log("What Country was Selected? " + arrayItem.object.id);
-
-
-
-									//Validate USD
-									if (arrayItem.object.id === 8)
-									{
-										console.log("After True Check 00 on USD");
-										activityUSD = 1;
-										// $scope.$emit("message", "USD Active");
-										// $scope.$emit("messageUSD", 1);
-
-										//test=arrayItem.object.id;
-										//----------------------------
-										// if the faceIndex and object ID are the same between the intersect and selected faces ,
-										// the face index is recorded
-										if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
-											test=selectedFaces.indexOf(arrayItem);
-											console.log("ObjectID 01 Check: " + arrayItem.object.id);
-											console.log("Check FaceIndex - Check 01 on USD")
-											activityUSD = 2;
-
-										}
-										//Check Face Index
-										//----------------------------
-									}
-									//End Validation of USD
-
-
-									//Validate EU
-									else if (arrayItem.object.id === 9)
-									{
-										console.log("After True Check 00 on EU");
-										activityEU = 1;
-										// $scope.$emit("message", "USD Active");
-										// $scope.$emit("messageUSD", 1);
-
-										//test=arrayItem.object.id;
-										//----------------------------
-										// if the faceIndex and object ID are the same between the intersect and selected faces ,
-										// the face index is recorded
-										if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
-											test=selectedFaces.indexOf(arrayItem);
-											console.log("ObjectID 01 Check: " + arrayItem.object.id);
-											console.log("Check FaceIndex - Check 01 on EU")
-											activityEU = 2;
-
-										}
-										//Check Face Index
-										//----------------------------
-									}
-
-									//End Validation of EU
-
-
-
-
-								});
-								//Selected Faces
-
-								// if is a previously selected face, change the color back to green, otherswise change to blue
-								if(test>=0)
-								{
-
-									console.log("False Flag: " + "USD: " + activityUSD + " EU: " + activityEU);
-									intersects[ 0 ].face.color=new THREE.Color( 0x44dd66 );
-									selectedFaces.splice(test, 1);
-
-
-									//Validate De-Selection of USD
-									if (activityUSD === 2)
-									{
-										console.log("Test Flag A Set To : " + test );
-										console.log("False Flag for USD");
-										$scope.$emit("message", "USD In-Active");
-										$scope.$emit("messageUSD", 0);
-										test = -1;
-										console.log("Test Flag B Set To : " + test );
-										activityUSD = 0;
-									}
-									//-----
-									else if (activityEU === 2)
-									{
-										console.log("Test Flag A Set To : " + test );
-										console.log("False Flag for EU");
-										$scope.$emit("message", "EU In-Active");
-										$scope.$emit("messageEU", 0);
-										test = -1;
-										console.log("Test Flag B Set To : " + test );
-										activityEU = 0;
-									}
-
-
-
+								// restore previous intersection object (if it exists) to its original color
+								if ( INTERSECTED ){
+									INTERSECTED.face.color = baseColor;
+									INTERSECTED.object.geometry.colorsNeedUpdate=true;
 								}
+								// remove previous intersection object reference
+								//     by setting current intersection object to "nothing"
+
+								INTERSECTED = null;
+								mouseSphereCoords = null;
 
 
-								else
-								{
-
-									console.log("True Flag: " + "USD: " + activityUSD + " EU: " + activityEU);
-									intersects[ 0 ].face.color=new THREE.Color( 0x222288 );
-									selectedFaces.push(intersects[0]);
-
-									//Validate USD Selection to Master Controller
-									if (activityUSD === 1)
-									{
-										console.log("True Flag for USD");
-										$scope.$emit("message", "USD Active");
-										$scope.$emit("messageUSD", 1);
-
-										activityUSD = 1;
-									}
-									//-----
-
-									//Validate EU Selection to Master Controller
-									else if (activityEU === 1)
-									{
-
-										console.log("True Flag for EU");
-										$scope.$emit("message", "EU Active");
-										$scope.$emit("messageEU", 1);
-										test = -1;
-
-									}
-									//------
-
-
-								}
-								//End of If/Else Check Testing
-
-
-								intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
-							} //End of Intersects
+							}
 						}
-						// Find intersections End
 
-						//End inject 4
+						function ColorSelected(){
+	selectedFaces.forEach( function(arrayItem)
+		{
+			arrayItem.face.color = selectedColor;
+			arrayItem.object.geometry.colorsNeedUpdate = true;
+		});
+}
+
+
+function toString(v) { return "[ " + v.x + ", " + v.y + ", " + v.z + " ]"; }
+
 
 
 					function update()
 					{
 					  controls.update();
+						checkHighlight();
+
+						ColorSelected();
+
 					}
 
 					//Inject 3 End
@@ -500,11 +573,10 @@ angular.module("tjsModelViewer", [])
 						// camera.position.y = 4;
 						// camera.position.z = Math.sin(timer) * 10;
 						renderer.render(scene, camera);
+
 					}
 					//Animate End
 
-					render();
-					animate();
 				}
 			}
 		}
