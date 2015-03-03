@@ -550,7 +550,7 @@ angular.module("tjsModelViewer", [])
 					document.getElementById("ca").innerHTML = "USD";
 					document.getElementById("cb").innerHTML = "CHA";
 					var cgtxt = scene.getObjectByName("Earth");
-					cgtxt.material.map = THREE.ImageUtils.loadTexture( 'assets/earthtextures/earthtextminUSA.png', {}, function(){
+					cgtxt.material.map = THREE.ImageUtils.loadTexture( 'assets/earthtextures/earthtextminUSACHA.png', {}, function(){
 					console.log("Loaded Texture for USA <3 CHA")
 					},
 					function(){
@@ -670,7 +670,7 @@ angular.module("tjsModelViewer", [])
 							document.getElementById("ca").innerHTML = "CHA";
 							document.getElementById("cb").innerHTML = "US";
 							var cgtxt = scene.getObjectByName("Earth");
-							cgtxt.material.map = THREE.ImageUtils.loadTexture( 'assets/earthtextures/earthtextminUSAEU.png', {}, function(){
+							cgtxt.material.map = THREE.ImageUtils.loadTexture( 'assets/earthtextures/earthtextminUSACHA.png', {}, function(){
 							console.log("Loaded Texture for USA <3 EU")
 							},
 							function(){

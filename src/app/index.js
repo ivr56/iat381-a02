@@ -16,16 +16,30 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 			})
       .when('/resultsUSEU', {
         templateUrl: 'app/results/resultsUSEU.html',
-        controller: 'resultsUSEUcontroller'
+        controller: 'resultscontroller'
       })
 			.when('/resultsUSCHA', {
 				templateUrl: 'app/results/resultsUSCHA.html',
-				controller: 'resultsUSCHAcontroller'
+				controller: 'resultscontroller'
 			})
 
 			.when('/resultsCHAEU', {
 				templateUrl: 'app/results/resultsCHAEU.html',
-				controller: 'resultsCHAEUcontroller'
+				controller: 'resultscontroller'
+			})
+
+
+			.when('/resultsEUCHA', {
+				templateUrl: 'app/results/resultsEUCHA.html',
+				controller: 'resultscontroller'
+			})
+			.when('/resultsCHAUS', {
+				templateUrl: 'app/results/resultsCHAUS.html',
+				controller: 'resultscontroller'
+			})
+			.when('/resultsEUUS', {
+				templateUrl: 'app/results/resultsEUUS.html',
+				controller: 'resultscontroller'
 			})
 
 			.otherwise({
@@ -62,74 +76,29 @@ a02.run(function ($rootScope)
 	//   console.log("var: " + varing);
 	// }
 
-	a02.controller("resultsUSEUcontroller", function($scope, $rootScope)
+	a02.controller("resultscontroller", function($scope, $rootScope)
 	{
 
 		//	$(".knob").globaldial.myfunctions(irenes);
-
-
-		var uni = 0;
-		globaldial.jam = function(inti)
-		{
-
-			var irene = inti;
-			//If Statement for Countries
-			irene = irene*2;
-			var irenes = irene.toString()
-		 	console.log("Check Jam: " + irenes);
-			document.getElementById("testing").innerHTML = irenes;
-
-		}
+		//
+		//
+		// var uni = 0;
+		// globaldial.jam = function(inti)
+		// {
+		//
+		// 	var irene = inti;
+		// 	//If Statement for Countries
+		// 	irene = irene*2;
+		// 	var irenes = irene.toString()
+		//  	console.log("Check Jam: " + irenes);
+		// 	document.getElementById("testing").innerHTML = irenes;
+		//
+		// }
 
 
 	});
 
 
-		a02.controller("resultsUSCHAcontroller", function($scope, $rootScope)
-		{
-
-			//	$(".knob").globaldial.myfunctions(irenes);
-
-
-			var uni = 0;
-			globaldial.jam = function(inti)
-			{
-
-				var irene = inti;
-				//If Statement for Countries
-				irene = irene*2;
-				var irenes = irene.toString()
-			 	console.log("Check Jam: " + irenes);
-				document.getElementById("testing").innerHTML = irenes;
-
-			}
-
-
-		});
-
-
-
-			a02.controller("resultsCHAEUcontroller", function($scope, $rootScope)
-			{
-
-				//	$(".knob").globaldial.myfunctions(irenes);
-
-
-				var uni = 0;
-				globaldial.jam = function(inti)
-				{
-
-					var irene = inti;
-					//If Statement for Countries
-					irene = irene*2;
-					var irenes = irene.toString()
-				 	console.log("Check Jam: " + irenes);
-					document.getElementById("testing").innerHTML = irenes;
-
-				}
-
-
-			});
 
 	a02.controller('MainCtrl', function ($scope, $rootScope)
 		{
@@ -414,6 +383,47 @@ a02.run(function ($rootScope)
 			}
 
 
+	});
+
+	a02.controller('resultstates', function ($scope, $rootScope, $location)
+	{
+
+			//US - EU
+			$scope.usdeu = function()
+			{
+				console.log('/resultsUSEU');
+				$location.url('/resultsUSEU');
+			}
+			$scope.euusd = function()
+			{
+				console.log('/resultsEUUS');
+				$location.url('/resultsEUUS');
+			}
+
+
+			//CHA - US
+			$scope.usdcha = function ()
+			{
+				console.log('USCHA');
+				$location.url('/resultsUSCHA');
+			}
+			$scope.chaus = function ()
+			{
+				console.log('CHAEU');
+				$location.url('/resultsCHAUS');
+			}
+
+			//EU - CHA
+			$scope.eucha = function ()
+			{
+				console.log('EUCHA');
+				$location.url('/resultsEUCHA');
+			}
+			$scope.chaeu = function ()
+			{
+				console.log('CHAEU');
+				$location.url('/resultsCHAEU');
+			}
 	});
 
 

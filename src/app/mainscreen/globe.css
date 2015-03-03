@@ -109,7 +109,6 @@ a {
 	width: 45%;
 	display:inline-block;
 	height: 100%;
-	background-color: #F9F9F9;
 	border: 1px black dotted;
 	opacity: 1;
 	font-family: 'Open Sans', sans-serif;
@@ -128,7 +127,7 @@ a {
 	width: 45%;
 	display:none;
 	height: 100%;
-	background-color: #F9F9F9;
+
 	border: 1px black dotted;
 	opacity: 1;
 	font-family: 'Open Sans', sans-serif;
@@ -147,7 +146,7 @@ a {
 	width: 45%;
 	display:none;
 	height: 100%;
-	background-color: #F9F9F9;
+
 	border: 1px black dotted;
 	opacity: 1;
 	font-family: 'Open Sans', sans-serif;
@@ -166,7 +165,6 @@ a {
 	width: 45%;
 	display:none;
 	height: 100%;
-	background-color: #F9F9F9;
 	border: 1px black dotted;
 	opacity: 1;
 	font-family: 'Open Sans', sans-serif;
