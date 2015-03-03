@@ -24,8 +24,8 @@
                        //console.log(this.$.attr('value'));
                        console.log("release : " + value);
                        var updatevalue= value*6.27;
-                       document.getElementById("userinpt").innerHTML=value;
-                       document.getElementById("displayinpt").innerHTML=updatevalue;
+                       document.getElementById("userinpt").innerHTML='$' + value;
+                       document.getElementById("displayinpt").innerHTML='¥'+ updatevalue;
                    },
                    cancel : function () {
                        console.log("cancel : ", this);
@@ -90,7 +90,7 @@
     <p>Press the "up" arrow to add a random octahedron!</p>
     <p>Mouse-over faces to highlight, click to select.</p>-->
     <div class="knobswitch">
-      <div><p>Testing: </p><p id="testing"></p></div>
+
 
       <!--   <input type="button" onclick="$('.knob-dyn').knob();" value="knobify!">
                  <input type="text" class="knob-dyn" data-width="200" data-cursor=true value="56">-->
