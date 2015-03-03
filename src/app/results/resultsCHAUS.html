@@ -23,15 +23,15 @@
                    release : function (value) {
                        //console.log(this.$.attr('value'));
                        console.log("release : " + value);
-                       var updatevalue= value*6.27;
-                       document.getElementById("userinpt").innerHTML='$' + value;
-                       document.getElementById("displayinpt").innerHTML='¥'+ updatevalue;
+                       var updatevalue= value*0.16;
+                       document.getElementById("userinpt").innerHTML='¥' + value;
+                       document.getElementById("displayinpt").innerHTML='$'+ updatevalue;
                    },
                    cancel : function () {
                        console.log("cancel : ", this);
                    },
                    format : function (value) {
-                       return '$' + value;
+                       return '¥' + value;
                    },
                    draw : function () {
 

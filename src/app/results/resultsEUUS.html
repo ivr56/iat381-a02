@@ -12,7 +12,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
        <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
        <script src="../js/jquery.knob.js"></script>
-       <!--<script src="../src/app/results/results.controller.js"></script>-->
+       <!-- <script src="../src/app/results/results.controller.js"></script>-->
       <script>
            $(function($) {
 
@@ -23,15 +23,16 @@
                    release : function (value) {
                        //console.log(this.$.attr('value'));
                        console.log("release : " + value);
-                       var updatevalue= value*6.27;
-                       document.getElementById("userinpt").innerHTML='$' + value;
-                       document.getElementById("displayinpt").innerHTML='¥'+ updatevalue;
+                       var updatevalue= value*1.12;
+                       document.getElementById("userinpt").innerHTML='£' + value;
+                       document.getElementById("displayinpt").innerHTML='$' + updatevalue;
+
                    },
                    cancel : function () {
                        console.log("cancel : ", this);
                    },
                    format : function (value) {
-                       return '$' + value;
+                       return '£' + value ;
                    },
                    draw : function () {
 
@@ -89,7 +90,7 @@
     <!--<p>Click/drag to rotate. Mouse wheel to zoom.</p>
     <p>Press the "up" arrow to add a random octahedron!</p>
     <p>Mouse-over faces to highlight, click to select.</p>-->
-    <div class="knobswitch1">
+    <div class="knobswitch">
 
 
       <!--   <input type="button" onclick="$('.knob-dyn').knob();" value="knobify!">
@@ -98,10 +99,10 @@
 
       </div>
 
-
       <div class="userpanel switchb">
       <img src="../src/assets/images/switch.png" width="80%">
       </div>
+
 <div class="currencyBoxesResults">
 
 

@@ -3,9 +3,9 @@
 *{
 	margin: 0;
 	padding: 0;
-	
 
-	
+
+
 
 }
 
@@ -15,7 +15,7 @@ html{
 	 background-color: #D9D8D8;
 }
 body {
-    
+
     /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
     color: #333;
 }
@@ -203,5 +203,24 @@ margin-bottom: 0;
 	background-repeat: no-repeat;
 	background-size: 50%,50%;
 	width: 100%;
-	
+
+}
+.knobswitch1{
+	z-index:15;
+	position:absolute;
+	top:-195px;
+	left:80px;
+	background-image: url("../chinaus.jpg");
+	background-repeat: no-repeat;
+	background-size: 55%,55%;
+	width: 100%;
+
+}
+
+.switchb{
+	z-index:28;
+	position:absolute;
+	left:45%;
+	top:80%;
+	width:10%;
 }

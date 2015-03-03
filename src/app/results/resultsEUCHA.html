@@ -12,7 +12,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
        <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
        <script src="../js/jquery.knob.js"></script>
-       <!--<script src="../src/app/results/results.controller.js"></script>-->
+       <script src="../src/app/results/results.controller.js"></script>
       <script>
            $(function($) {
 
@@ -23,15 +23,16 @@
                    release : function (value) {
                        //console.log(this.$.attr('value'));
                        console.log("release : " + value);
-                       var updatevalue= value*6.27;
-                       document.getElementById("userinpt").innerHTML='$' + value;
+                       var updatevalue= value*7;
+                       document.getElementById("userinpt").innerHTML='£' + value;
                        document.getElementById("displayinpt").innerHTML='¥'+ updatevalue;
+
                    },
                    cancel : function () {
                        console.log("cancel : ", this);
                    },
                    format : function (value) {
-                       return '$' + value;
+                       return '£' + value;
                    },
                    draw : function () {
 
@@ -98,10 +99,10 @@
 
       </div>
 
-
       <div class="userpanel switchb">
       <img src="../src/assets/images/switch.png" width="80%">
       </div>
+
 <div class="currencyBoxesResults">
 
 
@@ -110,9 +111,9 @@
       <p id="userinpt">0</p>
       </div>
 
-      <div class="userpanel">
-        <p id="displayinpt">0</p>
-        </div>
+     <div class="userpanel">
+       <p id="displayinpt">0</p>
+       </div>
      </div>
 </div>
 
