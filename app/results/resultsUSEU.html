@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://www.moczys.com/webGL/Experiment_02_V05.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Experiment 02: Selecting/Highlighting Faces</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+
+        <link rel="stylesheet" href="http://weareoutman.github.io/clockpicker/dist/jquery-clockpicker.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="req/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="req/dist/bootstrap-clockpicker.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+           <script src="req/js/jquery.knob.js"></script>
+           <script src="app/results/results.controller.js"></script>
+      <script>
+           $(function($) {
+
+               $(".knob").knob({
+                   change : function (value) {
+                       //console.log("change : " + value);
+                   },
+                   release : function (value) {
+                       //console.log(this.$.attr('value'));
+                       console.log("release : " + value);
+                       var updatevalue= value*0.89;
+                       document.getElementById("userinpt").innerHTML='$' + value;
+                       document.getElementById("displayinpt").innerHTML='£' + updatevalue;
+
+                   },
+                   cancel : function () {
+                       console.log("cancel : ", this);
+                   },
+                   format : function (value) {
+                       return '$' + value ;
+                   },
+                   draw : function () {
+
+                       // "tron" case
+                       if(this.$.data('skin') == 'tron') {
+
+                           this.cursorExt = 0.3;
+
+                           var a = this.arc(this.cv)  // Arc
+                               , pa                   // Previous arc
+                               , r = 1;
+
+                           this.g.lineWidth = this.lineWidth;
+
+                           if (this.o.displayPrevious) {
+                               pa = this.arc(this.v);
+                               this.g.beginPath();
+                               this.g.strokeStyle = this.pColor;
+                               this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, pa.s, pa.e, pa.d);
+                               this.g.stroke();
+                           }
+
+                           this.g.beginPath();
+                           this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ;
+                           this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, a.s, a.e, a.d);
+                           this.g.stroke();
+
+                           this.g.lineWidth = 2;
+                           this.g.beginPath();
+                           this.g.strokeStyle = this.o.fgColor;
+                           this.g.arc( this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+                           this.g.stroke();
+
+                           return false;
+                       }
+                   }
+               });
+
+
+           });
+       </script>
+
+</head>
+<body>
+
+
+<!-- <div id="ThreeJS" style="position: absolute; left:0px; top:0px"><canvas width="1070" height="0"></canvas></div>
+ -->
+<div class="instructionTextResults">
+<p> Use the dial to modify current amount</p>
+ </div>
+<div class="controlpanelResults" ng-controller="resultscontroller">
+
+
+    <!--<p>Click/drag to rotate. Mouse wheel to zoom.</p>
+    <p>Press the "up" arrow to add a random octahedron!</p>
+    <p>Mouse-over faces to highlight, click to select.</p>-->
+    <div class="knobswitch">
+
+
+      <!--   <input type="button" onclick="$('.knob-dyn').knob();" value="knobify!">
+                 <input type="text" class="knob-dyn" data-width="200" data-cursor=true value="56">-->
+                  <input class="knob" data-width="250" data-cursor=true data-fgColor="#222222" data-thickness=.2 value="0">
+
+      </div>
+
+      <div class="userpanel switchb" ng-controller="resultstates">
+        <a href="" ng-click="euusd()">
+        <img src="../src/assets/images/switch.png" width="80%">
+      </a>
+      </div>
+
+<div class="currencyBoxesResults">
+
+
+    <div class="userpanel">
+
+      <p id="userinpt">0</p>
+      </div>
+
+      <div class="userpanel">
+        <p id="displayinpt">0</p>
+        </div>
+     </div>
+</div>
+
+
+
+</div>

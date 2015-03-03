@@ -1,0 +1,43 @@
+
+<div class="hero-unit">
+
+
+	<div ng-controller="MainCtrl">
+	<tjs-model-viewer assimp-url="assimpModelUrl"><canvas id="test" width="1070" height="0"></tjs-model-viewer>
+		<div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
+		<div class="controlpanel">
+		<div class="instructionText">
+		<h3> Select Two Countries to Convert Currency</h3>
+		 </div>
+
+		    <!--<p>Click/drag to rotate. Mouse wheel to zoom.</p>
+		    <p>Press the "up" arrow to add a random octahedron!</p>
+		    <p>Mouse-over faces to highlight, click to select.</p>-->
+		<!-- <div class="form-group">
+
+		        <div class="input-group clockpicker">
+
+		        </div>
+
+		    </div> -->
+
+
+
+		<div class="currencyBoxes" ng-controller="MainCtrl">
+			<div ng-controller="states">
+		    <div id="confirmpanelUSEDU"><p><a href="" ng-Click="usdeu()">Convert</a></p></div>
+				<div id="confirmpanelUSCHA"><p><a href="" ng-Click="usdcha()">Convert</a></p></div>
+				<div id="confirmpanelCHAEU"><p><a href="" ng-Click="chaeu()">Convert</a></p></div>
+			</div>
+		    <div class="userpanel"><p id="ca"></p></div>
+		    <div class="userpanel"><p id="cb"></p></div>
+
+		     </div>
+		</div>
+
+		</div>
+	<!--
+	<button ng-click="changeModel()">change model</button>
+	<input ng-model="assimpModelUrl"></input>
+	-->
+</div>
