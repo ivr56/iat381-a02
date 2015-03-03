@@ -11,6 +11,11 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
         templateUrl: 'app/mainscreen/globe.html',
 				controller: 'MainCtrl'
 			})
+      .when('/results', {
+        templateUrl: 'app/results/results.html',
+        controller: 'MainCtrl'
+      })
+
 			.otherwise({
 				redirectTo: '/'
 			});
