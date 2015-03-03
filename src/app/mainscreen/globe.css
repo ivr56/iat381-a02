@@ -254,22 +254,23 @@ margin-bottom: 0;
 .knobswitch{
 	z-index:15;
 	position:absolute;
-	top:-195px;
-	left:80px;
+	top:-155px;
+	left:50px;
 	background-image: url("../usaeurope.png ");
 	background-repeat: no-repeat;
-	background-size: 50%,50%;
+	background-size: 70%,70%;
+
 	width: 100%;
 
 }
 .knobswitch1{
 	z-index:15;
 	position:absolute;
-	top:-195px;
-	left:80px;
+	top:-155px;
+	left:50px;
 	background-image: url("../chinaus.jpg");
 	background-repeat: no-repeat;
-	background-size: 55%,55%;
+	background-size: 75%,75%;
 	width: 100%;
 
 }
@@ -278,6 +279,6 @@ margin-bottom: 0;
 	z-index:28;
 	position:absolute;
 	left:45%;
-	top:80%;
+	top:520%;
 	width:10%;
 }
