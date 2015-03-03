@@ -49,38 +49,6 @@ angular.module("tjsModelViewer", [])
 					init();
 
 
-					// Load Model --------
-					// Load jeep model using the AssimpJSONLoader
-					// var loader1 = new THREE.AssimpJSONLoader();
-					//
-					//
-					// scope.$watch("assimpUrl", function(newValue, oldValue) {
-					// 	if (newValue != oldValue) loadModel(newValue);
-					// });
-					//
-					// function loadModel(modelUrl) {
-					//
-					// 	//Model Loader
-					// 	loader1.load(modelUrl, function (assimpjson) {
-					// 		assimpjson.scale.x = assimpjson.scale.y = assimpjson.scale.z = 0.2;
-					// 		assimpjson.updateMatrix();
-					// 		if (previous) scene.remove(previous);
-					// 		//Add to Scene
-					// 		scene.add(assimpjson);
-					//
-					// 		previous = assimpjson;
-					//
-					// 	});
-					// }
-					// // Load Model --------
-					//
-					// loadModel(scope.assimpUrl);
-
-					 //Earth Geometry
-
-					 //Create Geometery
-
-
 
 
 
@@ -807,11 +775,8 @@ angular.module("tjsModelViewer", [])
 								}
 								// remove previous intersection object reference
 								//     by setting current intersection object to "nothing"
-
 								INTERSECTED = null;
 								mouseSphereCoords = null;
-
-
 							}
 						}
 
