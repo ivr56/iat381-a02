@@ -177,6 +177,8 @@ angular.module("tjsModelViewer", [])
 					newEarth_shaded.name = "Earth";
 					//Add to Scene
 					scene.add(newEarth_shaded);
+
+
 					addUSD();
 					addEU();
 					addCHA();
@@ -391,10 +393,9 @@ angular.module("tjsModelViewer", [])
 				if(intersects[0].faceIndex==arrayItem.faceIndex && intersects[0].object.id==arrayItem.object.id){
 					test=selectedFaces.indexOf(arrayItem);
 					console.log("False");
-					activeCHA = 0;
 					$scope.$emit("messageUSD", 0);
 					var cgtxt = scene.getObjectByName("Earth");
-					if (activeCHA === 0 && activeUS === 0 && activeEU)
+					if (activeCHA === 0 && activeUS === 0 && activeEU === 0)
 					{
 						cgtxt.material.map = THREE.ImageUtils.loadTexture( 'assets/earthtextures/earthtextminwhole.png', {}, function(){
 						console.log("De-Loaded Texture for CHA")
@@ -430,7 +431,7 @@ angular.module("tjsModelViewer", [])
 					$scope.$emit("messageEU", 0);
 					activeCHA = 0;
 					var cgtxt = scene.getObjectByName("Earth");
-					if (activeCHA === 0 && activeUS === 0 && activeEU)
+					if (activeCHA === 0 && activeUS === 0 && activeEU === 0)
 					{
 						cgtxt.material.map = THREE.ImageUtils.loadTexture( 'assets/earthtextures/earthtextminwhole.png', {}, function(){
 						console.log("De-Loaded Texture for CHA")
@@ -463,7 +464,7 @@ angular.module("tjsModelViewer", [])
 					console.log("False");
 					$scope.$emit("messageCHA", 0);
 					var cgtxt = scene.getObjectByName("Earth");
-					if (activeCHA === 0 && activeUS === 0 && activeEU)
+					if (activeCHA === 0 && activeUS === 0 && activeEU === 0)
 					{
 						cgtxt.material.map = THREE.ImageUtils.loadTexture( 'assets/earthtextures/earthtextminwhole.png', {}, function(){
 						console.log("De-Loaded Texture for CHA")
@@ -509,7 +510,7 @@ angular.module("tjsModelViewer", [])
 		else{
 			intersects[ 0 ].face.color=new THREE.Color( 0x17A0BF );
 			selectedFaces.push(intersects[0]);
-			selectedFaces.forEach( function(arrayItem)
+			selectedFaces.forEach(function(arrayItem)
 			{
 				if (arrayItem.object.name === "USD")
 				{
@@ -518,6 +519,10 @@ angular.module("tjsModelViewer", [])
 				$scope.$emit("messageUSD", 1);
         if (activeUS === 1 && activeEU == 1 && activeCHA === 0)
 				{
+					document.getElementById("confirmpanelUSEDU").style.display = "block";
+					document.getElementById("confirmpanelUSCHA").style.display = "none";
+					document.getElementById("confirmpanelCHAEU").style.display = "none";
+
 					$scope.$emit("messageUSEU", 1);
 					document.getElementById("ca").innerHTML = "USD";
 					document.getElementById("cb").innerHTML = "EU";
@@ -534,6 +539,10 @@ angular.module("tjsModelViewer", [])
 				}
 				else if (activeUS == 1 && activeCHA === 1  && activeEU == 0)
 				{
+					document.getElementById("confirmpanelUSEDU").style.display = "none";
+					document.getElementById("confirmpanelUSCHA").style.display = "block";
+					document.getElementById("confirmpanelCHAEU").style.display = "none";
+
 					$scope.$emit("messageUSCHA", 1);
 					document.getElementById("ca").innerHTML = "USD";
 					document.getElementById("cb").innerHTML = "CHA";
@@ -550,6 +559,11 @@ angular.module("tjsModelViewer", [])
 				}
 				else
 				{
+					document.getElementById("confirmpanelUSEDU").style.display = "none";
+					document.getElementById("confirmpanelUSCHA").style.display = "none";
+					document.getElementById("confirmpanelCHAEU").style.display = "none";
+					document.getElementById("ca").innerHTML = "";
+					document.getElementById("cb").innerHTML = "";
 					var cgtxt = scene.getObjectByName("Earth");
 					cgtxt.material.map = THREE.ImageUtils.loadTexture( 'assets/earthtextures/earthtextminUSA.png', {}, function(){
 					console.log("Loaded Texture for USA")
@@ -573,6 +587,10 @@ angular.module("tjsModelViewer", [])
 					var cgtxt = scene.getObjectByName("Earth");
 					if (activeUS === 1 && activeEU == 1  && activeCHA == 0)
 					{
+						document.getElementById("confirmpanelUSEDU").style.display = "block";
+						document.getElementById("confirmpanelUSCHA").style.display = "none";
+						document.getElementById("confirmpanelCHAEU").style.display = "none";
+
 						$scope.$emit("messageEUUS", 1);
 						document.getElementById("ca").innerHTML = "USD";
 						document.getElementById("cb").innerHTML = "EU";
@@ -589,6 +607,10 @@ angular.module("tjsModelViewer", [])
 					}
 					else if (activeEU == 1 && activeCHA === 1 && activeUS == 0)
 					{
+						document.getElementById("confirmpanelUSEDU").style.display = "none";
+						document.getElementById("confirmpanelUSCHA").style.display = "none";
+						document.getElementById("confirmpanelCHAEU").style.display = "block";
+
 						$scope.$emit("messageEUCHA", 1);
 						document.getElementById("ca").innerHTML = "EU";
 						document.getElementById("cb").innerHTML = "CHA";
@@ -605,6 +627,12 @@ angular.module("tjsModelViewer", [])
 					}
 					else
 					{
+						document.getElementById("confirmpanelUSEDU").style.display = "none";
+						document.getElementById("confirmpanelUSCHA").style.display = "none";
+						document.getElementById("confirmpanelCHAEU").style.display = "none";
+						document.getElementById("ca").innerHTML = "";
+						document.getElementById("cb").innerHTML = "";
+
 						var cgtxt = scene.getObjectByName("Earth");
 						cgtxt.material.map = THREE.ImageUtils.loadTexture( 'assets/earthtextures/earthtextminEU.png', {}, function(){
 						console.log("Loaded Texture for EU")
@@ -630,6 +658,10 @@ angular.module("tjsModelViewer", [])
 						var cgtxt = scene.getObjectByName("Earth");
 						if (activeUS === 1 && activeCHA === 1 && activeEU === 0)
 						{
+							document.getElementById("confirmpanelUSEDU").style.display = "none";
+							document.getElementById("confirmpanelUSCHA").style.display = "block";
+							document.getElementById("confirmpanelCHAEU").style.display = "none";
+
 							$scope.$emit("messageCHAUS", 1);
 							console.log("Bingo Sunshine");
 							document.getElementById("ca").innerHTML = "CHA";
@@ -647,6 +679,10 @@ angular.module("tjsModelViewer", [])
 						}
 						else if (activeEU == 1 && activeCHA === 1 && activeUS === 0)
 						{
+							document.getElementById("confirmpanelUSEDU").style.display = "none";
+							document.getElementById("confirmpanelUSCHA").style.display = "none";
+							document.getElementById("confirmpanelCHAEU").style.display = "block";
+
 							$scope.$emit("messageCHAEU", 1);
 							document.getElementById("ca").innerHTML = "CHA";
 							document.getElementById("cb").innerHTML = "EU";
@@ -663,6 +699,11 @@ angular.module("tjsModelViewer", [])
 						}
 						else
 						{
+							document.getElementById("confirmpanelUSEDU").style.display = "none";
+							document.getElementById("confirmpanelUSCHA").style.display = "none";
+							document.getElementById("confirmpanelCHAEU").style.display = "none";
+							document.getElementById("ca").innerHTML = "";
+							document.getElementById("cb").innerHTML = "";
 							var cgtxt = scene.getObjectByName("Earth");
 							cgtxt.material.map = THREE.ImageUtils.loadTexture( 'assets/earthtextures/earthtextminCHA.png', {}, function(){
 							console.log("Loaded Texture for CHA")
@@ -684,17 +725,6 @@ angular.module("tjsModelViewer", [])
 		intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

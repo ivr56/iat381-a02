@@ -65,11 +65,6 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 		//--------------------------------------------
 
 
-		$scope.results = function ()
-		{
-
-		}
-
 		//--------
 		//Read Read Messages and Activity from ThreeJS + AngularJS Directive
 		$scope.$on("message", function (e, msg)
@@ -96,7 +91,9 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 					active = active + 1;
 					console.log("Active Currencies: " + active);
 					console.log("Added USD Selection to Active");
-					document.getElementById("confirmpanel").style.display = "none";
+
+					document.getElementById("ca").innerHTML = "";
+					document.getElementById("cb").innerHTML = "";
 					activeUSD = 1;
 
 					if (active === 2)
@@ -104,7 +101,7 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 
 						//Activate Button to Confirm
 						console.log("Button Activated for Exchange through USD");
-						document.getElementById("confirmpanel").style.display = "block";
+
 						// [ code_here. ] //
 						// [ Toggle HTML DOM Element Visiblity]
 						//--------
@@ -114,7 +111,7 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 
 						//Activate Button to Confirm
 						console.log("Too Many");
-						document.getElementById("confirmpanel").style.display = "none";
+
 						// [ code_here. ] //
 						// [ Toggle HTML DOM Element Visiblity]
 						//--------
@@ -131,7 +128,7 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 					active = active - 1;
 					console.log("Active Currencies: " + active);
 					console.log("Removed USD Selection from Active");
-					document.getElementById("confirmpanel").style.display = "none";
+
 				}
 
 		});
@@ -150,8 +147,10 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 					active = active + 1;
 					console.log("Active: " + active);
 					console.log("Added EU Selection");
-					document.getElementById("confirmpanel").style.display = "none";
+
 					console.log("USD: " + activeUSD);
+					document.getElementById("ca").innerHTML = "";
+					document.getElementById("cb").innerHTML = "";
 
 
 					if (active === 2)
@@ -159,7 +158,7 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 
 						//Activate Button to Confirm
 						console.log("Button Activated for Exchange");
-						document.getElementById("confirmpanel").style.display = "block";
+
 
 						// [ code_here. ] //
 						// [ Toggle HTML DOM Element Visiblity]
@@ -173,7 +172,6 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 
 						//Activate Button to Confirm
 						console.log("Too Many");
-						document.getElementById("confirmpanel").style.display = "none";
 
 						// [ code_here. ] //
 						// [ Toggle HTML DOM Element Visiblity]
@@ -189,7 +187,7 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 					active = active - 1;
 					console.log("Active: " + active);
 					console.log("Removed EU Selection");
-					document.getElementById("confirmpanel").style.display = "none";
+
 				}
 
 
@@ -211,14 +209,16 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 					active = active + 1;
 					console.log("Active: " + active);
 					console.log("Added CHA Selection");
-					document.getElementById("confirmpanel").style.display = "none";
+
+					document.getElementById("ca").innerHTML = "";
+					document.getElementById("cb").innerHTML = "";
 
 					if (active === 2)
 					{
 
 						//Activate Button to Confirm
 						console.log("Button Activated for Exchange");
-						document.getElementById("confirmpanel").style.display = "block";
+
 
 						// [ code_here. ] //
 						// [ Toggle HTML DOM Element Visiblity]
@@ -231,7 +231,7 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 
 						//Activate Button to Confirm
 						console.log("Too Many");
-						document.getElementById("confirmpanel").style.display = "none";
+
 
 						// [ code_here. ] //
 						// [ Toggle HTML DOM Element Visiblity]
@@ -248,7 +248,7 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 					active = active - 1;
 					console.log("Active: " + active);
 					console.log("Removed CHA Selection");
-					document.getElementById("confirmpanel").style.display = "none";
+
 				}
 
 
@@ -303,7 +303,27 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 	//-----------------------------
 
 
+	a02.controller('states', function ($scope, $rootScope)
+	{
 
+			$scope.usdeu = function()
+			{
+				console.log('USEU');
+				//$location.url('/resultsUSEU');
+			}
+			$scope.usdcha = function ()
+			{
+				console.log('USCHA');
+				//$location.url('/resultsUSCHA';);
+			}
+			$scope.chaeu = function ()
+			{
+				console.log('CHAEU');
+				//$location.url('/resultsCHAEU');
+			}
+
+
+	});
 
 
 	//Change View State

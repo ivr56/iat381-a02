@@ -21,13 +21,16 @@
 
 		    </div> -->
 
-		
+
 
 		<div class="currencyBoxes" ng-controller="MainCtrl">
-		    <div id="confirmpanel"><p><a ngClick="results()">Confirm Conversion?</a></p></div>
+			<div ng-controller="states">
+		    <div id="confirmpanelUSEDU"><p><a href="" ng-Click="usdeu()">Convert</a></p></div>
+				<div id="confirmpanelUSCHA"><p><a href="" ng-Click="usdcha()">Convert</a></p></div>
+				<div id="confirmpanelCHAEU"><p><a href="" ng-Click="chaeu()">Convert</a></p></div>
+			</div>
 		    <div class="userpanel"><p id="ca"></p></div>
-
-		     <div class="userpanel"><p id="cb"></p></div>
+		    <div class="userpanel"><p id="cb"></p></div>
 
 		     </div>
 		</div>
