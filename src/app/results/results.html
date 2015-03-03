@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../dist/bootstrap-clockpicker.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
        <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
-       <script src="../dist/jquery.knob.min.js"></script>
+       <script src="../js/jquery.knob.js"></script>
        <script>
            $(function($) {
 
@@ -22,6 +22,9 @@
                    release : function (value) {
                        //console.log(this.$.attr('value'));
                        console.log("release : " + value);
+
+                       document.getElementById("userinpt").innerHTML=value;
+
                    },
                    cancel : function () {
                        console.log("cancel : ", this);
@@ -88,14 +91,22 @@
     <div class="knobswitch">
 
 
-          <input class="knob" data-width="200" data-cursor=true data-fgColor="#222222" data-thickness=.3 value="0">
+      <!--   <input type="button" onclick="$('.knob-dyn').knob();" value="knobify!">
+                 <input type="text" class="knob-dyn" data-width="200" data-cursor=true value="56">-->
+                  <input class="knob" data-width="200" data-cursor=true data-fgColor="#222222" data-thickness=.3 value="0">
       </div>
+
+
 
 <div class="currencyBoxesResults">
 
-    <div class="userpanel"><p>Hello World</p></div>
 
-     <div class="userpanel"><p>Hello World</p></div>
+    <div class="userpanel">
+
+      <p id="userinpt">0</p>
+      </div>
+
+     <div class="userpanel"><p>0</p></div>
      </div>
 </div>
 
