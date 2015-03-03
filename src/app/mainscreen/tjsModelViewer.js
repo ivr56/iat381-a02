@@ -37,7 +37,7 @@ angular.module("tjsModelViewer", [])
 		        var projector, mouse = { x: 0, y: 0 },INTERSECTED;
 		        var selectedFaces = [];
 		        var floorSide=1000;
-		        var baseColor=new THREE.Color( 0x44dd66 );
+		        var baseColor=new THREE.Color( 0x14A0C1 );
 		        var highlightedColor=new THREE.Color( 0xddaa00 );
 		        var selectedColor=new THREE.Color( 0x4466dd );
 		        var mouseSphereCoords = null;
@@ -195,9 +195,9 @@ angular.module("tjsModelViewer", [])
 					var octaGeom = new THREE.Geometry();
 
 					octaGeom.vertices.push(
-						new THREE.Vector3( -10,  10, 0 ),
-						new THREE.Vector3( -10, -10, 0 ),
-						new THREE.Vector3(  10, -10, 0 )
+						new THREE.Vector3( -90,  -20, 50 ),
+						new THREE.Vector3( -100, -30, 62 ),
+						new THREE.Vector3(  -80, -30, 62 )
 					);
 
 					octaGeom.faces.push( new THREE.Face3( 0, 1, 2 ) );
@@ -236,9 +236,9 @@ angular.module("tjsModelViewer", [])
 									var octaGeom = new THREE.Geometry();
 
 									octaGeom.vertices.push(
-										new THREE.Vector3( -10,  10, 0 ),
-										new THREE.Vector3( -10, -10, 0 ),
-										new THREE.Vector3(  10, -10, 0 )
+										new THREE.Vector3( -30,  10, -5 ),
+										new THREE.Vector3( -20, 5, 5 ),
+										new THREE.Vector3(  -20, 5, -15 )
 									);
 
 									octaGeom.faces.push( new THREE.Face3( 0, 1, 2 ) );
@@ -279,9 +279,9 @@ angular.module("tjsModelViewer", [])
 																	var octaGeom = new THREE.Geometry();
 
 																	octaGeom.vertices.push(
-																		new THREE.Vector3( -10,  10, 0 ),
-																		new THREE.Vector3( -10, -10, 0 ),
-																		new THREE.Vector3(  10, -10, 0 )
+																		new THREE.Vector3( -100,  15, -66 ),
+																		new THREE.Vector3( -90, 25, -56 ),
+																		new THREE.Vector3(  -80, 15, -66 )
 																	);
 
 																	octaGeom.faces.push( new THREE.Face3( 0, 1, 2 ) );

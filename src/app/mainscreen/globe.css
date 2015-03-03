@@ -1,15 +1,22 @@
-* {
+
+
+*{
 	margin: 0;
 	padding: 0;
+	
+
+	
+
 }
 
 html{
 	 /*background-image: url("../assets/images/bg.png");*/
 	 font-family: 'Open Sans', sans-serif;
+	 background-color: #D9D8D8;
 }
 body {
-    background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    
+    /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
     color: #333;
 }
 
@@ -43,8 +50,11 @@ h1 {
 	text-align: center;
 	text-shadow: 1px 1px 1px #fff;
 	font-weight: normal;
-	font-family: Helvetica, Arial, sans;
+	/*font-family: Helvetica, Arial, sans;*/
 
+}
+p{/*
+	font-family: Helvetica, Arial, sans;*/
 }
 
 a {
@@ -81,6 +91,7 @@ a {
 	bottom: 55%;
 	width:100%;
 
+
 	position: absolute;
 	z-index: 1;
 	left: 0;
@@ -98,7 +109,7 @@ a {
 	width: 45%;
 	display:inline-block;
 	height: 100%;
-	background-color: #d9d9d9;
+	background-color: #F9F9F9;
 	border: 1px black dotted;
 	opacity: 1;
 	font-family: 'Open Sans', sans-serif;
@@ -107,7 +118,9 @@ a {
 	margin-left: auto;
 
 
+
 }
+
 
 #confirmpanel{
 
@@ -115,7 +128,7 @@ a {
 	width: 45%;
 	display:none;
 	height: 100%;
-	background-color: #d9d9d9;
+	background-color: #F9F9F9;
 	border: 1px black dotted;
 	opacity: 1;
 	font-family: 'Open Sans', sans-serif;
@@ -123,6 +136,7 @@ a {
 	margin-right: auto;
 	margin-left: auto;
 	margin-bottom: 0.5em;
+	padding: 0.5em;
 
 
 }
@@ -143,7 +157,9 @@ margin-top: 17em;
 height: 75px;
 text-align: center;
 width: 100%;
+
 }
+
 
 
 .currencyBoxesResults{
@@ -154,7 +170,7 @@ width: 100%;
 }
 
 .userpanel p{
-padding: 2em;
+padding: 1em;
 }
 
 .instructionText{
@@ -166,12 +182,15 @@ margin-bottom: 0;
 
 }
 
+
+
 .instructionTextResults{
 
-margin-top: 4em;
+margin-top: 2em;
 padding: 1em;
 text-align: center;
 margin-bottom: 0;
+
 
 }
 
@@ -180,5 +199,9 @@ margin-bottom: 0;
 	position:absolute;
 	top:-195px;
 	left:80px;
-
+	background-image: url("../usaeurope.png ");
+	background-repeat: no-repeat;
+	background-size: 50%,50%;
+	width: 100%;
+	
 }
