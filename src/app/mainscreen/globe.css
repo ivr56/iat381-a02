@@ -98,13 +98,14 @@ a {
 	width: 45%;
 	display:inline-block;
 	height: 100%;
-	background-color: #d9d9d9;
+	background-color: #F9F9F9;
 	border: 1px black dotted;
 	opacity: 1;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 1em;
 	margin-right: auto;
 	margin-left: auto;
+
 
 
 }
@@ -115,7 +116,7 @@ a {
 	width: 45%;
 	display:none;
 	height: 100%;
-	background-color: #d9d9d9;
+	background-color: #F9F9F9;
 	border: 1px black dotted;
 	opacity: 1;
 	font-family: 'Open Sans', sans-serif;
@@ -123,13 +124,14 @@ a {
 	margin-right: auto;
 	margin-left: auto;
 	margin-bottom: 0.5em;
+	padding: 0.5em;
 
 
 }
 
 .confirmpanel p{
 
-	padding: 0.5em;
+	padding: 1em;
 }
 
 .form-group{
@@ -143,6 +145,7 @@ margin-top: 17em;
 height: 75px;
 text-align: center;
 width: 100%;
+
 }
 
 
