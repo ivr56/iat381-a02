@@ -12,7 +12,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
        <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
        <script src="../js/jquery.knob.js"></script>
-       <!--<script src="../src/app/results/results.controller.js"></script>-->
+       <script src="../src/app/results/results.controller.js"></script>
       <script>
            $(function($) {
 
@@ -23,16 +23,17 @@
                    release : function (value) {
                        //console.log(this.$.attr('value'));
                        console.log("release : " + value);
-
-                       document.getElementById("userinpt").innerHTML=value;
+                       var updatevalue= value*0.14;
+                       document.getElementById("userinpt").innerHTML='¥' + value;
+                       document.getElementById("displayinpt").innerHTML='$'+ updatevalue;
 
                    },
                    cancel : function () {
                        console.log("cancel : ", this);
                    },
-                   /*format : function (value) {
-                       return value + '%';
-                   },*/
+                   format : function (value) {
+                       return '¥' + value;
+                   },
                    draw : function () {
 
                        // "tron" case
@@ -81,7 +82,7 @@
 <!-- <div id="ThreeJS" style="position: absolute; left:0px; top:0px"><canvas width="1070" height="0"></canvas></div>
  -->
 <div class="instructionTextResults">
-<h3> Use the dial to modify current amount</h3>
+<p> Use the dial to modify current amount</p>
  </div>
 <div class="controlpanelResults" ng-controller="resultscontroller">
 
@@ -90,7 +91,7 @@
     <p>Press the "up" arrow to add a random octahedron!</p>
     <p>Mouse-over faces to highlight, click to select.</p>-->
     <div class="knobswitch">
-      <div><p>Testing: </p><p id="testing"></p></div>
+
 
       <!--   <input type="button" onclick="$('.knob-dyn').knob();" value="knobify!">
                  <input type="text" class="knob-dyn" data-width="200" data-cursor=true value="56">-->
@@ -98,15 +99,19 @@
 
       </div>
 
+
+
 <div class="currencyBoxesResults">
 
 
     <div class="userpanel">
 
-      <h3 id="userinpt">0</h3>
+      <p id="userinpt">0</p>
       </div>
 
-     <div class="userpanel"><h3>0</h3></div>
+     <div class="userpanel">
+       <p id="displayinpt">0</p>
+       </div>
      </div>
 </div>
 
