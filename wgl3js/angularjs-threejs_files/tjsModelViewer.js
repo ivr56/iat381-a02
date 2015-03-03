@@ -764,7 +764,6 @@ angular.module("tjsModelViewer", [])
 								// upsdate mouseSphere coordinates and update colors
 								mouseSphereCoords = [INTERSECTED.point.x,INTERSECTED.point.y,INTERSECTED.point.z];
 								INTERSECTED.object.geometry.colorsNeedUpdate=true;
-
 							}
 							else // there are no intersections
 							{
