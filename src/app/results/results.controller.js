@@ -1,21 +1,38 @@
-// var America;
-// var Europe;
-// var China;
+// var America = 0;
+// var Europe = 0;
+// var China = 0;
 // var currencyA;
 // var currencyB;
 // var displayCurrency;
 // var amount;
 //
 //
-// If (currencyA == America  && currencyB == China){
+// $scope.$on("messageUSDCHA", function (e, msg)
+// {
+//     console.log(1 + ": Currencies Active");
+//     America = 1;
+//     China = 1;
+//     Europe = 0;
+//     //Message Service to Control JQuerry + Javascript Windows
+//     testing();
 //
-// displayCurrency == amount * 6.27;
+// });
 //
-// }
 //
-// If (currencyA == China  && currencyB == America){
+// function USDCHA($scope)
+// {
+//   If (currencyA == America  && currencyB == China){
 //
-// displayCurrency == amount * 0.16;
+//   displayCurrency == amount * 6.27;
+//   displayCurrency = $scope.dispalyb;
+//   }
+//
+//   If (currencyA == China  && currencyB == America){
+//
+//   displayCurrency == amount * 0.16;
+//   displayCurrency = $scope.dispalya;
+//   }
+//
 //
 // }
 //

@@ -54,7 +54,9 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 		//Add and Subtract values dependent on broadcast messages recieved from ThreeJS/Angular Directives
 		var active = 0;
 
-
+		var activeUSD = 0;
+		var activeEU = 0;
+		var activeCHA = 0;
 
 
 
@@ -193,6 +195,7 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 					active = active + 1;
 					console.log("Active: " + active);
 					console.log("Added CHA Selection");
+
 
 					if (active === 2)
 					{

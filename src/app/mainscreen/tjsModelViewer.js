@@ -54,20 +54,6 @@ angular.module("tjsModelViewer", [])
 
 
 
-				//
-				//
-				// //Chinese Yen
-				// var newtouchpointCHA= new THREE.SphereGeometry(5,5,5);
-				// var newtouchpointCHA_shaded = new THREE.Mesh(newtouchpointCHA, new THREE.MeshBasicMaterial({ color: 0x2266dd }));
-				// newtouchpointCHA_shaded.position.x = 100;
-				// newtouchpointCHA_shaded.position.y = 50;
-				// newtouchpointCHA_shaded.position.z = 0;
-				// scene.add(newtouchpointCHA_shaded);
-				// targetList.push(newtouchpointCHA_shaded);
-				// country_targetList.push("Chinese Yen");
-
-
-
 					//Initilize Start
 					function init() {
 						//camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 2000);
@@ -98,23 +84,6 @@ angular.module("tjsModelViewer", [])
 	      scene.add(ambientLight);
 
 
-							// // FLOOR
-						  //       	var faceMat = new THREE.MeshBasicMaterial({color: 0x888888,side: THREE.DoubleSide});
-						  //       	var wireMat = new THREE.MeshBasicMaterial({color:0xaaaaaa,wireframe:true,transparent:true});
-						  //       	var multiMat = [faceMat ,wireMat];
-							//
-						  //       	var floor= THREE.SceneUtils.createMultiMaterialObject(new THREE.PlaneGeometry(floorSide, floorSide, 10, 10),multiMat);
-							//
-						  //       	floor.rotation.x = Math.PI / 2;
-						  //       	scene.add(floor);
-
-
-							// // SKYBOX
-						  //   	var skyBoxGeometry = new THREE.CubeGeometry( 10000, 10000, 10000 );
-							//   	var skyBoxMaterial = new THREE.MeshBasicMaterial( { color: 0xdddddd, side: THREE.BackSide } );
-						  //   	var skyBox = new THREE.Mesh( skyBoxGeometry, skyBoxMaterial );
-						  //   	scene.add(skyBox);
-
 
 
 
@@ -132,16 +101,7 @@ angular.module("tjsModelViewer", [])
 						  container = document.getElementById( 'ThreeJS' );
 						  container.appendChild(renderer.domElement );
 
-						  // Events
 
-
-
-				        	// renderer = new THREE.WebGLRenderer( {antialias:true} );
-				        	// renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-				        	// container = document.getElementById( 'ThreeJS' );
-				        	// container.appendChild(renderer.domElement );
-
-				        	// EVENTS
 
 				        	// CONTROLS
 
@@ -151,30 +111,6 @@ angular.module("tjsModelViewer", [])
 									// RENDERER
 
 
-									// LIGHT
-				        	//var light = new THREE.AmbientLight( 0x333333 ); // soft white light
-				        	//scene.add( light );
-
-
-				        	// FLOOR
-				        	// var faceMat = new THREE.MeshBasicMaterial({color: 0x888888,side: THREE.DoubleSide});
-				        	// var wireMat = new THREE.MeshBasicMaterial({color:0xaaaaaa,wireframe:true,transparent:true});
-				        	// var multiMat = [faceMat ,wireMat];
-				        	// var floor= THREE.SceneUtils.createMultiMaterialObject(new THREE.PlaneGeometry(floorSide, floorSide, 10, 10),multiMat);
-				        	// floor.rotation.x = Math.PI / 2;
-				        	// scene.add(floor);
-
-				        	// SKYBOX
-
-
-
-									  ////////////
-										// CUSTOM //
-										////////////
-
-										////////////
-									// CUSTOM //
-									////////////
 
 
 									var newSphereGeom= new THREE.SphereGeometry(5,5,5);
