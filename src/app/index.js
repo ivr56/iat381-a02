@@ -393,23 +393,24 @@ a02.run(function ($rootScope)
 	//-----------------------------
 
 
-	a02.controller('states', function ($scope, $rootScope)
+
+	a02.controller('states', function ($scope, $rootScope, $location)
 	{
 
 			$scope.usdeu = function()
 			{
-				console.log('USEU');
-				//$location.url('/resultsUSEU');
+				console.log('/resultsUSEU');
+				$location.url('/resultsUSEU');
 			}
 			$scope.usdcha = function ()
 			{
 				console.log('USCHA');
-				//$location.url('/resultsUSCHA';);
+				$location.url('/resultsUSCHA');
 			}
 			$scope.chaeu = function ()
 			{
 				console.log('CHAEU');
-				//$location.url('/resultsCHAEU');
+				$location.url('/resultsCHAEU');
 			}
 
 

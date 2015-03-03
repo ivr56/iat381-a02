@@ -395,11 +395,9 @@ angular.module("tjsModelViewer", [])
 					console.log("False");
 					$scope.$emit("messageUSD", 0);
 					var cgtxt = scene.getObjectByName("Earth");
-<<<<<<< HEAD
-					if (activeCHA === 0 && activeUS === 0 && activeEU === 0)
-=======
+
+
 					if (activeCHA === 0 && activeUS === 1 && activeEU === 0)
->>>>>>> a38092f93bedc34520672c80c87a2a56e6221e62
 					{
 						cgtxt.material.map = THREE.ImageUtils.loadTexture( 'assets/earthtextures/earthtextminwhole.png', {}, function(){
 						console.log("De-Loaded Texture for CHA")
