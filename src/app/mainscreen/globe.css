@@ -43,8 +43,11 @@ h1 {
 	text-align: center;
 	text-shadow: 1px 1px 1px #fff;
 	font-weight: normal;
-	font-family: Helvetica, Arial, sans;
+	/*font-family: Helvetica, Arial, sans;*/
 
+}
+p{/*
+	font-family: Helvetica, Arial, sans;*/
 }
 
 a {
@@ -81,6 +84,7 @@ a {
 	bottom: 55%;
 	width:100%;
 
+
 	position: absolute;
 	z-index: 1;
 	left: 0;
@@ -109,6 +113,7 @@ a {
 
 
 }
+
 
 #confirmpanel{
 
@@ -170,9 +175,11 @@ margin-bottom: 0;
 
 }
 
+
+
 .instructionTextResults{
 
-margin-top: 4em;
+margin-top: 2em;
 padding: 1em;
 text-align: center;
 margin-bottom: 0;
