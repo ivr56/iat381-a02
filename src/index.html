@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" ng-app="iat381-a02">
+<html class="no-js">
   <head>
     <meta charset="utf-8">
     <title>Currency Converter</title>
@@ -10,22 +10,21 @@
 
         <!-- build:css({.tmp/serve,src}) styles/app.css -->
         <!-- inject:css -->
-        <link rel="stylesheet" href="app/index.css">
+
         <link rel="stylesheet" href="app/mainscreen/globe.css">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,300,600,700' rel='stylesheet' type='text/css'>
         <!-- endinject -->
         <!-- endbuild -->
   </head>
-  <body>
-    <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+  <body ng-app="angularjsThreejsApp" class="ng-scope">
 
+  	<div class="container" ng-view=""><div class="hero-unit ng-scope">
 
+  	<canvas width="1226" height="622"></canvas>
 
-    <div>Insert back button here (Index.html)</div>
-    <div ng-view></div>
-
+  	<!-- <tjs-model-viewer assimp-url="assimpModelUrl" class="ng-isolate-scope ng-scope"></tjs-model-viewer> -->
+  </div>
+  </div>
 
 
 
@@ -68,15 +67,14 @@
   <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
   <!-- inject:js -->
   <script src="app/index.js"></script>
-  <script src="components/navbar/navbar.controller.js"></script>
   <script src="app/threejs/Three.js"></script>
   <script src="app/threejs/THREEx.WindowResize.js"></script>
   <script src="app/threejs/THREEx.FullScreen.js"></script>
   <script src="app/threejs/OrbitControls.js"></script>
   <script src="app/threejs/KeyboardState.js"></script>
   <script src="app/threejs/Detector.js"></script>
-  <script src="app/mainscreen/globe.js"></script>
-  <script src="app/main/main.controller.js"></script>
+  <script src="app/mainscreen/tjsModelViewer.js"></script>
+
   <!-- endinject -->
 
   <!-- inject:partials -->
