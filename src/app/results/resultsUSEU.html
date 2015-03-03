@@ -12,7 +12,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
        <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
        <script src="../js/jquery.knob.js"></script>
-       <!--<script src="../src/app/results/results.controller.js"></script>-->
+       <!-- <script src="../src/app/results/results.controller.js"></script>-->
       <script>
            $(function($) {
 
@@ -23,8 +23,9 @@
                    release : function (value) {
                        //console.log(this.$.attr('value'));
                        console.log("release : " + value);
-
+                       var updatevalue= value*0.89;
                        document.getElementById("userinpt").innerHTML=value;
+                       document.getElementById("displayinpt").innerHTML=updatevalue;
 
                    },
                    cancel : function () {
@@ -108,7 +109,9 @@
       <p id="userinpt">0</p>
       </div>
 
-     <div class="userpanel"><p>0</p></div>
+      <div class="userpanel">
+        <p id="displayinpt">0</p>
+        </div>
      </div>
 </div>
 

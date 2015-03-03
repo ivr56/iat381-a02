@@ -12,7 +12,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
        <!--[if IE]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
        <script src="../js/jquery.knob.js"></script>
-       <!--<script src="../src/app/results/results.controller.js"></script>-->
+       <script src="../src/app/results/results.controller.js"></script>
       <script>
            $(function($) {
 
@@ -23,16 +23,17 @@
                    release : function (value) {
                        //console.log(this.$.attr('value'));
                        console.log("release : " + value);
-
+                       var updatevalue= value*0.14;
                        document.getElementById("userinpt").innerHTML=value;
+                       document.getElementById("displayinpt").innerHTML=updatevalue;
 
                    },
                    cancel : function () {
                        console.log("cancel : ", this);
                    },
-                   /*format : function (value) {
-                       return value + '%';
-                   },*/
+                   format : function (value) {
+                       return '¥' value;
+                   },
                    draw : function () {
 
                        // "tron" case
@@ -94,7 +95,7 @@
 
       <!--   <input type="button" onclick="$('.knob-dyn').knob();" value="knobify!">
                  <input type="text" class="knob-dyn" data-width="200" data-cursor=true value="56">-->
-                  <input class="knob" data-width="200" data-cursor=true data-fgColor="#222222" data-thickness=.3 value="0">
+                  <input class="knob" data-width="300" data-cursor=true data-fgColor="#222222" data-thickness=.3 value="0">
 
       </div>
 
@@ -108,7 +109,9 @@
       <p id="userinpt">0</p>
       </div>
 
-     <div class="userpanel"><p>0</p></div>
+     <div class="userpanel">
+       <p id="displayinpt">0</p>
+       </div>
      </div>
 </div>
 

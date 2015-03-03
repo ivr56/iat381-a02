@@ -7,7 +7,7 @@ angular.module("tjsModelViewer", [])
 				scope: {
 					//assimpUrl: "=assimpUrl"
 				},
-				link: function ($scope, $elem, $attr) {
+				link: function ($scope, $rootScope, $elem, $attr) {
 					var container;
 					var camera;
 					var scene;
@@ -394,7 +394,7 @@ angular.module("tjsModelViewer", [])
 					activeCHA = 0;
 					$scope.$emit("messageUSD", 0);
 					var cgtxt = scene.getObjectByName("Earth");
-					if (activeCHA === 0 && activeUS === 0 && activeEU)
+					if (activeCHA === 0 && activeUS === 1 && activeEU === 0)
 					{
 						cgtxt.material.map = THREE.ImageUtils.loadTexture( 'assets/earthtextures/earthtextminwhole.png', {}, function(){
 						console.log("De-Loaded Texture for CHA")
@@ -518,7 +518,7 @@ angular.module("tjsModelViewer", [])
 				$scope.$emit("messageUSD", 1);
         if (activeUS === 1 && activeEU == 1 && activeCHA === 0)
 				{
-					$scope.$emit("messageUSEU", 1);
+					$rootScope.USEU = 0;
 					document.getElementById("ca").innerHTML = "USD";
 					document.getElementById("cb").innerHTML = "EU";
 					var cgtxt = scene.getObjectByName("Earth");

@@ -2,6 +2,9 @@
 
 var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRoute'])
 
+	var globaldial = {};
+	var checkcountry = {};
+
 // templateUrl: 'app/mainscreen/globe.html',
 	//--------
 	//Route Provider
@@ -11,10 +14,19 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
         templateUrl: 'app/mainscreen/globe.html',
 				controller: 'MainCtrl'
 			})
-      .when('/results', {
-        templateUrl: 'app/results/results.html',
-        controller: 'MainCtrl'
+      .when('/resultsUSEU', {
+        templateUrl: 'app/results/resultsUSEU.html',
+        controller: 'resultsUSEUcontroller'
       })
+			.when('/resultsUSCHA', {
+				templateUrl: 'app/results/resultsUSCHA.html',
+				controller: 'resultsUSCHAcontroller'
+			})
+
+			.when('/resultsCHAEU', {
+				templateUrl: 'app/results/resultsCHAEU.html',
+				controller: 'resultsCHAEUcontroller'
+			})
 
 			.otherwise({
 				redirectTo: '/'
@@ -22,7 +34,11 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 	});
 	//End Route Provider
 	//--------
-
+a02.run(function ($rootScope)
+{
+	//Global Check for US <3 EU
+	$rootScope.USEU = 0;
+});
 
 
 	//--------
@@ -41,11 +57,84 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 	//-----------------------------
 	//Master Controller
 	//Manage View State. Check Currency to be Used by User/Visitor
+	// function globaldial.irene(varing)
+	// {
+	//   console.log("var: " + varing);
+	// }
+
+	a02.controller("resultsUSEUcontroller", function($scope, $rootScope)
+	{
+
+		//	$(".knob").globaldial.myfunctions(irenes);
+
+
+		var uni = 0;
+		globaldial.jam = function(inti)
+		{
+
+			var irene = inti;
+			//If Statement for Countries
+			irene = irene*2;
+			var irenes = irene.toString()
+		 	console.log("Check Jam: " + irenes);
+			document.getElementById("testing").innerHTML = irenes;
+
+		}
+
+
+	});
+
+
+		a02.controller("resultsUSCHAcontroller", function($scope, $rootScope)
+		{
+
+			//	$(".knob").globaldial.myfunctions(irenes);
+
+
+			var uni = 0;
+			globaldial.jam = function(inti)
+			{
+
+				var irene = inti;
+				//If Statement for Countries
+				irene = irene*2;
+				var irenes = irene.toString()
+			 	console.log("Check Jam: " + irenes);
+				document.getElementById("testing").innerHTML = irenes;
+
+			}
+
+
+		});
+
+
+
+			a02.controller("resultsCHAEUcontroller", function($scope, $rootScope)
+			{
+
+				//	$(".knob").globaldial.myfunctions(irenes);
+
+
+				var uni = 0;
+				globaldial.jam = function(inti)
+				{
+
+					var irene = inti;
+					//If Statement for Countries
+					irene = irene*2;
+					var irenes = irene.toString()
+				 	console.log("Check Jam: " + irenes);
+					document.getElementById("testing").innerHTML = irenes;
+
+				}
+
+
+			});
 
 	a02.controller('MainCtrl', function ($scope, $rootScope)
 		{
 
-		//--------
+
 
 		//Test Attribute
 		var test = 0;
@@ -65,10 +154,7 @@ var a02 =  angular.module('angularjsThreejsApp', ['tjsModelViewer', 'ngAnimate',
 		//--------------------------------------------
 
 
-		$scope.results = function ()
-		{
 
-		}
 
 		//--------
 		//Read Read Messages and Activity from ThreeJS + AngularJS Directive
