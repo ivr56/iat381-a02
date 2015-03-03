@@ -20,11 +20,11 @@
 		        </div>
 
 		    </div> -->
-		<div class="currencyBoxes">
-		    <div class="confirmpanel"><p>Confirm Conversion?</p></div>
-		    <div class="userpanel"><p>{{currency_a}}</p></div>
+		<div class="currencyBoxes" ng-controller="MainCtrl">
+		    <div id="confirmpanel"><p><a ngClick="results()">Confirm Conversion?</a></p></div>
+		    <div class="userpanel"><p id="ca"></p></div>
 
-		     <div class="userpanel"><p>{{currency_b}}</p></div>
+		     <div class="userpanel"><p id="cb"></p></div>
 		     </div>
 		</div>
 
