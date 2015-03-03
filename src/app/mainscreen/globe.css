@@ -9,7 +9,7 @@ html{
 }
 body {
     background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
     color: #333;
 }
 
@@ -128,7 +128,7 @@ a {
 
 .confirmpanel p{
 
-	padding: 1em;
+	padding: 0.5em;
 }
 
 .form-group{
@@ -145,6 +145,7 @@ width: 100%;
 }
 
 
+
 .currencyBoxesResults{
 margin-top: 14em;
 height: 75px;
@@ -153,7 +154,7 @@ width: 100%;
 }
 
 .userpanel p{
-padding: 2em;
+padding: 1em;
 }
 
 .instructionText{

@@ -249,9 +249,9 @@ angular.module("tjsModelViewer", [])
 					var octaGeom = new THREE.Geometry();
 
 					octaGeom.vertices.push(
-						new THREE.Vector3( -10,  10, 0 ),
-						new THREE.Vector3( -10, -10, 0 ),
-						new THREE.Vector3(  10, -10, 0 )
+						new THREE.Vector3( -90,  -20, 50 ),
+						new THREE.Vector3( -100, -30, 62 ),
+						new THREE.Vector3(  -80, -30, 62 )
 					);
 
 					octaGeom.faces.push( new THREE.Face3( 0, 1, 2 ) );
@@ -290,9 +290,9 @@ angular.module("tjsModelViewer", [])
 									var octaGeom = new THREE.Geometry();
 
 									octaGeom.vertices.push(
-										new THREE.Vector3( -10,  10, 0 ),
-										new THREE.Vector3( -10, -10, 0 ),
-										new THREE.Vector3(  10, -10, 0 )
+										new THREE.Vector3( -30,  10, -5 ),
+										new THREE.Vector3( -20, 5, 5 ),
+										new THREE.Vector3(  -20, 5, -15 )
 									);
 
 									octaGeom.faces.push( new THREE.Face3( 0, 1, 2 ) );
@@ -333,9 +333,9 @@ angular.module("tjsModelViewer", [])
 																	var octaGeom = new THREE.Geometry();
 
 																	octaGeom.vertices.push(
-																		new THREE.Vector3( -10,  10, 0 ),
-																		new THREE.Vector3( -10, -10, 0 ),
-																		new THREE.Vector3(  10, -10, 0 )
+																		new THREE.Vector3( -100,  15, -66 ),
+																		new THREE.Vector3( -90, 25, -56 ),
+																		new THREE.Vector3(  -80, 15, -66 )
 																	);
 
 																	octaGeom.faces.push( new THREE.Face3( 0, 1, 2 ) );
